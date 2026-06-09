@@ -114,23 +114,27 @@
 
     /* â”€â”€ "All Projects" mega-menu (mirrors homepage) â”€â”€ */
     #nav-megamenu {
-      position:fixed; left:0; right:0; z-index:290;
+      position:fixed; top:0; right:0; bottom:0; z-index:290;
+      width:clamp(280px,40vw,540px);
       background:#cccccc;
       backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
-      border-bottom:1px solid rgba(0,0,0,0.08);
-      padding:clamp(1.6rem,3vw,2.4rem) clamp(1.2rem,4vw,2.8rem);
-      opacity:0; visibility:hidden; transform:translateY(-12px);
-      transition:opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
+      border-left:1px solid rgba(0,0,0,0.08);
+      padding:clamp(4.5rem,8vw,6rem) clamp(1.2rem,2.4vw,2rem) clamp(1.6rem,3vw,2.4rem);
+      overflow-y:auto;
+      visibility:hidden; transform:translateX(100%);
+      transition:transform 0.35s cubic-bezier(0.16,1,0.3,1), visibility 0s linear 0.35s;
     }
     #nav-megamenu.open {
-      opacity:1; visibility:visible; transform:translateY(0);
-      transition:opacity 0.3s ease, transform 0.3s ease, visibility 0s;
+      visibility:visible; transform:translateX(0);
+      transition:transform 0.35s cubic-bezier(0.16,1,0.3,1), visibility 0s;
     }
     #nav-megamenu-grid {
-      display:grid;
-      grid-template-columns:repeat(4, minmax(0,1fr));
+      display:flex;
+      flex-direction:column;
       gap:clamp(0.7rem,1.4vw,1.1rem);
-      max-width:78rem; margin:0 auto;
+    }
+    @media(max-width:640px){
+      #nav-megamenu { width:100%; border-left:none; }
     }
     .hero-card {
       background:#fff; border-radius:10px;
@@ -396,10 +400,6 @@
   var menuEl   = document.getElementById('nav-megamenu');
   if (!navEl || !trigger || !menuEl) return;
 
-  function positionMenu() { menuEl.style.top = navEl.offsetHeight + 'px'; }
-  positionMenu();
-  window.addEventListener('resize', positionMenu);
-
   var hideTimer = null;
   function open()  { clearTimeout(hideTimer); menuEl.classList.add('open'); }
   function close() { hideTimer = setTimeout(function () { menuEl.classList.remove('open'); }, 150); }
@@ -408,10 +408,19 @@
   trigger.addEventListener('mouseleave', close);
   menuEl.addEventListener('mouseenter', open);
   menuEl.addEventListener('mouseleave', close);
+
+  // Close drawer on click outside
+  document.addEventListener('click', function(e) {
+    if (menuEl.classList.contains('open') && !menuEl.contains(e.target) && !trigger.contains(e.target)) {
+      menuEl.classList.remove('open');
+    }
+  });
 })();
 </script>
 
 
 </body>
 </html>
+
+
 
