@@ -171,6 +171,19 @@
     .hero-card-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
     .hero-card-thumb a { display:block; width:100%; height:100%; }
     #nav-megamenu .hero-card-thumb img { object-fit:contain; }
+    /* Megamenu cards always use the side-by-side row layout */
+    #nav-megamenu .hero-card {
+      flex-direction:row; align-items:flex-start;
+      gap:0.8rem; padding:0.85rem;
+      max-height:none; overflow:visible;
+    }
+    #nav-megamenu .hero-card-body { flex:1; min-width:0; display:flex; flex-direction:column; }
+    #nav-megamenu .hero-card-thumb {
+      order:0; margin-top:0; flex-shrink:0;
+      width:5rem; aspect-ratio:1/1;
+    }
+    #nav-megamenu .hero-card-title { font-size:0.95rem; margin-bottom:0.35rem; }
+    #nav-megamenu .hero-card-tags { margin-bottom:0; }
     #end-card .hero-card-thumb img { object-fit:contain; }
 
     /* â”€â”€ "All Projects" card variant â”€â”€ */
@@ -463,7 +476,7 @@
           <div class="hero-card-tag">AI Production</div>
           <div class="hero-card-tag">Compositing</div>
         </div>
-        <div class="hero-card-desc">Proprietary AI system converting engineering sketches into photoreal lifestyle product imagery for seasonal campaigns â€” no reshoots needed.</div>
+        
       </div>
     </div>
 
@@ -475,7 +488,7 @@
           <div class="hero-card-tag">Brand Design</div>
           <div class="hero-card-tag">Visual Identity</div>
         </div>
-        <div class="hero-card-desc">Unified global brand system giving each vehicle its own personality while maintaining consistency across markets â€” Nissan's visual signature for three years.</div>
+        
       </div>
     </div>
 
@@ -487,7 +500,7 @@
           <div class="hero-card-tag">Product Design</div>
           <div class="hero-card-tag">UI/UX Design</div>
         </div>
-        <div class="hero-card-desc">Creator economy platform where creators and fans build content together â€” writing, video, blog posts â€” with a token currency called Blaze. 100+ screens designed solo.</div>
+        
       </div>
     </div>
 
@@ -637,7 +650,7 @@
             <div class="hero-card-tag">AI Production</div>
             <div class="hero-card-tag">Compositing</div>
           </div>
-          <div class="hero-card-desc">Proprietary AI system converting engineering sketches into photoreal lifestyle product imagery for seasonal campaigns â€” no reshoots needed.</div>
+          
         </div>
       </div>
 
@@ -649,7 +662,7 @@
             <div class="hero-card-tag">Brand Design</div>
             <div class="hero-card-tag">Visual Identity</div>
           </div>
-          <div class="hero-card-desc">Unified global brand system giving each vehicle its own personality while maintaining consistency across markets â€” Nissan's visual signature for three years.</div>
+          
         </div>
       </div>
 
@@ -661,7 +674,7 @@
             <div class="hero-card-tag">Product Design</div>
             <div class="hero-card-tag">UI/UX Design</div>
           </div>
-          <div class="hero-card-desc">Creator economy platform where creators and fans build content together â€” writing, video, blog posts â€” with a token currency called Blaze. 100+ screens designed solo.</div>
+          
         </div>
       </div>
 
@@ -1088,6 +1101,8 @@ window.addEventListener('touchmove', function(e) {
 </script>
 </body>
 </html>
+
+
 
 
 
