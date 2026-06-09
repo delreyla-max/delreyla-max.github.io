@@ -14,7 +14,7 @@
       --red:  #E0261E;
       --panel-w: clamp(210px,25.2vw,336px);
     }
-    html, body { width:100%; height:100%; overflow:hidden; background:#fff; font-family:'Inter',sans-serif; color:#fff; }
+    html, body { width:100%; height:100%; overflow:hidden; background:#fff; font-family:'Inter',sans-serif; color:#000; }
 
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
        SPLASH
@@ -412,9 +412,9 @@
     #panel-1.visible { transform:translateY(-50%) translateX(0); }
     #panel-2 { right:auto; left:clamp(1.5rem,5vw,4rem); transform:translateY(-50%) translateX(-40px); }
     #panel-2.visible { transform:translateY(-50%) translateX(0); }
-    .panel-title { font-size:clamp(1.1rem,2.4vw,1.6rem); font-weight:700; letter-spacing:-0.03em; line-height:1.1; margin-bottom:0.5rem; color:#000; }
-    .panel-role { font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(0,0,0,0.35); margin-bottom:1rem; }
-    .panel-thumb { position:relative; width:74.75%; aspect-ratio:16/9; border-radius:2px; margin-bottom:1rem; overflow:hidden; background:#111; }
+    .panel-title { font-family:'Inter',sans-serif; font-size:clamp(1.1rem,2.4vw,1.6rem); font-weight:700; letter-spacing:-0.03em; line-height:1.1; margin-bottom:0.5rem; color:#000; }
+    .panel-role { font-family:'Inter',sans-serif; font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(0,0,0,0.35); margin-bottom:1rem; }
+    .panel-thumb { position:relative; width:100%; aspect-ratio:4/3; border-radius:8px; margin-bottom:1rem; overflow:hidden; background:#111; }
     .panel-thumb img {
       position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
       opacity:0; transition:opacity 0.8s ease, transform 0.6s ease;
@@ -435,18 +435,19 @@
     .panel-thumb-nav.next { right:8px; }
     .panel-thumb-nav svg { width:8px; height:8px; }
     .panel-thumb-nav.prev svg { transform:rotate(180deg); }
-    .panel-tags { display:flex; flex-wrap:wrap; gap:0.3rem; margin-bottom:1rem; }
+    .panel-tags { display:flex; flex-wrap:wrap; gap:0.3rem; margin-bottom:0.5rem; }
     .panel-tag { font-size:0.5rem; letter-spacing:0.12em; text-transform:uppercase; padding:0.18rem 0.55rem; border:1px solid rgba(0,0,0,0.12); border-radius:2px; color:#000; }
-    .panel-desc { font-size:clamp(0.7rem,1vw,0.8rem); font-weight:300; line-height:1.8; color:#000; margin-bottom:1.2rem; }
-    .panel-btn {
+    .panel-divider { width:100%; height:1px; background:rgba(0,0,0,0.08); margin-bottom:0.5rem; }
+    .panel-desc { font-family:'Inter',sans-serif; font-size:0.72rem; font-weight:300; line-height:1.8; color:#000; margin-bottom:1.2rem; }
+    .panel .panel-btn {
       display:inline-flex; align-items:center; gap:0.45rem;
       font-size:0.58rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase;
       color:#fff; background:#000; border:none; border-radius:2px;
       padding:0.65rem 1.2rem; cursor:pointer; font-family:'Inter',sans-serif;
       text-decoration:none; transition:background 0.2s, transform 0.15s;
     }
-    .panel-btn:hover { background:#222; transform:translateY(-1px); }
-    .panel-btn svg { width:10px; height:10px; }
+    .panel .panel-btn:hover { background:#222; transform:translateY(-1px); }
+    .panel .panel-btn svg { width:10px; height:10px; }
     .panel-close {
       position:absolute; top:0.7rem; right:0.7rem;
       width:1.5rem; height:1.5rem;
@@ -456,7 +457,6 @@
       transition:background 0.2s;
     }
     .panel-close:hover { background:rgba(0,0,0,0.15); }
-    .panel-divider { width:100%; height:1px; background:rgba(0,0,0,0.08); margin-bottom:1rem; }
 
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
        END CARD
@@ -597,7 +597,6 @@
 <div class="panel" id="panel-0">
   <button class="panel-close" aria-label="Close">×</button>
   <div class="panel-title">Toyota AI Pipeline</div>
-  <div class="panel-role">Associate Creative Director &nbsp;&middot;&nbsp; Rapp</div>
   <div class="panel-thumb" data-folder="projects/toyota-ai-pipeline-project" data-images="image1.png,final1.png,final2.png" data-alt="Toyota AI Pipeline">
     <button class="panel-thumb-nav prev" aria-label="Previous image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button class="panel-thumb-nav next" aria-label="Next image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -607,15 +606,12 @@
     <div class="panel-tag">Compositing</div>
     <div class="panel-tag">Adobe Firefly</div>
   </div>
-  <div class="panel-divider"></div>
-  <div class=”panel-desc”>Proprietary AI system converting engineering sketches into photoreal lifestyle product imagery — enabling seasonal campaigns for thousands of parts without a single reshoot.</div>
-  <a class="panel-btn" href="project.html?id=toyota-ai-pipeline">View Project <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  <a class=”panel-btn” href=”project.html?id=toyota-ai-pipeline”>View Project <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 </div>
 
 <div class="panel" id="panel-1">
   <button class="panel-close" aria-label="Close">×</button>
   <div class="panel-title">Nissan Global Rebrand</div>
-  <div class="panel-role">Associate Creative Director &nbsp;&middot;&nbsp; TBWA\Chiat\Day LA</div>
   <div class="panel-thumb" data-folder="projects/nissal-global-branding-project" data-images="nissan5.jpg,nissan2.jpg,nissan6.jpg" data-alt="Nissan">
     <button class="panel-thumb-nav prev" aria-label="Previous image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button class="panel-thumb-nav next" aria-label="Next image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -626,15 +622,12 @@
     <div class="panel-tag">Style Guide</div>
     <div class="panel-tag">Global</div>
   </div>
-  <div class="panel-divider"></div>
-  <div class="panel-desc">Unified global brand system giving each vehicle its own personality while maintaining consistency across all markets. The color grid became Nissan's visual signature for three years.</div>
   <a class="panel-btn" href="project.html?id=nissan-global-branding">View Project <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 </div>
 
 <div class="panel" id="panel-2">
   <button class="panel-close" aria-label="Close">×</button>
   <div class="panel-title">Storyfire</div>
-  <div class="panel-role">Solo Designer</div>
   <div class="panel-thumb" data-folder="projects/storyfire-project" data-images="storyfire3.png,storyfire4.png,storyfire7.png" data-alt="Storyfire">
     <button class="panel-thumb-nav prev" aria-label="Previous image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button class="panel-thumb-nav next" aria-label="Next image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -644,9 +637,7 @@
     <div class="panel-tag">UI/UX</div>
     <div class="panel-tag">Web &amp; App</div>
   </div>
-  <div class="panel-divider"></div>
-  <div class=”panel-desc”>Creator platform for collaborative content — writing, video, blogs — with Blaze token economy. 100+ screens designed across web and mobile app from the ground up.</div>
-  <a class="panel-btn" href="project.html?id=storyfire">View Project <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  <a class=”panel-btn” href=”project.html?id=storyfire”>View Project <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 </div>
 
 <!-- â•â•â•â•â•â•â•â•â•â•â• END CARD â•â•â•â•â•â•â•â•â•â•â• -->
@@ -1111,12 +1102,16 @@ window.addEventListener('touchmove', function(e) {
   }
 
   stopFrames.forEach(function(sf, i) {
-    var show = inScrub && Math.abs(currentFrame - sf) <= PANEL_FRAMES;
-    if (i === lastStopIdx && (finalStopReached || showEndCard)) show = false; // hand off to end card
-    var p = document.getElementById('panel-' + i);
+    var inRange = inScrub && Math.abs(currentFrame - sf) <= PANEL_FRAMES;
+    if (i === lastStopIdx && (finalStopReached || showEndCard)) inRange = false;
+    var panelId = 'panel-' + i;
+    // Clear dismissed state once user scrolls away from that panel's range
+    if (!inRange) dismissedPanels.delete(panelId);
+    var show = inRange && !dismissedPanels.has(panelId);
+    var p = document.getElementById(panelId);
     var d = document.getElementById('dot-' + i);
     if (p) p.classList.toggle('visible', show);
-    if (d) d.classList.toggle('active', show);
+    if (d) d.classList.toggle('active', inRange);
   });
 
   // end card replaced by loop-back — keep hidden
@@ -1124,10 +1119,14 @@ window.addEventListener('touchmove', function(e) {
 })();
 
 // Panel close buttons
+var dismissedPanels = new Set();
 document.querySelectorAll('.panel-close').forEach(function(btn) {
   btn.addEventListener('click', function() {
     var panel = btn.closest('.panel');
-    if (panel) panel.classList.remove('visible');
+    if (panel) {
+      panel.classList.remove('visible');
+      dismissedPanels.add(panel.id);
+    }
   });
 });
 </script>
