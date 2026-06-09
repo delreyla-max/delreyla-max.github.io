@@ -392,6 +392,8 @@
       position:fixed; top:50%; right:clamp(1.5rem,5vw,4rem);
       transform:translateY(-50%) translateX(40px);
       width:var(--panel-w);
+      max-height:90vh; overflow-y:auto;
+      color:#000;
       background:#fff;
       backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);
       border:1px solid rgba(0,0,0,0.05); border-radius:14px;
@@ -408,6 +410,8 @@
       top:50%; transform:translateY(-50%) translateX(-40px);
     }
     #panel-1.visible { transform:translateY(-50%) translateX(0); }
+    #panel-2 { right:auto; left:clamp(1.5rem,5vw,4rem); transform:translateY(-50%) translateX(-40px); }
+    #panel-2.visible { transform:translateY(-50%) translateX(0); }
     .panel-title { font-size:clamp(1.1rem,2.4vw,1.6rem); font-weight:700; letter-spacing:-0.03em; line-height:1.1; margin-bottom:0.5rem; color:#000; }
     .panel-role { font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(0,0,0,0.35); margin-bottom:1rem; }
     .panel-thumb { position:relative; width:74.75%; aspect-ratio:16/9; border-radius:2px; margin-bottom:1rem; overflow:hidden; background:#111; }
@@ -555,7 +559,7 @@
     <div id="splash-layout">
       <div id="splash-left">
         <div class="hero-line d0"><span class="hero-tagline">BRAND DES\GN + CREATIVE D\RECTOR</span></div>
-        <div class="hero-line d1"><span class="hero-brand-design">Every brand has a story.</span></div>
+        <div class="hero-line d1"><span class="hero-brand-design">A brand without a story is just a name.</span></div>
       </div>
     </div>
 
@@ -648,7 +652,7 @@
 <!-- â•â•â•â•â•â•â•â•â•â•â• END CARD â•â•â•â•â•â•â•â•â•â•â• -->
 <div id="end-card">
   <div id="splash-left">
-    <div class="hero-line d0"><span class="hero-brand-design">Every brand has a story.</span></div>
+    <div class="hero-line d0"><span class="hero-brand-design">A brand without a story is just a name.</span></div>
     <div class="hero-line d1"><span class="hero-direction">Technology can help tell it.</span></div>
 
     <!-- Featured project cards -->
