@@ -1,0 +1,379 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact â€” Garman</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html, body { width:100%; min-height:100%; background:#fff; font-family:'Inter',sans-serif; color:#000; }
+    body { display:flex; flex-direction:column; }
+
+    /* â”€â”€ NAV â€” mirrors the homepage nav â”€â”€ */
+    #site-nav {
+      position:fixed; top:0; left:0; right:0; z-index:300;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:1.4rem clamp(1.2rem,4vw,2.8rem);
+      border-bottom:1px solid rgba(0,0,0,0.1);
+      background:rgba(255,255,255,0.92);
+      backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    }
+    #nav-brand {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(1rem,1.6vw,1.25rem);
+      letter-spacing:0.04em;
+      color:#000;
+      display:flex; flex-direction:row; align-items:baseline; gap:0.5em; line-height:1.15;
+      text-decoration:none; cursor:pointer;
+    }
+    #nav-brand .nav-brand-name { color:#999999; }
+    #nav-brand .nav-brand-tagline { color:#000000; letter-spacing:0.03em; }
+    #nav-links { display:flex; align-items:center; gap:clamp(1rem,2.4vw,1.8rem); }
+    #nav-links a {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(0.85rem,1.4vw,1.1rem);
+      letter-spacing:0.04em;
+      color:#000; text-decoration:none;
+      transition:opacity 0.25s;
+    }
+    #nav-links a:hover { opacity:0.5; }
+
+    /* â”€â”€ PAGE LAYOUT â”€â”€ */
+    main {
+      flex:1; display:flex; align-items:center; justify-content:center;
+      padding:clamp(7rem,14vw,9rem) clamp(1.2rem,4vw,2.8rem) clamp(3rem,7vw,5rem);
+    }
+    #contact-wrap { width:100%; max-width:34rem; }
+    .hero-line { overflow:hidden; line-height:1; }
+    .hero-line > * {
+      display:block;
+      transform:translateY(110%);
+      animation:sReveal 0.75s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    .d0 > * { animation-delay:0.1s; }
+    .d1 > * { animation-delay:0.26s; }
+    @keyframes sReveal { to { transform:translateY(0); } }
+    @keyframes sFadeUp { to { opacity:1; } }
+
+    #contact-title {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(3rem,9vw,6.5rem);
+      letter-spacing:-0.015em;
+      color:#000;
+      line-height:0.95;
+    }
+    #contact-sub {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(1.4rem,4.2vw,2.6rem);
+      letter-spacing:-0.015em;
+      color:#999999;
+      line-height:0.95;
+    }
+
+    #contact-form {
+      margin-top:clamp(2rem,4.5vw,3rem);
+      display:flex; flex-direction:column; gap:1.2rem;
+      opacity:0; animation:sFadeUp 0.7s ease forwards; animation-delay:0.5s;
+    }
+    .field { display:flex; flex-direction:column; gap:0.5rem; }
+    .field label {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:0.78rem; letter-spacing:0.16em; text-transform:uppercase;
+      color:rgba(0,0,0,0.4);
+    }
+    .field input,
+    .field textarea {
+      font-family:'Poppins',sans-serif;
+      font-size:0.9rem; color:#000;
+      background:transparent;
+      border:none; border-bottom:1px solid rgba(0,0,0,0.15);
+      padding:0.6rem 0.1rem;
+      transition:border-color 0.25s ease;
+      resize:vertical;
+    }
+    .field input::placeholder,
+    .field textarea::placeholder { color:rgba(0,0,0,0.3); }
+    .field input:focus,
+    .field textarea:focus { outline:none; border-color:#000; }
+    .field textarea { min-height:8rem; line-height:1.6; }
+
+    #contact-submit {
+      align-self:flex-start;
+      margin-top:0.6rem;
+      display:inline-flex; align-items:center; gap:0.5rem;
+      font-family:'Bebas Neue',sans-serif;
+      font-size:0.95rem; letter-spacing:0.16em;
+      color:#fff; background:#000;
+      border:none; border-radius:5px;
+      padding:0.85rem 1.8rem; cursor:pointer;
+      transition:opacity 0.25s ease, transform 0.25s ease;
+    }
+    #contact-submit:hover { opacity:0.8; transform:translateY(-1px); }
+    #contact-submit svg { width:10px; height:10px; }
+
+    @media(max-width:640px){
+      #contact-title { font-size:clamp(2.6rem,15vw,4rem); }
+      #contact-sub   { font-size:clamp(1.3rem,7.5vw,2rem); }
+    }
+    /* â”€â”€ "All Projects" mega-menu (mirrors homepage) â”€â”€ */
+    #nav-megamenu {
+      position:fixed; left:0; right:0; z-index:290;
+      background:#cccccc;
+      backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+      border-bottom:1px solid rgba(0,0,0,0.08);
+      padding:clamp(1.6rem,3vw,2.4rem) clamp(1.2rem,4vw,2.8rem);
+      opacity:0; visibility:hidden; transform:translateY(-12px);
+      transition:opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
+    }
+    #nav-megamenu.open {
+      opacity:1; visibility:visible; transform:translateY(0);
+      transition:opacity 0.3s ease, transform 0.3s ease, visibility 0s;
+    }
+    #nav-megamenu-grid {
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0,1fr));
+      gap:clamp(0.7rem,1.4vw,1.1rem);
+      max-width:78rem; margin:0 auto;
+    }
+    .hero-card {
+      background:#fff; border-radius:10px;
+      padding:clamp(0.7rem,1.12vw,0.91rem);
+      box-shadow:0 6px 12px rgba(0,0,0,0.22), 0 14px 40px rgba(0,0,0,0.07);
+      border:1px solid rgba(0,0,0,0.05);
+      display:flex; flex-direction:column;
+      max-height:252px; overflow:hidden;
+      transition:transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .hero-card:hover { transform:translateY(-4px); box-shadow:0 20px 50px rgba(0,0,0,0.1); }
+    a.hero-card-title { text-decoration:none; display:block; transition:opacity 0.2s ease; }
+    a.hero-card-title:hover { opacity:0.6; }
+    .hero-card-title {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(0.77rem,1.26vw,1.05rem);
+      letter-spacing:0.01em; color:#000; margin-bottom:0.385rem;
+    }
+    .hero-card-tags { display:flex; flex-wrap:wrap; gap:0.245rem; margin-bottom:0.49rem; }
+    .hero-card-tag {
+      font-family:'Poppins',sans-serif;
+      font-size:0.41rem; letter-spacing:0.04em;
+      padding:0.196rem 0.455rem; border-radius:5px;
+      background:rgba(0,0,0,0.05); color:rgba(0,0,0,0.55);
+    }
+    .hero-card-desc {
+      font-family:'Poppins',sans-serif;
+      font-size:0.49rem; line-height:1.7; font-weight:300;
+      color:rgba(0,0,0,0.5); margin-bottom:0.63rem;
+    }
+    .hero-card-body { display:contents; }
+    .hero-card-thumb {
+      order:1; margin-top:auto; border-radius:6px; overflow:hidden;
+      aspect-ratio:16/10; background:#111;
+    }
+    .hero-card-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+    #nav-megamenu .hero-card-thumb img { object-fit:contain; }
+
+    .hero-card-list {
+      display:grid; grid-template-columns:repeat(2, 1fr);
+      gap:0.21rem 0.56rem; margin-bottom:0.7rem;
+    }
+    .hero-card-list .client-name { line-height:1.4; }
+    .hero-card-cta {
+      margin-top:auto;
+      display:inline-flex; align-items:center; gap:0.28rem;
+      align-self:flex-start;
+      font-family:'Bebas Neue',sans-serif;
+      font-size:0.546rem; letter-spacing:0.16em;
+      color:#fff; background:#000;
+      padding:0.42rem 0.77rem; border-radius:4px;
+      text-decoration:none;
+      transition:opacity 0.25s ease, transform 0.25s ease;
+    }
+    .hero-card-cta:hover { opacity:0.8; transform:translateY(-1px); }
+    .hero-card-cta svg { width:6px; height:6px; }
+
+    .client-name {
+      font-family:'Poppins',sans-serif;
+      font-size:clamp(0.46rem,0.72vw,0.56rem);
+      font-weight:400;
+      color:rgba(0,0,0,0.45);
+      line-height:1.45;
+      text-decoration:none;
+      display:inline-block;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%;
+      transition:font-weight 0.3s ease, color 0.3s ease;
+    }
+    .client-name:hover {
+      font-weight:600;
+      color:#000;
+    }
+
+    @media(max-width:640px){
+      #nav-megamenu-grid { grid-template-columns:1fr; max-width:26rem; }
+      .hero-card {
+        flex-direction:row; align-items:flex-start;
+        gap:0.8rem; padding:0.85rem;
+        min-height:clamp(5.5rem,26vw,7.2rem);
+        max-height:none; overflow:visible;
+      }
+      .hero-card-body { flex:1; min-width:0; display:flex; flex-direction:column; }
+      .hero-card-thumb {
+        order:0; margin-top:0; flex-shrink:0;
+        width:clamp(4.2rem,22vw,5.5rem);
+        aspect-ratio:1/1;
+      }
+    .hero-card-title { font-size:0.95rem; margin-bottom:0.35rem; }
+      .hero-card-tags { margin-bottom:0.4rem; }
+      .hero-card-tag { font-size:0.5rem; padding:0.22rem 0.5rem; }
+      .hero-card-desc {
+        font-size:0.62rem; line-height:1.55; margin-bottom:0;
+        display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
+      }
+      .hero-card-list {
+        display:grid; grid-template-columns:repeat(3, 1fr);
+        gap:0.12rem 0.4rem; margin-bottom:0.5rem;
+        font-size:0.56rem;
+      }
+      .hero-card-list .client-name { line-height:1.6; }
+      .hero-card-cta { font-size:0.6rem; padding:0.42rem 0.8rem; gap:0.3rem; }
+      .hero-card-cta svg { width:8px; height:8px; }
+    }
+
+  </style>
+</head>
+<body>
+
+<nav id="site-nav">
+  <a id="nav-brand" href="index.html"><span class="nav-brand-name">GARMAN</span><span class="nav-brand-tagline">BRAND DES\GN + CREATIVE D\RECTOR</span></a>
+  <div id="nav-links">
+    <a id="nav-all-projects" href="all-projects.html">Projects</a>
+    <a href="resume.html">Resume</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+<div id="nav-megamenu">
+  <div id="nav-megamenu-grid">
+    <div class="hero-card">
+      <div class="hero-card-thumb"><img src="projects/toyota-ai-pipeline-project/final1.png" alt="Toyota AI Pipeline" loading="lazy"></div>
+      <div class="hero-card-body">
+        <a class="hero-card-title" href="project.html?id=toyota-ai-pipeline">Toyota AI Pipeline</a>
+        <div class="hero-card-tags">
+          <div class="hero-card-tag">AI Production</div>
+          <div class="hero-card-tag">Compositing</div>
+        </div>
+        <div class="hero-card-desc">Proprietary AI system converting engineering sketches into photoreal lifestyle product imagery for seasonal campaigns â€” no reshoots needed.</div>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="hero-card-thumb"><img src="projects/nissal-global-branding-project/nissan5.jpg" alt="Nissan Global Rebrand" loading="lazy"></div>
+      <div class="hero-card-body">
+        <a class="hero-card-title" href="project.html?id=nissan-global-branding">Nissan Global Rebrand</a>
+        <div class="hero-card-tags">
+          <div class="hero-card-tag">Brand Design</div>
+          <div class="hero-card-tag">Visual Identity</div>
+        </div>
+        <div class="hero-card-desc">Unified global brand system giving each vehicle its own personality while maintaining consistency across markets â€” Nissan's visual signature for three years.</div>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="hero-card-thumb"><img src="projects/storyfire-project/storyfire4.png" alt="Storyfire" loading="lazy"></div>
+      <div class="hero-card-body">
+        <a class="hero-card-title" href="project.html?id=storyfire">Storyfire</a>
+        <div class="hero-card-tags">
+          <div class="hero-card-tag">Product Design</div>
+          <div class="hero-card-tag">UI/UX Design</div>
+        </div>
+        <div class="hero-card-desc">Creator economy platform where creators and fans build content together â€” writing, video, blog posts â€” with a token currency called Blaze. 100+ screens designed solo.</div>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="hero-card-body" style="display:flex; flex-direction:column; flex:1;">
+        <div class="hero-card-title">All Projects</div>
+        <div class="hero-card-list" id="nav-megamenu-list">
+          <a class="client-name" href="project.html?id=tacobell-redesign">Tacobell.com</a>
+          <a class="client-name" href="project.html?id=storyfire">Storyfire</a>
+          <a class="client-name" href="project.html?id=toyota-ai-pipeline">Toyota AI Pipeline</a>
+          <a class="client-name" href="project.html?id=toyota-garage">Toyota Garage</a>
+          <a class="client-name" href="project.html?id=honda-motorsports">Honda Motorsports</a>
+          <a class="client-name" href="project.html?id=nissan-global-branding">Nissan Global Branding</a>
+          <a class="client-name" href="project.html?id=mr-cooper-portal">Mr. Cooper Portal</a>
+          <a class="client-name" href="project.html?id=disney-habit-heroes">Disney Habit Heroes</a>
+          <a class="client-name" href="project.html?id=nissan-quest">Nissan Quest</a>
+          <a class="client-name" href="project.html?id=google-chromebook">Google Chromebook</a>
+          <a class="client-name" href="project.html?id=toyota-lexus-owners">Toyota/Lexus Owners</a>
+          <a class="client-name" href="project.html?id=xome-real-estate">Xome Real Estate</a>
+          <a class="client-name" href="project.html?id=jeffrys-bbq">Jeffry's Wine Country BBQ</a>
+          <a class="client-name" href="project.html?id=playstation-3-launch">Playstation 3 Launch</a>
+          <a class="client-name" href="project.html?id=pixar-walle">Pixar's Wall-E</a>
+          <a class="client-name" href="project.html?id=nissan-leaf">Nissan Leaf</a>
+          <a class="client-name" href="project.html?id=nissan-versa">Nissan Versa Launch</a>
+          <a class="client-name" href="project.html?id=adidas-golf">Adidas Golf</a>
+          <a class="client-name" href="project.html?id=saints-row-iv">Saints Row IV</a>
+        </div>
+        <a class="hero-card-cta" href="all-projects.html">
+          ALL PROJECTS
+          <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<main>
+  <div id="contact-wrap">
+    <div class="hero-line d0"><span id="contact-title">Let's talk.</span></div>
+    <div class="hero-line d1"><span id="contact-sub">Send a message.</span></div>
+
+    <form id="contact-form" action="mailto:gyip@me.com" method="POST" enctype="text/plain">
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your name" required>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Tell me a bit about your project..." required></textarea>
+      </div>
+      <button type="submit" id="contact-submit">
+        SEND MESSAGE
+        <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </form>
+  </div>
+</main>
+
+<script>
+// â”€â”€â”€ "All Projects" mega-menu â€” full-width dropdown shown on hover â”€â”€
+(function () {
+  var navEl    = document.getElementById('site-nav');
+  var trigger  = document.getElementById('nav-all-projects');
+  var menuEl   = document.getElementById('nav-megamenu');
+  if (!navEl || !trigger || !menuEl) return;
+
+  function positionMenu() { menuEl.style.top = navEl.offsetHeight + 'px'; }
+  positionMenu();
+  window.addEventListener('resize', positionMenu);
+
+  var hideTimer = null;
+  function open()  { clearTimeout(hideTimer); menuEl.classList.add('open'); }
+  function close() { hideTimer = setTimeout(function () { menuEl.classList.remove('open'); }, 150); }
+
+  trigger.addEventListener('mouseenter', open);
+  trigger.addEventListener('mouseleave', close);
+  menuEl.addEventListener('mouseenter', open);
+  menuEl.addEventListener('mouseleave', close);
+})();
+</script>
+
+</body>
+</html>
+

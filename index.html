@@ -1,0 +1,1084 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Every brand has a story. AI helps tell it.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@1,900&family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --gold: #CC8A1F;
+      --red:  #E0261E;
+      --panel-w: clamp(210px,25.2vw,336px);
+    }
+    html, body { width:100%; height:100%; overflow:hidden; background:#fff; font-family:'Inter',sans-serif; color:#fff; }
+
+    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       SPLASH
+    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    #splash {
+      position:fixed; inset:0; background:transparent; z-index:200;
+      overflow:hidden; pointer-events:none;
+    }
+    #splash-text {
+      position:absolute; inset:0; z-index:2; will-change:transform;
+      pointer-events:auto;
+    }
+
+    /* â”€â”€ NAV â€” fixed, sits above everything (splash + canvas + panels) â”€â”€ */
+    #site-nav {
+      position:fixed; top:0; left:0; right:0; z-index:300;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:1.4rem clamp(1.2rem,4vw,2.8rem);
+      border-bottom:1px solid rgba(0,0,0,0.1);
+      background:rgba(255,255,255,0.92);
+      backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+      opacity:0; animation:sFadeUp 0.6s ease forwards; animation-delay:0.1s;
+    }
+    #nav-brand {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(1rem,1.6vw,1.25rem);
+      letter-spacing:0.04em;
+      color:#000;
+      display:flex; flex-direction:row; align-items:baseline; gap:0.5em; line-height:1.15;
+      text-decoration:none;
+      cursor:pointer;
+    }
+    #nav-brand .nav-brand-name { color:#999999; }
+    #nav-brand .nav-brand-tagline { color:#000000; letter-spacing:0.03em; }
+    #nav-links {
+      display:flex; align-items:center; gap:clamp(1rem,2.4vw,1.8rem);
+    }
+    #nav-links a {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(0.85rem,1.4vw,1.1rem);
+      letter-spacing:0.04em;
+      color:#000; text-decoration:none;
+      transition:opacity 0.25s;
+    }
+    #nav-links a:hover { opacity:0.5; }
+
+    /* â”€â”€ "All Projects" mega-menu â€” full-width dropdown under the nav â”€â”€ */
+    #nav-megamenu {
+      position:fixed; left:0; right:0; z-index:290;
+      background:#cccccc;
+      backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+      border-bottom:1px solid rgba(0,0,0,0.08);
+      padding:clamp(1.6rem,3vw,2.4rem) clamp(1.2rem,4vw,2.8rem);
+      opacity:0; visibility:hidden; transform:translateY(-12px);
+      transition:opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
+    }
+    #nav-megamenu.open {
+      opacity:1; visibility:visible; transform:translateY(0);
+      transition:opacity 0.3s ease, transform 0.3s ease, visibility 0s;
+    }
+    #nav-megamenu-grid {
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0,1fr));
+      gap:clamp(0.7rem,1.4vw,1.1rem);
+      max-width:78rem; margin:0 auto;
+    }
+
+    /* â”€â”€ MAIN LAYOUT â”€â”€ */
+    #splash-layout {
+      position:absolute; inset:0; z-index:2;
+      display:grid;
+      grid-template-columns: 1fr;
+      padding:clamp(5.5rem,11vw,8rem) clamp(1.2rem,4vw,2.8rem) clamp(3rem,7vw,5rem);
+      align-items:start;
+    }
+
+    /* â”€â”€ LEFT: type stack â”€â”€ */
+    #splash-left {
+      display:flex; flex-direction:column;
+      align-items:flex-start;
+    }
+    .hero-line { overflow:hidden; line-height:1; }
+    .hero-line > * {
+      display:block;
+      transform:translateY(110%);
+      animation:sReveal 0.75s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    .hero-brand-design, .hero-direction {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(3.2rem,10.5vw,9.5rem);
+      letter-spacing:-0.015em;
+      color:#000;
+      line-height:0.95;
+    }
+    .hero-direction {
+      font-size:clamp(1.6rem,5.25vw,4.75rem);
+      color:#999999;
+    }
+
+    .d0 > * { animation-delay:0.1s; }
+    .d1 > * { animation-delay:0.26s; }
+
+    @keyframes sReveal  { to { transform:translateY(0); } }
+    @keyframes sFadeUp  { to { opacity:1; } }
+
+    /* â”€â”€ Hero project cards (under the headline) â”€â”€ */
+    #hero-projects {
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0,1fr));
+      gap:clamp(0.49rem,0.98vw,0.77rem);
+      width:100%;
+      margin-top:clamp(1.12rem,2.45vw,1.82rem);
+      max-width:54.6rem;
+      opacity:0; animation:sFadeUp 0.7s ease forwards; animation-delay:0.75s;
+    }
+    .hero-card {
+      background:#fff; border-radius:10px;
+      padding:clamp(0.7rem,1.12vw,0.91rem);
+      box-shadow:0 6px 12px rgba(0,0,0,0.22), 0 14px 40px rgba(0,0,0,0.07);
+      border:1px solid rgba(0,0,0,0.05);
+      display:flex; flex-direction:column;
+      max-height:252px; overflow:hidden;
+      transition:transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .hero-card:hover { transform:translateY(-4px); box-shadow:0 20px 50px rgba(0,0,0,0.1); }
+    a.hero-card-title { text-decoration:none; display:block; transition:opacity 0.2s ease; }
+    a.hero-card-title:hover { opacity:0.6; }
+    .hero-card-title {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(0.77rem,1.26vw,1.05rem);
+      letter-spacing:0.01em; color:#000; margin-bottom:0.385rem;
+    }
+    .hero-card-tags { display:flex; flex-wrap:wrap; gap:0.245rem; margin-bottom:0.49rem; }
+    .hero-card-tag {
+      font-family:'Poppins',sans-serif;
+      font-size:0.41rem; letter-spacing:0.04em;
+      padding:0.196rem 0.455rem; border-radius:5px;
+      background:rgba(0,0,0,0.05); color:rgba(0,0,0,0.55);
+    }
+    .hero-card-desc {
+      font-family:'Poppins',sans-serif;
+      font-size:0.49rem; line-height:1.7; font-weight:300;
+      color:rgba(0,0,0,0.5); margin-bottom:0.63rem;
+    }
+    .hero-card-body { display:contents; }
+    .hero-card-thumb {
+      order:1; margin-top:auto; border-radius:6px; overflow:hidden;
+      aspect-ratio:16/10; background:#111;
+    }
+    .hero-card-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+    .hero-card-thumb a { display:block; width:100%; height:100%; }
+    #nav-megamenu .hero-card-thumb img { object-fit:contain; }
+    #end-card .hero-card-thumb img { object-fit:contain; }
+
+    /* â”€â”€ "All Projects" card variant â”€â”€ */
+    .hero-card-list {
+      display:grid; grid-template-columns:repeat(2, 1fr);
+      gap:0.21rem 0.56rem; margin-bottom:0.7rem;
+    }
+    .hero-card-list .client-name { line-height:1.4; }
+    .hero-card-cta {
+      margin-top:auto;
+      display:inline-flex; align-items:center; gap:0.28rem;
+      align-self:flex-start;
+      font-family:'Bebas Neue',sans-serif;
+      font-size:0.546rem; letter-spacing:0.16em;
+      color:#fff; background:#000;
+      padding:0.42rem 0.77rem; border-radius:4px;
+      text-decoration:none;
+      transition:opacity 0.25s ease, transform 0.25s ease;
+    }
+    .hero-card-cta:hover { opacity:0.8; transform:translateY(-1px); }
+    .hero-card-cta svg { width:6px; height:6px; }
+
+    .client-name {
+      font-family:'Poppins',sans-serif;
+      font-size:clamp(0.46rem,0.72vw,0.56rem);
+      font-weight:400;
+      color:rgba(0,0,0,0.45);
+      line-height:1.45;
+      text-decoration:none;
+      display:inline-block;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%;
+      transition:font-weight 0.3s ease, color 0.3s ease;
+    }
+    .client-name:hover {
+      font-weight:600;
+      color:#000;
+    }
+
+    /* â”€â”€ SCROLL CTA â”€â”€ */
+    #splash-cta {
+      position:fixed; top:calc(36vh + 30px); left:50%; transform:translateX(-50%);
+      z-index:250;
+      display:flex; flex-direction:column; align-items:center; gap:0.4rem;
+      opacity:0;
+      pointer-events:none;
+    }
+    #splash-cta.intro { animation:sFadeUp 0.6s ease forwards; animation-delay:1s; }
+    #splash-cta-label {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(1.1rem,2.1vw,1.4rem);
+      letter-spacing:0.1em;
+      color:#000;
+    }
+    #splash-cta-icon {
+      width:27px; height:50px;
+      display:flex; align-items:center; justify-content:center;
+    }
+    #splash-cta-icon svg { width:100%; height:100%; overflow:visible; }
+    #splash-cta-icon .chevron {
+      transform-origin:center;
+      animation:chevronPulse 1.6s ease-in-out infinite;
+    }
+    #splash-cta-icon .chevron-2 { animation-delay:0.22s; }
+    @keyframes chevronPulse {
+      0%   { opacity:0.15; transform:translateY(-4px); }
+      50%  { opacity:1;    transform:translateY(0); }
+      100% { opacity:0.15; transform:translateY(4px); }
+    }
+
+    @media(max-width:640px){
+      .hero-brand-design { font-size:clamp(1.9rem,10.5vw,3rem); text-align:left; white-space:nowrap; }
+      .hero-direction { font-size:clamp(1.3rem,7.5vw,2rem); text-align:left; }
+      #splash-left { text-align:left; }
+      #nav-links { gap:0.9rem; }
+
+      /* Hero cards: stack into a single column AND switch to the compact
+         (thumbnail-left) layout together â€” desktop/mobile only, no
+         intermediate tablet breakpoint */
+      #hero-projects, #nav-megamenu-grid { grid-template-columns:1fr; max-width:26rem; }
+      .hero-card {
+        flex-direction:row; align-items:flex-start;
+        gap:0.8rem; padding:0.85rem;
+        min-height:clamp(5.5rem,26vw,7.2rem);
+        max-height:none; overflow:visible;
+      }
+      .hero-card-body { flex:1; min-width:0; display:flex; flex-direction:column; }
+      .hero-card-thumb {
+        order:0; margin-top:0; flex-shrink:0;
+        width:clamp(4.2rem,22vw,5.5rem);
+        aspect-ratio:1/1;
+      }
+    .hero-card-title { font-size:0.95rem; margin-bottom:0.35rem; }
+      .hero-card-tags { margin-bottom:0.4rem; }
+      .hero-card-tag { font-size:0.5rem; padding:0.22rem 0.5rem; }
+      .hero-card-desc {
+        font-size:0.62rem; line-height:1.55; margin-bottom:0;
+        display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
+      }
+
+      /* "All Projects" card: show the full project list on mobile too,
+         in a denser multi-column layout so it still fits comfortably */
+      .hero-card-list {
+        display:grid; grid-template-columns:repeat(3, 1fr);
+        gap:0.12rem 0.4rem; margin-bottom:0.5rem;
+        font-size:0.56rem;
+      }
+      .hero-card-list .client-name { line-height:1.6; }
+      .hero-card-cta { font-size:0.6rem; padding:0.42rem 0.8rem; gap:0.3rem; }
+      .hero-card-cta svg { width:8px; height:8px; }
+    }
+
+    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       LOADER
+    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    #loader {
+      position:fixed; inset:0; background:#000; z-index:190;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      transition:opacity 0.8s ease; opacity:0; pointer-events:none;
+    }
+    #loader.active { opacity:1; pointer-events:all; }
+    #loader.fade   { opacity:0; pointer-events:none; }
+    #loader-name {
+      font-size:clamp(2.8rem,8vw,7rem); font-weight:900;
+      letter-spacing:-0.04em; text-transform:uppercase;
+      line-height:1; margin-bottom:2rem; position:relative;
+    }
+    #loader-name::after {
+      content:'GARMAN'; position:absolute; inset:0;
+      color:rgba(255,255,255,0.07); z-index:-1;
+    }
+    #loader-name-fill {
+      display:block; clip-path:inset(0 100% 0 0);
+      transition:clip-path 0.1s linear; color:#fff;
+    }
+    #bar-wrap { width:clamp(160px,30vw,320px); height:1px; background:rgba(255,255,255,0.1); }
+    #loader-bar { height:100%; background:#fff; width:0%; transition:width 0.08s linear; }
+    #loader-footer {
+      position:absolute; bottom:clamp(1.5rem,3vw,2.2rem);
+      left:clamp(1.5rem,4vw,3rem); right:clamp(1.5rem,4vw,3rem);
+      display:flex; justify-content:space-between; align-items:flex-end;
+    }
+    #loader-location { font-size:0.52rem; letter-spacing:0.25em; text-transform:uppercase; color:rgba(255,255,255,0.18); }
+    #loader-pct { font-size:0.58rem; letter-spacing:0.12em; color:rgba(255,255,255,0.22); font-variant-numeric:tabular-nums; }
+
+    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       CANVAS
+    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    #canvas { position:fixed; inset:0; width:100%; height:100%; display:block; transform:translateY(0); will-change:transform, opacity; z-index:0; opacity:1; }
+
+    /* â”€â”€ VIGNETTE â”€â”€ */
+    #vig {
+      position:fixed; inset:0; pointer-events:none; z-index:2;
+      background:
+        linear-gradient(to right,  rgba(0,0,0,0.55) 0%, transparent 25%, transparent 65%, rgba(0,0,0,0.65) 100%),
+        linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.5) 100%);
+    }
+
+    /* â”€â”€ PROGRESS â”€â”€ */
+    #prog-track {
+      position:fixed; bottom:0; left:0; right:0; height:2px;
+      background:rgba(255,255,255,0.06); z-index:20;
+      opacity:0; transition:opacity 0.8s;
+    }
+    #prog-track.show { opacity:1; }
+    #prog-fill { height:100%; background:#fff; width:0%; }
+    .stop-dot {
+      position:absolute; top:50%; transform:translate(-50%,-50%);
+      width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,0.3);
+      transition:background 0.2s, transform 0.2s;
+    }
+    .stop-dot.active { background:#fff; transform:translate(-50%,-50%) scale(1.8); }
+
+    /* â”€â”€ LOCK HINT â”€â”€ */
+    #lock-hint {
+      position:fixed; bottom:1.2rem; left:50%; transform:translateX(-50%);
+      z-index:20; font-size:0.52rem; letter-spacing:0.25em; text-transform:uppercase;
+      color:rgba(255,255,255,0.25); opacity:0; transition:opacity 0.4s; pointer-events:none;
+    }
+    #lock-hint.show { opacity:1; }
+
+    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PANELS
+    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    .panel {
+      position:fixed; top:50%; right:clamp(1.5rem,5vw,4rem);
+      transform:translateY(-50%) translateX(40px);
+      width:var(--panel-w);
+      background:#fff;
+      backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);
+      border:1px solid rgba(0,0,0,0.05); border-radius:14px;
+      box-shadow:0 6px 12px rgba(0,0,0,0.22), 0 14px 40px rgba(0,0,0,0.07);
+      padding:clamp(1.4rem,2.5vw,2rem);
+      z-index:10; opacity:0; pointer-events:none;
+      transition:opacity 0.5s cubic-bezier(.4,0,.2,1), transform 0.5s cubic-bezier(.4,0,.2,1);
+    }
+    .panel.visible { opacity:1; transform:translateY(-50%) translateX(0); pointer-events:all; }
+
+    /* Nissan panel â€” left side, vertically centered like the others */
+    #panel-1 {
+      right:auto; left:clamp(1.5rem,5vw,4rem);
+      top:50%; transform:translateY(-50%) translateX(-40px);
+    }
+    #panel-1.visible { transform:translateY(-50%) translateX(0); }
+    .panel-title { font-size:clamp(1.1rem,2.4vw,1.6rem); font-weight:700; letter-spacing:-0.03em; line-height:1.1; margin-bottom:0.5rem; color:#000; }
+    .panel-role { font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(0,0,0,0.35); margin-bottom:1rem; }
+    .panel-thumb { position:relative; width:74.75%; aspect-ratio:16/9; border-radius:2px; margin-bottom:1rem; overflow:hidden; background:#111; }
+    .panel-thumb img {
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+      opacity:0; transition:opacity 0.8s ease, transform 0.6s ease;
+    }
+    .panel-thumb img.show { opacity:1; }
+    .panel.visible .panel-thumb img.show { transform:scale(1.03); }
+    .panel-thumb-nav {
+      position:absolute; top:50%; transform:translateY(-50%);
+      width:26px; height:26px; border-radius:50%;
+      background:rgba(255,255,255,0.85); border:none;
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; opacity:0; z-index:2;
+      transition:opacity 0.2s ease, background 0.2s ease;
+    }
+    .panel-thumb:hover .panel-thumb-nav { opacity:1; }
+    .panel-thumb-nav:hover { background:#fff; }
+    .panel-thumb-nav.prev { left:8px; }
+    .panel-thumb-nav.next { right:8px; }
+    .panel-thumb-nav svg { width:8px; height:8px; }
+    .panel-thumb-nav.prev svg { transform:rotate(180deg); }
+    .panel-tags { display:flex; flex-wrap:wrap; gap:0.3rem; margin-bottom:1rem; }
+    .panel-tag { font-size:0.5rem; letter-spacing:0.12em; text-transform:uppercase; padding:0.18rem 0.55rem; border:1px solid rgba(0,0,0,0.12); border-radius:2px; color:#000; }
+    .panel-desc { font-size:clamp(0.7rem,1vw,0.8rem); font-weight:300; line-height:1.8; color:#000; margin-bottom:1.2rem; }
+    .panel-btn {
+      display:inline-flex; align-items:center; gap:0.45rem;
+      font-size:0.58rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase;
+      color:#fff; background:#000; border:none; border-radius:2px;
+      padding:0.65rem 1.2rem; cursor:pointer; font-family:'Inter',sans-serif;
+      text-decoration:none; transition:background 0.2s, transform 0.15s;
+    }
+    .panel-btn:hover { background:#222; transform:translateY(-1px); }
+    .panel-btn svg { width:10px; height:10px; }
+    .panel-divider { width:100%; height:1px; background:rgba(0,0,0,0.08); margin-bottom:1rem; }
+
+    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       END CARD
+    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    #end-card {
+      position:fixed; inset:0; z-index:150;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      overflow-y:auto; padding:clamp(1.5rem,4vw,4rem) clamp(1.2rem,4vw,2.8rem);
+      opacity:0; pointer-events:none; transition:opacity 0.8s ease;
+      background:#fff;
+    }
+    #end-card.visible { opacity:1; pointer-events:all; }
+
+    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       MOBILE
+    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    @media(max-width:640px){
+      .panel { right:1rem; left:1rem; width:auto; top:auto; bottom:3.5rem; transform:translateY(20px); padding:1.1rem; }
+      .panel.visible { transform:translateY(0); }
+      #panel-1 { right:1rem; left:1rem; width:auto; top:auto; bottom:3.5rem; transform:translateY(20px); }
+      #panel-1.visible { transform:translateY(0); }
+      .panel-thumb { display:block; width:46%; aspect-ratio:16/9; margin-bottom:0.8rem; }
+      .panel-title { font-size:1rem; }
+      .panel-desc { font-size:0.72rem; line-height:1.65; margin-bottom:0.9rem; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+      .panel-tags { margin-bottom:0.7rem; }
+      #end-card { padding:1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- â•â•â•â•â•â•â•â•â•â•â• SPLASH â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- Sticky nav â€” persists across the splash AND the scroll-scrub experience -->
+<nav id="site-nav">
+  <a id="nav-brand" href="#" onclick="if(window.goToHomeStart){ window.goToHomeStart(); } return false;"><span class="nav-brand-name">GARMAN</span><span class="nav-brand-tagline">BRAND DES\GN + CREATIVE D\RECTOR</span></a>
+  <div id="nav-links">
+    <a href="all-projects.html" id="nav-all-projects">Projects</a>
+    <a href="resume.html">Resume</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<!-- Full-width "All Projects" mega-menu â€” opens on hover, mirrors the cards from the end of the scroll -->
+<div id="nav-megamenu">
+  <div id="nav-megamenu-grid">
+    <div class="hero-card">
+      <div class="hero-card-thumb"><a href="project.html?id=toyota-ai-pipeline"><img src="projects/toyota-ai-pipeline-project/final1.png" alt="Toyota AI Pipeline" loading="lazy"></a></div>
+      <div class="hero-card-body">
+        <a class="hero-card-title" href="project.html?id=toyota-ai-pipeline">Toyota AI Pipeline</a>
+        <div class="hero-card-tags">
+          <div class="hero-card-tag">AI Production</div>
+          <div class="hero-card-tag">Compositing</div>
+        </div>
+        <div class="hero-card-desc">Proprietary AI system converting engineering sketches into photoreal lifestyle product imagery for seasonal campaigns â€” no reshoots needed.</div>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="hero-card-thumb"><a href="project.html?id=nissan-global-branding"><img src="projects/nissal-global-branding-project/nissan5.jpg" alt="Nissan Global Rebrand" loading="lazy"></a></div>
+      <div class="hero-card-body">
+        <a class="hero-card-title" href="project.html?id=nissan-global-branding">Nissan Global Rebrand</a>
+        <div class="hero-card-tags">
+          <div class="hero-card-tag">Brand Design</div>
+          <div class="hero-card-tag">Visual Identity</div>
+        </div>
+        <div class="hero-card-desc">Unified global brand system giving each vehicle its own personality while maintaining consistency across markets â€” Nissan's visual signature for three years.</div>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="hero-card-thumb"><a href="project.html?id=storyfire"><img src="projects/storyfire-project/storyfire4.png" alt="Storyfire" loading="lazy"></a></div>
+      <div class="hero-card-body">
+        <a class="hero-card-title" href="project.html?id=storyfire">Storyfire</a>
+        <div class="hero-card-tags">
+          <div class="hero-card-tag">Product Design</div>
+          <div class="hero-card-tag">UI/UX Design</div>
+        </div>
+        <div class="hero-card-desc">Creator economy platform where creators and fans build content together â€” writing, video, blog posts â€” with a token currency called Blaze. 100+ screens designed solo.</div>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="hero-card-body" style="display:flex; flex-direction:column; flex:1;">
+        <div class="hero-card-title">All Projects</div>
+        <div class="hero-card-list" id="nav-megamenu-list">
+          <a class="client-name" href="project.html?id=tacobell-redesign">Tacobell.com</a>
+          <a class="client-name" href="project.html?id=storyfire">Storyfire</a>
+          <a class="client-name" href="project.html?id=toyota-ai-pipeline">Toyota AI Pipeline</a>
+          <a class="client-name" href="project.html?id=toyota-garage">Toyota Garage</a>
+          <a class="client-name" href="project.html?id=honda-motorsports">Honda Motorsports</a>
+          <a class="client-name" href="project.html?id=nissan-global-branding">Nissan Global Branding</a>
+          <a class="client-name" href="project.html?id=mr-cooper-portal">Mr. Cooper Portal</a>
+          <a class="client-name" href="project.html?id=disney-habit-heroes">Disney Habit Heroes</a>
+          <a class="client-name" href="project.html?id=nissan-quest">Nissan Quest</a>
+          <a class="client-name" href="project.html?id=google-chromebook">Google Chromebook</a>
+          <a class="client-name" href="project.html?id=toyota-lexus-owners">Toyota/Lexus Owners</a>
+          <a class="client-name" href="project.html?id=xome-real-estate">Xome Real Estate</a>
+          <a class="client-name" href="project.html?id=jeffrys-bbq">Jeffry's Wine Country BBQ</a>
+          <a class="client-name" href="project.html?id=playstation-3-launch">Playstation 3 Launch</a>
+          <a class="client-name" href="project.html?id=pixar-walle">Pixar's Wall-E</a>
+          <a class="client-name" href="project.html?id=nissan-leaf">Nissan Leaf</a>
+          <a class="client-name" href="project.html?id=nissan-versa">Nissan Versa Launch</a>
+          <a class="client-name" href="project.html?id=adidas-golf">Adidas Golf</a>
+          <a class="client-name" href="project.html?id=saints-row-iv">Saints Row IV</a>
+        </div>
+        <a class="hero-card-cta" href="all-projects.html">
+          ALL PROJECTS
+          <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="splash">
+
+
+  <!-- Sliding text layer: scrolls up & clears, truck stays put -->
+  <div id="splash-text">
+
+    <!-- Main layout -->
+    <div id="splash-layout">
+      <div id="splash-left">
+        <div class="hero-line d0"><span class="hero-brand-design">Every brand has a story.</span></div>
+        <div class="hero-line d1"><span class="hero-direction">Technology can help tell it.</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scroll CTA â€” fixed to the bottom of the viewport, always visible -->
+  <div id="splash-cta" class="intro">
+    <div id="splash-cta-label">SCROLL</div>
+    <div id="splash-cta-icon">
+      <svg viewBox="0 0 200 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="22" y="10" width="156" height="226" rx="78" stroke="black" stroke-width="13" fill="none"/>
+        <rect x="87" y="48" width="26" height="58" rx="13" stroke="black" stroke-width="13" fill="none"/>
+        <path class="chevron chevron-1" d="M48 268L100 308L152 268" stroke="black" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path class="chevron chevron-2" d="M48 304L100 344L152 304" stroke="black" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- â•â•â•â•â•â•â•â•â•â•â• LOADER â•â•â•â•â•â•â•â•â•â•â• -->
+<div id="loader">
+  <div id="loader-name"><span id="loader-name-fill">GARMAN</span></div>
+  <div id="bar-wrap"><div id="loader-bar"></div></div>
+  <div id="loader-footer">
+    <div id="loader-location">Los Angeles, CA</div>
+    <div id="loader-pct">0%</div>
+  </div>
+</div>
+
+<canvas id="canvas"></canvas>
+<div id="prog-track"><div id="prog-fill"></div></div>
+<div id="lock-hint">Keep scrolling</div>
+
+<!-- â•â•â•â•â•â•â•â•â•â•â• PANELS â•â•â•â•â•â•â•â•â•â•â• -->
+<div class="panel" id="panel-0">
+  <div class="panel-title">Toyota AI Pipeline</div>
+  <div class="panel-role">Associate Creative Director &nbsp;&middot;&nbsp; Rapp</div>
+  <div class="panel-thumb" data-folder="projects/toyota-ai-pipeline-project" data-images="image1.png,final1.png,final2.png" data-alt="Toyota AI Pipeline">
+    <button class="panel-thumb-nav prev" aria-label="Previous image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button class="panel-thumb-nav next" aria-label="Next image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </div>
+  <div class="panel-tags">
+    <div class="panel-tag">AI Production</div>
+    <div class="panel-tag">Compositing</div>
+    <div class="panel-tag">Adobe Firefly</div>
+  </div>
+  <div class="panel-divider"></div>
+  <div class="panel-desc">Proprietary AI system converting engineering sketches into photoreal lifestyle product imagery â€” enabling seasonal campaigns for thousands of parts without a single reshoot.</div>
+  <a class="panel-btn" href="project.html?id=toyota-ai-pipeline">View Project <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</div>
+
+<div class="panel" id="panel-1">
+  <div class="panel-title">Nissan Global Rebrand</div>
+  <div class="panel-role">Associate Creative Director &nbsp;&middot;&nbsp; TBWA\Chiat\Day LA</div>
+  <div class="panel-thumb" data-folder="projects/nissal-global-branding-project" data-images="nissan5.jpg,nissan2.jpg,nissan6.jpg" data-alt="Nissan">
+    <button class="panel-thumb-nav prev" aria-label="Previous image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button class="panel-thumb-nav next" aria-label="Next image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </div>
+  <div class="panel-tags">
+    <div class="panel-tag">Brand Design</div>
+    <div class="panel-tag">Visual Identity</div>
+    <div class="panel-tag">Style Guide</div>
+    <div class="panel-tag">Global</div>
+  </div>
+  <div class="panel-divider"></div>
+  <div class="panel-desc">Unified global brand system giving each vehicle its own personality while maintaining consistency across all markets. The color grid became Nissan's visual signature for three years.</div>
+  <a class="panel-btn" href="project.html?id=nissan-global-branding">View Project <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</div>
+
+<div class="panel" id="panel-2">
+  <div class="panel-title">Storyfire</div>
+  <div class="panel-role">Solo Designer</div>
+  <div class="panel-thumb" data-folder="projects/storyfire-project" data-images="storyfire3.png,storyfire4.png,storyfire7.png" data-alt="Storyfire">
+    <button class="panel-thumb-nav prev" aria-label="Previous image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button class="panel-thumb-nav next" aria-label="Next image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </div>
+  <div class="panel-tags">
+    <div class="panel-tag">Product Design</div>
+    <div class="panel-tag">UI/UX</div>
+    <div class="panel-tag">Web &amp; App</div>
+  </div>
+  <div class="panel-divider"></div>
+  <div class="panel-desc">Creator platform for collaborative content â€” writing, video, blogs â€” with Blaze token economy. 100+ screens designed across web and mobile app from the ground up.</div>
+  <a class="panel-btn" href="project.html?id=storyfire">View Project <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</div>
+
+<!-- â•â•â•â•â•â•â•â•â•â•â• END CARD â•â•â•â•â•â•â•â•â•â•â• -->
+<div id="end-card">
+  <div id="splash-left">
+    <div class="hero-line d0"><span class="hero-brand-design">Every brand has a story.</span></div>
+    <div class="hero-line d1"><span class="hero-direction">Technology can help tell it.</span></div>
+
+    <!-- Featured project cards -->
+    <div id="hero-projects">
+      <div class="hero-card">
+        <div class="hero-card-thumb"><img src="projects/toyota-ai-pipeline-project/final1.png" alt="Toyota AI Pipeline" loading="lazy"></div>
+        <div class="hero-card-body">
+          <a class="hero-card-title" href="project.html?id=toyota-ai-pipeline">Toyota AI Pipeline</a>
+          <div class="hero-card-tags">
+            <div class="hero-card-tag">AI Production</div>
+            <div class="hero-card-tag">Compositing</div>
+          </div>
+          <div class="hero-card-desc">Proprietary AI system converting engineering sketches into photoreal lifestyle product imagery for seasonal campaigns â€” no reshoots needed.</div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-card-thumb"><img src="projects/nissal-global-branding-project/nissan5.jpg" alt="Nissan Global Rebrand" loading="lazy"></div>
+        <div class="hero-card-body">
+          <a class="hero-card-title" href="project.html?id=nissan-global-branding">Nissan Global Rebrand</a>
+          <div class="hero-card-tags">
+            <div class="hero-card-tag">Brand Design</div>
+            <div class="hero-card-tag">Visual Identity</div>
+          </div>
+          <div class="hero-card-desc">Unified global brand system giving each vehicle its own personality while maintaining consistency across markets â€” Nissan's visual signature for three years.</div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-card-thumb"><img src="projects/storyfire-project/storyfire4.png" alt="Storyfire" loading="lazy"></div>
+        <div class="hero-card-body">
+          <a class="hero-card-title" href="project.html?id=storyfire">Storyfire</a>
+          <div class="hero-card-tags">
+            <div class="hero-card-tag">Product Design</div>
+            <div class="hero-card-tag">UI/UX Design</div>
+          </div>
+          <div class="hero-card-desc">Creator economy platform where creators and fans build content together â€” writing, video, blog posts â€” with a token currency called Blaze. 100+ screens designed solo.</div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-card-body" style="display:flex; flex-direction:column; flex:1;">
+          <div class="hero-card-title">All Projects</div>
+          <div class="hero-card-list" id="all-projects-list">
+            <a class="client-name" href="project.html?id=tacobell-redesign">Tacobell.com</a>
+            <a class="client-name" href="project.html?id=storyfire">Storyfire</a>
+            <a class="client-name" href="project.html?id=toyota-ai-pipeline">Toyota AI Pipeline</a>
+            <a class="client-name" href="project.html?id=toyota-garage">Toyota Garage</a>
+            <a class="client-name" href="project.html?id=honda-motorsports">Honda Motorsports</a>
+            <a class="client-name" href="project.html?id=nissan-global-branding">Nissan Global Branding</a>
+            <a class="client-name" href="project.html?id=mr-cooper-portal">Mr. Cooper Portal</a>
+            <a class="client-name" href="project.html?id=disney-habit-heroes">Disney Habit Heroes</a>
+            <a class="client-name" href="project.html?id=nissan-quest">Nissan Quest</a>
+            <a class="client-name" href="project.html?id=google-chromebook">Google Chromebook</a>
+            <a class="client-name" href="project.html?id=toyota-lexus-owners">Toyota/Lexus Owners</a>
+            <a class="client-name" href="project.html?id=xome-real-estate">Xome Real Estate</a>
+            <a class="client-name" href="project.html?id=jeffrys-bbq">Jeffry's Wine Country BBQ</a>
+            <a class="client-name" href="project.html?id=playstation-3-launch">Playstation 3 Launch</a>
+            <a class="client-name" href="project.html?id=pixar-walle">Pixar's Wall-E</a>
+            <a class="client-name" href="project.html?id=nissan-leaf">Nissan Leaf</a>
+            <a class="client-name" href="project.html?id=nissan-versa">Nissan Versa Launch</a>
+            <a class="client-name" href="project.html?id=adidas-golf">Adidas Golf</a>
+            <a class="client-name" href="project.html?id=saints-row-iv">Saints Row IV</a>
+          </div>
+          <a class="hero-card-cta" href="all-projects.html">
+            ALL PROJECTS
+            <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// â”€â”€â”€ SPLASH: background frame flasher â”€â”€â”€â”€â”€
+// Pin the homepage headline to sit exactly 30px below the nav bar,
+// regardless of nav height across breakpoints.
+(function positionHeadline() {
+  var navEl    = document.getElementById('site-nav');
+  var layoutEl = document.getElementById('splash-layout');
+  if (!navEl || !layoutEl) return;
+  function update() {
+    layoutEl.style.paddingTop = (navEl.offsetHeight + 30) + 'px';
+  }
+  update();
+  window.addEventListener('resize', update);
+})();
+
+var splashEl     = document.getElementById('splash');
+var splashTextEl = document.getElementById('splash-text');
+var splashCtaEl  = document.getElementById('splash-cta');
+if (splashCtaEl) {
+  // Once the entrance fade-in finishes, hand opacity control over to the
+  // scroll-driven fade-out logic in the RAF loop (avoids the CSS animation
+  // and inline-style opacity fighting each other).
+  splashCtaEl.addEventListener('animationend', function() {
+    splashCtaEl.classList.remove('intro');
+    splashCtaEl.style.opacity = '1';
+  });
+}
+// â”€â”€â”€ "All Projects" mega-menu â€” full-width dropdown shown on hover â”€â”€
+(function () {
+  var navEl    = document.getElementById('site-nav');
+  var trigger  = document.getElementById('nav-all-projects');
+  var menuEl   = document.getElementById('nav-megamenu');
+  if (!navEl || !trigger || !menuEl) return;
+
+  function positionMenu() { menuEl.style.top = navEl.offsetHeight + 'px'; }
+  positionMenu();
+  window.addEventListener('resize', positionMenu);
+
+  var hideTimer = null;
+  function open()  { clearTimeout(hideTimer); menuEl.classList.add('open'); }
+  function close() { hideTimer = setTimeout(function () { menuEl.classList.remove('open'); }, 150); }
+
+  trigger.addEventListener('mouseenter', open);
+  trigger.addEventListener('mouseleave', close);
+  menuEl.addEventListener('mouseenter', open);
+  menuEl.addEventListener('mouseleave', close);
+})();
+
+// â”€â”€â”€ PANELS: cross-fade carousel through each panel's set of images â”€â”€
+// Auto-advances on a timer, but visitors can also click the prev/next
+// arrows (which appear on hover) to flip through the images themselves â€”
+// doing so resets the auto-advance timer so it doesn't fight the user.
+function initThumbCarousel(container, intervalMs) {
+  if (!container) return;
+
+  // Build <img> elements from data-folder + data-images="image1.png,image2.png,..."
+  // â€” list as many or as few "imageN" files as you like per panel; just name
+  // your files image1, image2, image3 (any extension) and list them here in order.
+  var folder = container.getAttribute('data-folder');
+  var list   = container.getAttribute('data-images');
+  var alt    = container.getAttribute('data-alt') || '';
+  if (folder && list) {
+    var names = list.split(',').map(function(s){ return s.trim(); }).filter(Boolean);
+    names.forEach(function(name, i) {
+      var img = document.createElement('img');
+      img.src = folder + '/' + name;
+      img.alt = alt;
+      if (i === 0) img.classList.add('show');
+      container.appendChild(img);
+    });
+  }
+
+  var imgs = container.querySelectorAll('img');
+  if (imgs.length < 2) return;
+  var idx = 0;
+  var timer = null;
+
+  function show(nextIdx) {
+    imgs[idx].classList.remove('show');
+    idx = (nextIdx + imgs.length) % imgs.length;
+    imgs[idx].classList.add('show');
+  }
+  function restart() {
+    if (timer) clearInterval(timer);
+    timer = setInterval(function() { show(idx + 1); }, intervalMs);
+  }
+  restart();
+
+  var prevBtn = container.querySelector('.panel-thumb-nav.prev');
+  var nextBtn = container.querySelector('.panel-thumb-nav.next');
+  if (prevBtn) prevBtn.addEventListener('click', function(e) { e.stopPropagation(); show(idx - 1); restart(); });
+  if (nextBtn) nextBtn.addEventListener('click', function(e) { e.stopPropagation(); show(idx + 1); restart(); });
+}
+document.querySelectorAll('.panel-thumb').forEach(function(el) {
+  initThumbCarousel(el, 2600);
+});
+
+
+// â”€â”€â”€ CONFIG â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+var FOLDER_FRAME_COUNTS = [152, 242, 182];   // frames1, frames2, frames3 â€” update when you re-export
+var FPS             = 24;
+var PX_PER_FRAME    = 12;
+var PANEL_FRAMES    = 40;
+var ESCAPE_DELTA    = 600;
+var PAUSE_MS        = 1000;
+var TRANSITION_DIST = 500;
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+var TOTAL_FRAMES = FOLDER_FRAME_COUNTS.reduce(function(a, b){ return a + b; }, 0);
+
+// cumulative starting index of each folder within the combined sequence
+var folderStarts = [];
+FOLDER_FRAME_COUNTS.reduce(function(acc, count) { folderStarts.push(acc); return acc + count; }, 0);
+
+// panels appear at the end of each folder's run
+var stopFrames = folderStarts.map(function(start, idx) {
+  return start + FOLDER_FRAME_COUNTS[idx] - 1;
+});
+// the final stop holds on the true last frame â€” the end card appears only
+// once that pause finishes (sequential, not overlapping)
+var lastStopIdx = stopFrames.length - 1;
+stopFrames[lastStopIdx] = TOTAL_FRAMES - 1;
+var finalStopReached = false;
+
+var canvas         = document.getElementById('canvas');
+var ctx            = canvas.getContext('2d');
+var loaderEl       = document.getElementById('loader');
+var loaderBar      = document.getElementById('loader-bar');
+var loaderPct      = document.getElementById('loader-pct');
+var loaderNameFill = document.getElementById('loader-name-fill');
+var progFill       = document.getElementById('prog-fill');
+var progTrack      = document.getElementById('prog-track');
+var lockHint       = document.getElementById('lock-hint');
+var endCard        = document.getElementById('end-card');
+
+var frames      = new Array(TOTAL_FRAMES);
+var loadedCount = 0;
+var ready       = false;
+
+var phase            = 'transition';
+var transitionScroll = 0;
+var smoothTransition = 0;
+var virtualScroll    = 0;
+var maxScroll        = (TOTAL_FRAMES - 1) * PX_PER_FRAME;
+var smoothScroll     = 0;
+var currentFrame     = 0;
+var locked           = false;
+var lockTarget       = 0;
+var lockAccum        = 0;
+var recentlyUnlockedStop = -1;  // prevents instant re-lock right after a pause ends
+var showEndCard      = false;
+var endCardTimer     = null;
+
+function resizeCanvas() {
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+  if (ready) drawFrame(currentFrame);
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+// â”€â”€â”€ LOAD FRAMES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function padNum(n, d) { return String(n).padStart(d, '0'); }
+
+function framePath(i) {
+  // find which folder index i falls into based on cumulative folder counts
+  var folderIdx = folderStarts.length - 1;
+  for (var f = 0; f < folderStarts.length; f++) {
+    if (i < folderStarts[f] + FOLDER_FRAME_COUNTS[f]) { folderIdx = f; break; }
+  }
+  var folder = folderIdx + 1;
+  var local  = i - folderStarts[folderIdx];
+  return 'frames/frames' + folder + '/frames' + folder + padNum(local, 3) + '.jpg';
+}
+
+for (var fi = 0; fi < TOTAL_FRAMES; fi++) {
+  (function(i) {
+    var img = new Image();
+    img.onload  = function(){ onLoaded(i, img); };
+    img.onerror = function(){ onLoaded(i, null); };
+    img.src = framePath(i);
+  })(fi);
+}
+
+function onLoaded(i, img) {
+  frames[i] = img;
+  loadedCount++;
+  var pct    = loadedCount / TOTAL_FRAMES;
+  var pctVal = (pct * 100).toFixed(1);
+  loaderBar.style.width      = pctVal + '%';
+  loaderNameFill.style.clipPath = 'inset(0 ' + (100 - pctVal) + '% 0 0)';
+  loaderPct.textContent      = Math.floor(pct * 100) + '%';
+  if (i === 0 && img) drawFrame(0);
+
+  if (loadedCount >= TOTAL_FRAMES) {
+    ready = true;
+    stopFrames.forEach(function(f, idx) {
+      var dot = document.createElement('div');
+      dot.className = 'stop-dot'; dot.id = 'dot-' + idx;
+      dot.style.left = (f / (TOTAL_FRAMES - 1) * 100) + '%';
+      progTrack.appendChild(dot);
+    });
+    setTimeout(function() {
+      loaderEl.classList.remove('active');
+      loaderEl.classList.add('fade');
+      progTrack.classList.add('show');
+      setTimeout(function(){ loaderEl.style.display = 'none'; }, 700);
+    }, 300);
+  }
+}
+
+// â”€â”€â”€ DRAW â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function drawFrame(idx) {
+  idx = Math.max(0, Math.min(TOTAL_FRAMES - 1, Math.round(idx)));
+  var img = frames[idx];
+  if (!img || !img.naturalWidth) return;
+  var iw = img.naturalWidth, ih = img.naturalHeight;
+  var cw = canvas.width, ch = canvas.height;
+
+  // Always fill the viewport edge-to-edge top-to-bottom ("cover") â€” the
+  // truck stays full height with no letterbox bars on mobile, even if the
+  // sides crop slightly.
+  var scale = Math.max(cw / iw, ch / ih);
+  var w = iw * scale, h = ih * scale;
+  ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
+}
+
+// â”€â”€â”€ SCROLL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function addDelta(delta) {
+  if (phase === 'transition') {
+    transitionScroll += delta;
+    if (transitionScroll < 0) transitionScroll = 0;
+
+    // Drive the frame scrub in parallel with the text exit so the truck
+    // animation starts playing immediately on scroll â€” no need to wait
+    // for the hero text to fully clear the screen first.
+    if (ready && delta > 0) {
+      virtualScroll += delta;
+      virtualScroll = Math.max(0, Math.min(maxScroll, virtualScroll));
+    }
+
+    if (transitionScroll >= TRANSITION_DIST) {
+      transitionScroll = TRANSITION_DIST;
+      if (!loaderEl.classList.contains('active') && loaderEl.style.display !== 'none') {
+        loaderEl.classList.add('active');
+      }
+      if (ready) phase = 'scrub';
+    }
+  } else {
+    if (virtualScroll <= 0 && delta < 0) {
+      phase = 'transition';
+      transitionScroll = TRANSITION_DIST;
+      smoothTransition = TRANSITION_DIST;
+      transitionScroll += delta;
+      if (transitionScroll < 0) transitionScroll = 0;
+      return;
+    }
+    if (locked) {
+      // ignore input â€” pause is timed, not scroll-escaped
+    } else {
+      virtualScroll += delta;
+      virtualScroll = Math.max(0, Math.min(maxScroll, virtualScroll));
+      var frame = virtualScroll / PX_PER_FRAME;
+
+      // once we've moved away from a stop we just paused at, it's eligible to lock again
+      if (recentlyUnlockedStop !== -1 && Math.abs(frame - stopFrames[recentlyUnlockedStop]) > 2) {
+        recentlyUnlockedStop = -1;
+      }
+
+      for (var i = 0; i < stopFrames.length; i++) {
+        if (i === recentlyUnlockedStop) continue;
+        if (Math.abs(frame - stopFrames[i]) < 1.5) {
+          virtualScroll = stopFrames[i] * PX_PER_FRAME;
+          locked = true; lockTarget = virtualScroll; lockAccum = 0;
+          lockHint.classList.add('show');
+          (function(stopIdx) {
+            setTimeout(function() {
+              locked = false;
+              lockHint.classList.remove('show');
+              recentlyUnlockedStop = stopIdx;
+              if (stopIdx === lastStopIdx) {
+                finalStopReached = true;
+                endCardTimer = setTimeout(function() {
+                  showEndCard = true;
+                  endCardTimer = null;
+                }, PAUSE_MS);
+              }
+            }, PAUSE_MS);
+          })(i);
+          break;
+        }
+      }
+    }
+  }
+}
+
+// Reset everything back to the very start of the homepage (frame 0, hero visible)
+function goToHomeStart() {
+  phase = 'transition';
+  transitionScroll = 0;
+  smoothTransition = 0;
+  virtualScroll = 0;
+  smoothScroll = 0;
+  currentFrame = 0;
+  locked = false;
+  lockTarget = 0;
+  lockAccum = 0;
+  recentlyUnlockedStop = -1;
+  finalStopReached = false;
+  showEndCard = false;
+  if (endCardTimer) { clearTimeout(endCardTimer); endCardTimer = null; }
+  if (ready) drawFrame(0);
+}
+window.goToHomeStart = goToHomeStart;
+
+window.addEventListener('wheel', function(e) {
+  e.preventDefault();
+  addDelta(e.deltaY);
+}, { passive: false });
+
+var touchLastY = 0;
+window.addEventListener('touchstart', function(e) { touchLastY = e.touches[0].clientY; }, { passive: true });
+window.addEventListener('touchmove', function(e) {
+  e.preventDefault();
+  var dy = touchLastY - e.touches[0].clientY;
+  touchLastY = e.touches[0].clientY;
+  addDelta(dy * 2.5);
+}, { passive: false });
+
+// â”€â”€â”€ RAF â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+(function loop() {
+  requestAnimationFrame(loop);
+
+  smoothTransition += (transitionScroll - smoothTransition) * 0.1;
+  var t = smoothTransition / TRANSITION_DIST;
+
+  // Only the hero text + CTA slide up and clear the screen â€” the truck
+  // (canvas, showing frame 0 of frames1) stays put as the background.
+  splashTextEl.style.transform = 'translateY(' + (-t * 120) + 'vh)';
+  splashTextEl.style.opacity   = String(1 - t);
+
+  // The truck is visible immediately on load (frame 0 of frames1) â€” no
+  // fade-in; the canvas is the page background from the very start.
+  canvas.style.opacity = '1';
+
+  // SCROLL cue disappears as soon as the user starts scrolling
+  if (splashCtaEl) {
+    var ctaFade = 1 - Math.min(1, transitionScroll / (TRANSITION_DIST * 0.12));
+    splashCtaEl.style.opacity = String(ctaFade);
+  }
+
+  if (phase === 'transition' && transitionScroll >= TRANSITION_DIST && ready && t > 0.98) {
+    phase = 'scrub';
+  }
+
+  if (!ready) return;
+
+  smoothScroll += (virtualScroll - smoothScroll) * 0.1;
+  var rf = Math.round(smoothScroll / PX_PER_FRAME);
+  if (rf !== currentFrame) { currentFrame = rf; drawFrame(currentFrame); }
+
+  var inScrub = (phase === 'scrub' || t > 0.5);
+  progFill.style.width = (currentFrame / (TOTAL_FRAMES - 1) * 100) + '%';
+
+  // scrolling back past the final stop un-does the end-card hand-off,
+  // so the Storyfire panel (and everything else) can reappear on reverse
+  if ((finalStopReached || showEndCard) && currentFrame < stopFrames[lastStopIdx]) {
+    finalStopReached = false;
+    showEndCard = false;
+    if (endCardTimer) { clearTimeout(endCardTimer); endCardTimer = null; }
+  }
+
+  stopFrames.forEach(function(sf, i) {
+    var show = inScrub && Math.abs(currentFrame - sf) <= PANEL_FRAMES;
+    if (i === lastStopIdx && (finalStopReached || showEndCard)) show = false; // hand off to end card
+    var p = document.getElementById('panel-' + i);
+    var d = document.getElementById('dot-' + i);
+    if (p) p.classList.toggle('visible', show);
+    if (d) d.classList.toggle('active', show);
+  });
+
+  endCard.classList.toggle('visible', inScrub && showEndCard);
+})();
+</script>
+</body>
+</html>
+
