@@ -937,7 +937,7 @@ function drawFrame(idx) {
   // truck stays full height with no letterbox bars on mobile, even if the
   // sides crop slightly.
   var scale = Math.max(cw / iw, ch / ih);
-  if (window.innerWidth <= 640) scale *= 0.8;
+  if (window.innerWidth <= 640) scale *= 0.6;
   var w = iw * scale, h = ih * scale;
   ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
 }
