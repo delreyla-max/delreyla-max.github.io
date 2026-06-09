@@ -121,8 +121,8 @@
     /* â”€â”€ "All Projects" mega-menu (mirrors homepage) â”€â”€ */
     #nav-megamenu {
       position:fixed; top:0; right:0; bottom:0; z-index:290;
-      width:clamp(280px,40vw,540px);
-      background:#cccccc;
+      width:clamp(240px,24vw,340px);
+      background:rgba(204,204,204,0.6);
       backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
       border-left:1px solid rgba(0,0,0,0.08);
       padding:clamp(4.5rem,8vw,6rem) clamp(1.2rem,2.4vw,2rem) clamp(1.6rem,3vw,2.4rem);
@@ -153,6 +153,7 @@
     }
     .hero-card:hover { transform:translateY(-4px); box-shadow:0 20px 50px rgba(0,0,0,0.1); }
     a.hero-card-title { text-decoration:none; display:block; transition:opacity 0.2s ease; }
+    a.hero-card { text-decoration:none; color:inherit; }
     a.hero-card-title:hover { opacity:0.6; }
     .hero-card-title {
       font-family:'Bebas Neue',sans-serif;
@@ -191,6 +192,15 @@
     }
     #nav-megamenu .hero-card-title { font-size:0.95rem; margin-bottom:0.35rem; }
     #nav-megamenu .hero-card-tags { margin-bottom:0; }
+
+    .hero-card-all-projects {
+      text-decoration:none;
+      display:flex; align-items:center; justify-content:center;
+      min-height:5rem;
+    }
+    .hero-card-all-inner {
+      display:flex; flex-direction:column; align-items:flex-start;
+    }
 
     .hero-card-list {
       display:grid; grid-template-columns:repeat(2, 1fr);
@@ -272,72 +282,48 @@
 </nav>
 <div id="nav-megamenu">
   <div id="nav-megamenu-grid">
-    <div class="hero-card">
+    <a class="hero-card" href="project.html?id=toyota-ai-pipeline">
       <div class="hero-card-thumb"><img src="projects/toyota-ai-pipeline-project/final1.png" alt="Toyota AI Pipeline" loading="lazy"></div>
       <div class="hero-card-body">
-        <a class="hero-card-title" href="project.html?id=toyota-ai-pipeline">Toyota AI Pipeline</a>
+        <div class="hero-card-title">Toyota AI Pipeline</div>
         <div class="hero-card-tags">
           <div class="hero-card-tag">AI Production</div>
           <div class="hero-card-tag">Compositing</div>
         </div>
-        
       </div>
-    </div>
+    </a>
 
-    <div class="hero-card">
+    <a class="hero-card" href="project.html?id=nissan-global-branding">
       <div class="hero-card-thumb"><img src="projects/nissal-global-branding-project/nissan5.jpg" alt="Nissan Global Rebrand" loading="lazy"></div>
       <div class="hero-card-body">
-        <a class="hero-card-title" href="project.html?id=nissan-global-branding">Nissan Global Rebrand</a>
+        <div class="hero-card-title">Nissan Global Rebrand</div>
         <div class="hero-card-tags">
           <div class="hero-card-tag">Brand Design</div>
           <div class="hero-card-tag">Visual Identity</div>
         </div>
-        
       </div>
-    </div>
+    </a>
 
-    <div class="hero-card">
+    <a class="hero-card" href="project.html?id=storyfire">
       <div class="hero-card-thumb"><img src="projects/storyfire-project/storyfire4.png" alt="Storyfire" loading="lazy"></div>
       <div class="hero-card-body">
-        <a class="hero-card-title" href="project.html?id=storyfire">Storyfire</a>
+        <div class="hero-card-title">Storyfire</div>
         <div class="hero-card-tags">
           <div class="hero-card-tag">Product Design</div>
           <div class="hero-card-tag">UI/UX Design</div>
         </div>
-        
       </div>
-    </div>
+    </a>
 
-    <div class="hero-card">
-      <div class="hero-card-body" style="display:flex; flex-direction:column; flex:1;">
-        <div class="hero-card-title">All Projects</div>
-        <div class="hero-card-list" id="nav-megamenu-list">
-          <a class="client-name" href="project.html?id=tacobell-redesign">Tacobell.com</a>
-          <a class="client-name" href="project.html?id=storyfire">Storyfire</a>
-          <a class="client-name" href="project.html?id=toyota-ai-pipeline">Toyota AI Pipeline</a>
-          <a class="client-name" href="project.html?id=toyota-garage">Toyota Garage</a>
-          <a class="client-name" href="project.html?id=honda-motorsports">Honda Motorsports</a>
-          <a class="client-name" href="project.html?id=nissan-global-branding">Nissan Global Branding</a>
-          <a class="client-name" href="project.html?id=mr-cooper-portal">Mr. Cooper Portal</a>
-          <a class="client-name" href="project.html?id=disney-habit-heroes">Disney Habit Heroes</a>
-          <a class="client-name" href="project.html?id=nissan-quest">Nissan Quest</a>
-          <a class="client-name" href="project.html?id=google-chromebook">Google Chromebook</a>
-          <a class="client-name" href="project.html?id=toyota-lexus-owners">Toyota/Lexus Owners</a>
-          <a class="client-name" href="project.html?id=xome-real-estate">Xome Real Estate</a>
-          <a class="client-name" href="project.html?id=jeffrys-bbq">Jeffry's Wine Country BBQ</a>
-          <a class="client-name" href="project.html?id=playstation-3-launch">Playstation 3 Launch</a>
-          <a class="client-name" href="project.html?id=pixar-walle">Pixar's Wall-E</a>
-          <a class="client-name" href="project.html?id=nissan-leaf">Nissan Leaf</a>
-          <a class="client-name" href="project.html?id=nissan-versa">Nissan Versa Launch</a>
-          <a class="client-name" href="project.html?id=adidas-golf">Adidas Golf</a>
-          <a class="client-name" href="project.html?id=saints-row-iv">Saints Row IV</a>
-        </div>
-        <a class="hero-card-cta" href="all-projects.html">
+    <a class="hero-card hero-card-all-projects" href="all-projects.html">
+      <div class="hero-card-all-inner">
+        <div class="hero-card-title">View All Projects</div>
+        <div class="hero-card-cta" style="margin-top:0.6rem;">
           ALL PROJECTS
           <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        </div>
       </div>
-    </div>
+    </a>
   </div>
 </div>
 
@@ -396,6 +382,14 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
 
 
 
