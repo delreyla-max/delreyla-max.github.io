@@ -47,7 +47,7 @@
       text-decoration:none;
       cursor:pointer;
     }
-    #nav-brand .nav-brand-name { color:#999999; }
+    #nav-brand .nav-brand-name { color:#000; }
     #nav-brand .nav-brand-tagline { color:#000000; letter-spacing:0.03em; }
     #nav-links {
       display:flex; align-items:center; gap:clamp(1rem,2.4vw,1.8rem);
@@ -125,10 +125,21 @@
     .d2 > * { animation-delay:0.42s; }
     .hero-tagline {
       font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(0.95rem,2.2vw,1.5rem);
-      letter-spacing:0.2em;
-      color:rgba(0,0,0,0.35);
+      font-size:clamp(1.25rem,3vw,2.1rem);
+      letter-spacing:0.16em;
+      color:rgba(0,0,0,0.72);
       margin-bottom:1.4rem;
+      display:block;
+    }
+    /* Client name-drop under the headline â€" signals caliber before the scroll */
+    .hero-clients {
+      font-family:'Poppins',sans-serif;
+      font-size:clamp(0.62rem,1.1vw,0.82rem);
+      letter-spacing:0.2em;
+      text-transform:uppercase;
+      font-weight:500;
+      color:rgba(0,0,0,0.55);
+      margin-top:1.2rem;
       display:block;
     }
 
@@ -244,6 +255,22 @@
     }
 
     /* â"€â"€ SCROLL CTA â"€â"€ */
+    /* Skip-to-work escape â€" lets hiring managers bypass the scroll-jack */
+    #skip-to-work {
+      position:fixed; bottom:clamp(1.2rem,3vw,2rem); right:clamp(1.2rem,4vw,2.8rem);
+      z-index:260;
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(0.85rem,1.4vw,1.05rem);
+      letter-spacing:0.08em;
+      color:rgba(0,0,0,0.6); text-decoration:none;
+      padding:0.5rem 0.95rem;
+      background:rgba(255,255,255,0.78);
+      backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+      border:1px solid rgba(0,0,0,0.12); border-radius:999px;
+      transition:color 0.25s, background 0.25s;
+    }
+    #skip-to-work:hover { color:#000; background:rgba(255,255,255,0.95); }
+
     #splash-cta {
       position:fixed; top:calc(36vh + 30px); left:50%; transform:translateX(-50%);
       z-index:250;
@@ -479,6 +506,39 @@
       .panel-tags { margin-bottom:0.7rem; }
       #end-card { padding:1.5rem; }
     }
+
+    /* ── A4: prefers-reduced-motion — static hero, no scroll-jack ──────── */
+    html.reduced-motion,
+    html.reduced-motion body { overflow:auto !important; height:auto !important; }
+    html.reduced-motion #canvas,
+    html.reduced-motion #loader,
+    html.reduced-motion #vig,
+    html.reduced-motion #prog-track,
+    html.reduced-motion #lock-hint,
+    html.reduced-motion #splash-cta,
+    html.reduced-motion .panel,
+    html.reduced-motion #skip-to-work { display:none !important; }
+    html.reduced-motion #splash {
+      position:static !important; height:auto !important;
+      overflow:visible !important; pointer-events:auto !important; background:#fff;
+    }
+    html.reduced-motion #splash-text { position:static !important; transform:none !important; opacity:1 !important; }
+    html.reduced-motion #splash-layout { min-height:100vh; align-items:start; }
+    html.reduced-motion .hero-line { overflow:visible; }
+    html.reduced-motion .hero-line > * { transform:none !important; animation:none !important; opacity:1 !important; }
+    html.reduced-motion #static-hero-cta { display:flex !important; }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-line > * { animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
+    }
+    .static-hero-cta-btn {
+      display:inline-flex; align-items:center; gap:0.5em;
+      font-family:'Bebas Neue',sans-serif; font-size:clamp(0.9rem,1.6vw,1.15rem);
+      letter-spacing:0.08em; text-decoration:none;
+      padding:0.65rem 1.5rem; border-radius:999px; transition:opacity 0.2s;
+    }
+    .static-hero-cta-btn:hover { opacity:0.7; }
+    .static-hero-cta-primary { background:#000; color:#fff; }
+    .static-hero-cta-secondary { background:transparent; color:#000; border:1px solid rgba(0,0,0,0.25); }
   </style>
 </head>
 <body>
@@ -492,8 +552,11 @@
     <a href="resume.html">Resume</a>
     <a href="contact.html">Contact</a>
   </div>
-  
+
 </nav>
+
+<!-- Skip-to-work escape â€" jumps straight past the animation to the project grid -->
+<a id="skip-to-work" href="all-projects.html">Skip to work &darr;</a>
 
 <!-- Full-width "All Projects" mega-menu â€" opens on hover, mirrors the cards from the end of the scroll -->
 <div id="nav-megamenu">
@@ -555,6 +618,12 @@
       <div id="splash-left">
         <div class="hero-line d0"><span class="hero-tagline">BRAND DES\GN + CREATIVE D\RECTOR</span></div>
         <div class="hero-line d1"><span class="hero-brand-design">A brand without a story is just a name.</span></div>
+        <div class="hero-line d2"><span class="hero-clients">Toyota &middot; Nissan &middot; Disney &middot; Google &middot; PlayStation</span></div>
+        <div id="static-hero-cta" style="display:none; margin-top:2.5rem; flex-wrap:wrap; gap:0.75rem;">
+          <a href="all-projects.html" class="static-hero-cta-btn static-hero-cta-primary">View Work</a>
+          <a href="resume.html" class="static-hero-cta-btn static-hero-cta-secondary">Resume</a>
+          <a href="contact.html" class="static-hero-cta-btn static-hero-cta-secondary">Contact</a>
+        </div>
       </div>
     </div>
 
@@ -726,6 +795,10 @@
 // â"€â"€â"€ SPLASH: background frame flasher â"€â"€â"€â"€â"€
 // Pin the homepage headline to sit exactly 30px below the nav bar,
 // regardless of nav height across breakpoints.
+// A4: prefers-reduced-motion — skip scroll-jack, show static hero
+var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (prefersReducedMotion) { document.documentElement.classList.add('reduced-motion'); }
+
 (function positionHeadline() {
   var navEl    = document.getElementById('site-nav');
   var layoutEl = document.getElementById('splash-layout');
@@ -900,6 +973,7 @@ function framePath(i) {
   return 'frames/frames' + folder + '/frames' + folder + padNum(local, 3) + '.jpg';
 }
 
+if (!prefersReducedMotion) {
 for (var fi = 0; fi < TOTAL_FRAMES; fi++) {
   (function(i) {
     var img = new Image();
@@ -907,6 +981,7 @@ for (var fi = 0; fi < TOTAL_FRAMES; fi++) {
     img.onerror = function(){ onLoaded(i, null); };
     img.src = framePath(i);
   })(fi);
+}
 }
 
 function onLoaded(i, img) {
@@ -1048,6 +1123,7 @@ function goToHomeStart() {
 }
 window.goToHomeStart = goToHomeStart;
 
+if (!prefersReducedMotion) {
 window.addEventListener('wheel', function(e) {
   e.preventDefault();
   addDelta(e.deltaY);
@@ -1061,8 +1137,10 @@ window.addEventListener('touchmove', function(e) {
   touchLastY = e.touches[0].clientY;
   addDelta(dy * 5);
 }, { passive: false });
+}
 
 // â"€â"€â"€ RAF â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
+if (!prefersReducedMotion) {
 (function loop() {
   requestAnimationFrame(loop);
 
@@ -1121,6 +1199,7 @@ window.addEventListener('touchmove', function(e) {
   // end card replaced by loop-back — keep hidden
   endCard.classList.remove('visible');
 })();
+} // end if (!prefersReducedMotion)
 
 // Panel close buttons
 var dismissedPanels = new Set();

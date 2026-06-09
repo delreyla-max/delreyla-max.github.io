@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -12,7 +12,7 @@
     html, body { width:100%; min-height:100%; background:#fff; font-family:'Inter',sans-serif; color:#000; }
     body { display:flex; flex-direction:column; }
 
-    /* â”€â”€ NAV â€” mirrors the homepage nav â”€â”€ */
+    /* â"€â"€ NAV â€" mirrors the homepage nav â"€â"€ */
     #site-nav {
       position:fixed; top:0; left:0; right:0; z-index:300;
       display:flex; align-items:center; justify-content:space-between;
@@ -29,7 +29,7 @@
       display:flex; flex-direction:row; align-items:baseline; gap:0.5em; line-height:1.15;
       text-decoration:none; cursor:pointer;
     }
-    #nav-brand .nav-brand-name { color:#999999; }
+    #nav-brand .nav-brand-name { color:#000; }
     #nav-brand .nav-brand-tagline { color:#000000; letter-spacing:0.03em; }
     #nav-links { display:flex; align-items:center; gap:clamp(1rem,2.4vw,1.8rem); }
     #nav-links a {
@@ -42,7 +42,7 @@
     #nav-links a:hover { opacity:0.5; }
     
 
-    /* â”€â”€ PAGE LAYOUT â”€â”€ */
+    /* â"€â"€ PAGE LAYOUT â"€â"€ */
     main {
       flex:1; display:flex; align-items:center; justify-content:center;
       padding:clamp(7rem,14vw,9rem) clamp(1.2rem,4vw,2.8rem) clamp(3rem,7vw,5rem);
@@ -119,7 +119,7 @@
       #contact-title { font-size:clamp(2.6rem,15vw,4rem); }
       #contact-sub   { font-size:clamp(1.3rem,7.5vw,2rem); }
     }
-    /* â”€â”€ "All Projects" mega-menu (mirrors homepage) â”€â”€ */
+    /* â"€â"€ "All Projects" mega-menu (mirrors homepage) â"€â"€ */
     #nav-megamenu {
       position:fixed; top:0; right:0; bottom:0; z-index:290;
       width:clamp(240px,24vw,340px);
@@ -403,7 +403,7 @@
 </main>
 
 <script>
-// â”€â”€â”€ "All Projects" mega-menu â€” full-width dropdown shown on hover â”€â”€
+// â"€â"€â"€ "All Projects" mega-menu â€" full-width dropdown shown on hover â"€â"€
 (function () {
   var navEl    = document.getElementById('site-nav');
   var trigger  = document.getElementById('nav-all-projects');
