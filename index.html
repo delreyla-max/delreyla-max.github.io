@@ -443,6 +443,15 @@
     }
     .panel-btn:hover { background:#222; transform:translateY(-1px); }
     .panel-btn svg { width:10px; height:10px; }
+    .panel-close {
+      position:absolute; top:0.7rem; right:0.7rem;
+      width:1.5rem; height:1.5rem;
+      background:rgba(0,0,0,0.07); border:none; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; font-size:0.8rem; line-height:1; color:#000;
+      transition:background 0.2s;
+    }
+    .panel-close:hover { background:rgba(0,0,0,0.15); }
     .panel-divider { width:100%; height:1px; background:rgba(0,0,0,0.08); margin-bottom:1rem; }
 
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -582,6 +591,7 @@
 
 <!-- â•â•â•â•â•â•â•â•â•â•â• PANELS â•â•â•â•â•â•â•â•â•â•â• -->
 <div class="panel" id="panel-0">
+  <button class="panel-close" aria-label="Close">×</button>
   <div class="panel-title">Toyota AI Pipeline</div>
   <div class="panel-role">Associate Creative Director &nbsp;&middot;&nbsp; Rapp</div>
   <div class="panel-thumb" data-folder="projects/toyota-ai-pipeline-project" data-images="image1.png,final1.png,final2.png" data-alt="Toyota AI Pipeline">
@@ -594,11 +604,12 @@
     <div class="panel-tag">Adobe Firefly</div>
   </div>
   <div class="panel-divider"></div>
-  <div class="panel-desc">Proprietary AI system converting engineering sketches into photoreal lifestyle product imagery â€” enabling seasonal campaigns for thousands of parts without a single reshoot.</div>
+  <div class=”panel-desc”>Proprietary AI system converting engineering sketches into photoreal lifestyle product imagery — enabling seasonal campaigns for thousands of parts without a single reshoot.</div>
   <a class="panel-btn" href="project.html?id=toyota-ai-pipeline">View Project <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 </div>
 
 <div class="panel" id="panel-1">
+  <button class="panel-close" aria-label="Close">×</button>
   <div class="panel-title">Nissan Global Rebrand</div>
   <div class="panel-role">Associate Creative Director &nbsp;&middot;&nbsp; TBWA\Chiat\Day LA</div>
   <div class="panel-thumb" data-folder="projects/nissal-global-branding-project" data-images="nissan5.jpg,nissan2.jpg,nissan6.jpg" data-alt="Nissan">
@@ -617,6 +628,7 @@
 </div>
 
 <div class="panel" id="panel-2">
+  <button class="panel-close" aria-label="Close">×</button>
   <div class="panel-title">Storyfire</div>
   <div class="panel-role">Solo Designer</div>
   <div class="panel-thumb" data-folder="projects/storyfire-project" data-images="storyfire3.png,storyfire4.png,storyfire7.png" data-alt="Storyfire">
@@ -629,7 +641,7 @@
     <div class="panel-tag">Web &amp; App</div>
   </div>
   <div class="panel-divider"></div>
-  <div class="panel-desc">Creator platform for collaborative content â€” writing, video, blogs â€” with Blaze token economy. 100+ screens designed across web and mobile app from the ground up.</div>
+  <div class=”panel-desc”>Creator platform for collaborative content — writing, video, blogs — with Blaze token economy. 100+ screens designed across web and mobile app from the ground up.</div>
   <a class="panel-btn" href="project.html?id=storyfire">View Project <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 </div>
 
@@ -813,7 +825,7 @@ document.querySelectorAll('.panel-thumb').forEach(function(el) {
 
 
 // â”€â”€â”€ CONFIG â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-var FOLDER_FRAME_COUNTS = [152, 242, 182];   // frames1, frames2, frames3 â€” update when you re-export
+var FOLDER_FRAME_COUNTS = [152, 242, 182, 84];   // frames1, frames2, frames3, frames4
 var FPS             = 24;
 var PX_PER_FRAME    = 12;
 var PANEL_FRAMES    = 40;
@@ -997,9 +1009,9 @@ function addDelta(delta) {
               if (stopIdx === lastStopIdx) {
                 finalStopReached = true;
                 endCardTimer = setTimeout(function() {
-                  showEndCard = true;
                   endCardTimer = null;
-                }, PAUSE_MS);
+                  goToHomeStart();
+                }, 0);
               }
             }, PAUSE_MS);
           })(i);
@@ -1026,6 +1038,14 @@ function goToHomeStart() {
   showEndCard = false;
   if (endCardTimer) { clearTimeout(endCardTimer); endCardTimer = null; }
   if (ready) drawFrame(0);
+
+  // Replay hero text animations
+  var animated = document.querySelectorAll('#splash-layout .hero-line > *');
+  animated.forEach(function(el) {
+    el.style.animation = 'none';
+    el.offsetHeight; // force reflow
+    el.style.animation = '';
+  });
 }
 window.goToHomeStart = goToHomeStart;
 
@@ -1095,8 +1115,17 @@ window.addEventListener('touchmove', function(e) {
     if (d) d.classList.toggle('active', show);
   });
 
-  endCard.classList.toggle('visible', inScrub && showEndCard);
+  // end card replaced by loop-back — keep hidden
+  endCard.classList.remove('visible');
 })();
+
+// Panel close buttons
+document.querySelectorAll('.panel-close').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var panel = btn.closest('.panel');
+    if (panel) panel.classList.remove('visible');
+  });
+});
 </script>
 </body>
 </html>
