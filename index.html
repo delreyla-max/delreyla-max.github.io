@@ -320,34 +320,29 @@
        LOADER
     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
     #loader {
-      position:fixed; inset:0; background:#000; z-index:190;
+      position:fixed; inset:0; background:#fff; z-index:190;
       display:flex; flex-direction:column; align-items:center; justify-content:center;
       transition:opacity 0.8s ease; opacity:0; pointer-events:none;
     }
     #loader.active { opacity:1; pointer-events:all; }
     #loader.fade   { opacity:0; pointer-events:none; }
     #loader-name {
-      font-size:clamp(2.8rem,8vw,7rem); font-weight:900;
-      letter-spacing:-0.04em; text-transform:uppercase;
-      line-height:1; margin-bottom:2rem; position:relative;
-    }
-    #loader-name::after {
-      content:'GARMAN'; position:absolute; inset:0;
-      color:rgba(255,255,255,0.07); z-index:-1;
+      font-size:0.55rem; font-weight:600;
+      letter-spacing:0.2em; text-transform:uppercase;
+      line-height:1; margin-bottom:1rem; position:relative;
     }
     #loader-name-fill {
-      display:block; clip-path:inset(0 100% 0 0);
-      transition:clip-path 0.1s linear; color:#fff;
+      display:block; color:#000;
     }
-    #bar-wrap { width:clamp(160px,30vw,320px); height:1px; background:rgba(255,255,255,0.1); }
-    #loader-bar { height:100%; background:#fff; width:0%; transition:width 0.08s linear; }
+    #bar-wrap { width:clamp(160px,30vw,320px); height:1px; background:rgba(0,0,0,0.1); }
+    #loader-bar { height:100%; background:#000; width:0%; transition:width 0.08s linear; }
     #loader-footer {
       position:absolute; bottom:clamp(1.5rem,3vw,2.2rem);
       left:clamp(1.5rem,4vw,3rem); right:clamp(1.5rem,4vw,3rem);
       display:flex; justify-content:space-between; align-items:flex-end;
     }
-    #loader-location { font-size:0.52rem; letter-spacing:0.25em; text-transform:uppercase; color:rgba(255,255,255,0.18); }
-    #loader-pct { font-size:0.58rem; letter-spacing:0.12em; color:rgba(255,255,255,0.22); font-variant-numeric:tabular-nums; }
+    #loader-location { font-size:0.52rem; letter-spacing:0.25em; text-transform:uppercase; color:rgba(0,0,0,0.25); }
+    #loader-pct { font-size:0.58rem; letter-spacing:0.12em; color:rgba(0,0,0,0.3); font-variant-numeric:tabular-nums; }
 
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
        CANVAS
@@ -581,7 +576,7 @@
 
 <!-- â•â•â•â•â•â•â•â•â•â•â• LOADER â•â•â•â•â•â•â•â•â•â•â• -->
 <div id="loader">
-  <div id="loader-name"><span id="loader-name-fill">GARMAN</span></div>
+  <div id="loader-name"><span id="loader-name-fill">Loading</span></div>
   <div id="bar-wrap"><div id="loader-bar"></div></div>
   <div id="loader-footer">
     <div id="loader-location">Los Angeles, CA</div>
