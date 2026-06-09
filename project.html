@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title id="page-title">Project — Garman</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -167,6 +169,54 @@
     }
     @media(max-width:640px){
       .media-grid { column-count:2 !important; }
+    }
+
+    /* ── LIGHTBOX ── */
+    .media-grid img, .media-block.is-image img { cursor:zoom-in; }
+    #lightbox {
+      position:fixed; inset:0; z-index:900;
+      background:rgba(0,0,0,0.92);
+      display:flex; align-items:center; justify-content:center;
+      opacity:0; visibility:hidden;
+      transition:opacity 0.25s ease, visibility 0s linear 0.25s;
+    }
+    #lightbox.open {
+      opacity:1; visibility:visible;
+      transition:opacity 0.25s ease, visibility 0s;
+    }
+    #lightbox-img {
+      max-width:92vw; max-height:90vh;
+      object-fit:contain;
+      border-radius:4px;
+      transform:scale(0.97);
+      transition:transform 0.25s ease;
+      user-select:none;
+    }
+    #lightbox.open #lightbox-img { transform:scale(1); }
+    #lightbox-close {
+      position:fixed; top:1.4rem; right:1.6rem;
+      background:none; border:none; cursor:pointer;
+      color:#fff; font-size:1.8rem; line-height:1;
+      opacity:0.7; transition:opacity 0.2s;
+      z-index:901;
+    }
+    #lightbox-close:hover { opacity:1; }
+    .lightbox-arrow {
+      position:fixed; top:50%; transform:translateY(-50%);
+      background:rgba(255,255,255,0.1); border:none; cursor:pointer;
+      color:#fff; width:3rem; height:3rem; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      opacity:0.6; transition:opacity 0.2s, background 0.2s;
+      z-index:901;
+    }
+    .lightbox-arrow:hover { opacity:1; background:rgba(255,255,255,0.2); }
+    .lightbox-arrow.hidden { opacity:0; pointer-events:none; }
+    #lightbox-prev { left:1.2rem; }
+    #lightbox-next { right:1.2rem; }
+    #lightbox-counter {
+      position:fixed; bottom:1.4rem; left:50%; transform:translateX(-50%);
+      font-family:'Poppins',sans-serif; font-size:0.65rem; letter-spacing:0.1em;
+      color:rgba(255,255,255,0.45);
     }
 
     .project-columns {
@@ -752,6 +802,83 @@
 })();
 </script>
 
+<!-- ── LIGHTBOX ── -->
+<div id="lightbox">
+  <button id="lightbox-close" aria-label="Close">&times;</button>
+  <button class="lightbox-arrow" id="lightbox-prev" aria-label="Previous">
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M7 1L3 5L7 9" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <img id="lightbox-img" src="" alt="">
+  <button class="lightbox-arrow" id="lightbox-next" aria-label="Next">
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <div id="lightbox-counter"></div>
+</div>
+
+<script>
+(function () {
+  var lb       = document.getElementById('lightbox');
+  var lbImg    = document.getElementById('lightbox-img');
+  var lbClose  = document.getElementById('lightbox-close');
+  var lbPrev   = document.getElementById('lightbox-prev');
+  var lbNext   = document.getElementById('lightbox-next');
+  var lbCount  = document.getElementById('lightbox-counter');
+
+  var images = [];  // all clickable images on the page
+  var current = 0;
+
+  function collectImages() {
+    images = Array.from(document.querySelectorAll('.media-block.is-image img, .media-grid img'));
+  }
+
+  function open(idx) {
+    current = idx;
+    lbImg.src = images[current].src;
+    lbImg.alt = images[current].alt;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    updateUI();
+  }
+
+  function close() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(function () { lbImg.src = ''; }, 250);
+  }
+
+  function updateUI() {
+    lbCount.textContent = (current + 1) + ' / ' + images.length;
+    lbPrev.classList.toggle('hidden', current === 0);
+    lbNext.classList.toggle('hidden', current === images.length - 1);
+  }
+
+  function prev() { if (current > 0) { current--; lbImg.src = images[current].src; updateUI(); } }
+  function next() { if (current < images.length - 1) { current++; lbImg.src = images[current].src; updateUI(); } }
+
+  // Wire up clicks on images after page renders
+  window.addEventListener('load', function () {
+    collectImages();
+    images.forEach(function (img, i) {
+      img.addEventListener('click', function () { open(i); });
+    });
+  });
+
+  lbClose.addEventListener('click', close);
+  lbPrev.addEventListener('click', prev);
+  lbNext.addEventListener('click', next);
+
+  // Close on backdrop click
+  lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+
+  // Keyboard nav
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') prev();
+    if (e.key === 'ArrowRight') next();
+  });
+})();
+</script>
 
 </body>
 </html>
