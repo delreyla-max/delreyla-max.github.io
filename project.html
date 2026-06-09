@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title id="page-title">Project — Garman</title>
+  <title id="page-title">Project â€” Garman</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -114,7 +114,7 @@
     }
     .project-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
 
-    /* ─── Project media gallery — flexible, block-based per project ─── */
+    /* â”€â”€â”€ Project media gallery â€” flexible, block-based per project â”€â”€â”€ */
     .project-media {
       margin-top:clamp(2.2rem,5vw,3.2rem);
       display:flex; flex-direction:column; gap:clamp(1.2rem,3vw,2rem);
@@ -140,7 +140,7 @@
     .media-embed-frame iframe {
       position:absolute; top:0; left:0; width:100%; height:100%; border:0;
     }
-    /* Masonry grid via CSS columns — each image keeps its natural aspect
+    /* Masonry grid via CSS columns â€” each image keeps its natural aspect
        ratio and the layout flows like Pinterest. Column count is set per
        block (data-cols) and tightened on small screens via the media query. */
     .media-grid {
@@ -171,7 +171,7 @@
       .media-grid { column-count:2 !important; }
     }
 
-    /* ── LIGHTBOX ── */
+    /* â”€â”€ LIGHTBOX â”€â”€ */
     .media-grid img, .media-block.is-image img { cursor:zoom-in; }
     #lightbox {
       position:fixed; inset:0; z-index:900;
@@ -279,7 +279,7 @@
     }
 
 
-    /* ── "All Projects" mega-menu (mirrors homepage) ── */
+    /* â”€â”€ "All Projects" mega-menu (mirrors homepage) â”€â”€ */
     #nav-megamenu {
       position:fixed; left:0; right:0; z-index:290;
       background:#cccccc;
@@ -425,7 +425,7 @@
           <div class="hero-card-tag">AI Production</div>
           <div class="hero-card-tag">Compositing</div>
         </div>
-        <div class="hero-card-desc">Proprietary AI system converting engineering sketches into photoreal lifestyle product imagery for seasonal campaigns — no reshoots needed.</div>
+        <div class="hero-card-desc">Proprietary AI system converting engineering sketches into photoreal lifestyle product imagery for seasonal campaigns â€” no reshoots needed.</div>
       </div>
     </div>
 
@@ -437,7 +437,7 @@
           <div class="hero-card-tag">Brand Design</div>
           <div class="hero-card-tag">Visual Identity</div>
         </div>
-        <div class="hero-card-desc">Unified global brand system giving each vehicle its own personality while maintaining consistency across markets — Nissan's visual signature for three years.</div>
+        <div class="hero-card-desc">Unified global brand system giving each vehicle its own personality while maintaining consistency across markets â€” Nissan's visual signature for three years.</div>
       </div>
     </div>
 
@@ -449,7 +449,7 @@
           <div class="hero-card-tag">Product Design</div>
           <div class="hero-card-tag">UI/UX Design</div>
         </div>
-        <div class="hero-card-desc">Creator economy platform where creators and fans build content together — writing, video, blog posts — with a token currency called Blaze. 100+ screens designed solo.</div>
+        <div class="hero-card-desc">Creator economy platform where creators and fans build content together â€” writing, video, blog posts â€” with a token currency called Blaze. 100+ screens designed solo.</div>
       </div>
     </div>
 
@@ -549,7 +549,7 @@
     return;
   }
 
-  document.getElementById("page-title").textContent = data.title + " — Garman";
+  document.getElementById("page-title").textContent = data.title + " â€” Garman";
   document.getElementById("p-eyebrow").textContent = data.eyebrow || "";
   document.getElementById("p-title").textContent = data.title || "";
   document.getElementById("p-credit").textContent = data.credit || "";
@@ -565,7 +565,7 @@
     tagsEl.appendChild(el);
   });
 
-  // ─── Media gallery — each project can lay its assets out differently ──
+  // â”€â”€â”€ Media gallery â€” each project can lay its assets out differently â”€â”€
   var mediaWrap = document.getElementById("project-media");
   var media = data.media || [];
   var folder = data.folder || "this-project";
@@ -723,7 +723,7 @@
   }
 
   if (!mediaWrap.children.length) {
-    // Nothing in "media" — fall back to the legacy single-thumbnail field,
+    // Nothing in "media" â€” fall back to the legacy single-thumbnail field,
     // or show a placeholder explaining how to add a gallery.
     var thumb = document.getElementById("project-thumb");
     thumb.style.display = "flex";
@@ -738,15 +738,15 @@
     } else {
       document.getElementById("p-thumb-placeholder").innerHTML =
         "No media yet. Drop images, video files, or Vimeo/YouTube links into this project's" +
-        " gallery — open admin.html, expand “" + (data.title || "this project") +
-        "”, and add blocks to its Media gallery section. Local files go in the folder named " +
+        " gallery â€” open admin.html, expand â€œ" + (data.title || "this project") +
+        "â€, and add blocks to its Media gallery section. Local files go in the folder named " +
         folder + ".";
     }
   }
 
   document.getElementById("project-wrap").style.display = "block";
 
-  // ─── Prev / Next navigation ───────────────────────────────────────────
+  // â”€â”€â”€ Prev / Next navigation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   var sorted = (window.PROJECTS || []).slice().sort(function (a, b) {
     return (a.order || 0) - (b.order || 0);
   });
@@ -780,7 +780,7 @@
 </script>
 
 <script>
-// ─── "All Projects" mega-menu — full-width dropdown shown on hover ──
+// â”€â”€â”€ "All Projects" mega-menu â€” full-width dropdown shown on hover â”€â”€
 (function () {
   var navEl    = document.getElementById('site-nav');
   var trigger  = document.getElementById('nav-all-projects');
@@ -802,7 +802,7 @@
 })();
 </script>
 
-<!-- ── LIGHTBOX ── -->
+<!-- â”€â”€ LIGHTBOX â”€â”€ -->
 <div id="lightbox">
   <button id="lightbox-close" aria-label="Close">&times;</button>
   <button class="lightbox-arrow" id="lightbox-prev" aria-label="Previous">
@@ -882,3 +882,4 @@
 
 </body>
 </html>
+
