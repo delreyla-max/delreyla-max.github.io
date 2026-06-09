@@ -1010,7 +1010,7 @@ function addDelta(delta) {
                 finalStopReached = true;
                 endCardTimer = setTimeout(function() {
                   endCardTimer = null;
-                  goToHomeStart();
+                  window.location.href = 'all-projects.html';
                 }, 0);
               }
             }, PAUSE_MS);
