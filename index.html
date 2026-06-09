@@ -40,7 +40,7 @@
     }
     #nav-brand {
       font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(1rem,1.6vw,1.25rem);
+      font-size:clamp(1.14rem,1.6vw,1.39rem);
       letter-spacing:0.04em;
       color:#000;
       display:flex; flex-direction:row; align-items:baseline; gap:0.5em; line-height:1.15;
@@ -60,6 +60,7 @@
       transition:opacity 0.25s;
     }
     #nav-links a:hover { opacity:0.5; }
+    
 
     /* â”€â”€ "All Projects" mega-menu â€” full-width dropdown under the nav â”€â”€ */
     #nav-megamenu {
@@ -83,7 +84,7 @@
       gap:clamp(0.7rem,1.4vw,1.1rem);
     }
     @media(max-width:640px){
-      #nav-megamenu { width:80% !important; min-width:0; }
+      #nav-megamenu { width:80% !important; min-width:0; top:4rem; }
     }
 
     /* â”€â”€ MAIN LAYOUT â”€â”€ */
@@ -112,6 +113,7 @@
       letter-spacing:-0.015em;
       color:#000;
       line-height:0.95;
+      margin-left:-0.03em;
     }
     .hero-direction {
       font-size:clamp(1.6rem,5.25vw,4.75rem);
@@ -120,6 +122,15 @@
 
     .d0 > * { animation-delay:0.1s; }
     .d1 > * { animation-delay:0.26s; }
+    .d2 > * { animation-delay:0.42s; }
+    .hero-tagline {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(0.95rem,2.2vw,1.5rem);
+      letter-spacing:0.2em;
+      color:rgba(0,0,0,0.35);
+      margin-bottom:1.4rem;
+      display:block;
+    }
 
     @keyframes sReveal  { to { transform:translateY(0); } }
     @keyframes sFadeUp  { to { opacity:1; } }
@@ -264,7 +275,7 @@
     }
 
     @media(max-width:640px){
-      .hero-brand-design { font-size:clamp(1.9rem,10.5vw,3rem); text-align:left; white-space:nowrap; }
+      .hero-brand-design { font-size:clamp(2.66rem,14.7vw,4.2rem); text-align:left; }
       .hero-direction { font-size:clamp(1.3rem,7.5vw,2rem); text-align:left; }
       #splash-left { text-align:left; }
       #nav-links { gap:0.9rem; }
@@ -467,12 +478,13 @@
 <!-- â•â•â•â•â•â•â•â•â•â•â• SPLASH â•â•â•â•â•â•â•â•â•â•â• -->
 <!-- Sticky nav â€” persists across the splash AND the scroll-scrub experience -->
 <nav id="site-nav">
-  <a id="nav-brand" href="#" onclick="if(window.goToHomeStart){ window.goToHomeStart(); } return false;"><span class="nav-brand-name">GARMAN</span><span class="nav-brand-tagline">BRAND DES\GN + CREATIVE D\RECTOR</span></a>
+  <a id="nav-brand" href="#" onclick="if(window.goToHomeStart){ window.goToHomeStart(); } return false;"><span class="nav-brand-name">GARMAN</span></a>
   <div id="nav-links">
     <a href="all-projects.html" id="nav-all-projects">Projects</a>
     <a href="resume.html">Resume</a>
     <a href="contact.html">Contact</a>
   </div>
+  
 </nav>
 
 <!-- Full-width "All Projects" mega-menu â€” opens on hover, mirrors the cards from the end of the scroll -->
@@ -533,8 +545,8 @@
     <!-- Main layout -->
     <div id="splash-layout">
       <div id="splash-left">
-        <div class="hero-line d0"><span class="hero-brand-design">Every brand has a story.</span></div>
-        <div class="hero-line d1"><span class="hero-direction">Technology can help tell it.</span></div>
+        <div class="hero-line d0"><span class="hero-tagline">BRAND DES\GN + CREATIVE D\RECTOR</span></div>
+        <div class="hero-line d1"><span class="hero-brand-design">Every brand has a story.</span></div>
       </div>
     </div>
 
@@ -1088,6 +1100,12 @@ window.addEventListener('touchmove', function(e) {
 </script>
 </body>
 </html>
+
+
+
+
+
+
 
 
 

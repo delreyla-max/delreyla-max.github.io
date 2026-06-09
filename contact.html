@@ -23,7 +23,7 @@
     }
     #nav-brand {
       font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(1rem,1.6vw,1.25rem);
+      font-size:clamp(1.14rem,1.6vw,1.39rem);
       letter-spacing:0.04em;
       color:#000;
       display:flex; flex-direction:row; align-items:baseline; gap:0.5em; line-height:1.15;
@@ -40,6 +40,7 @@
       transition:opacity 0.25s;
     }
     #nav-links a:hover { opacity:0.5; }
+    
 
     /* â”€â”€ PAGE LAYOUT â”€â”€ */
     main {
@@ -140,7 +141,7 @@
       gap:clamp(0.7rem,1.4vw,1.1rem);
     }
     @media(max-width:640px){
-      #nav-megamenu { width:80% !important; min-width:0; }
+      #nav-megamenu { width:80% !important; min-width:0; top:4rem; }
     }
     .hero-card {
       background:#fff; border-radius:10px;
@@ -279,6 +280,7 @@
     <a href="resume.html">Resume</a>
     <a href="contact.html">Contact</a>
   </div>
+  
 </nav>
 <div id="nav-megamenu">
   <div id="nav-megamenu-grid">
@@ -333,7 +335,7 @@
     <div class="hero-line d0"><span id="contact-title">Let's talk.</span></div>
     <div class="hero-line d1"><span id="contact-sub">Send a message.</span></div>
 
-    <form id="contact-form" action="mailto:gyip@me.com" method="POST" enctype="text/plain">
+    <form id="contact-form">
       <div class="field">
         <label for="name">Name</label>
         <input type="text" id="name" name="name" placeholder="Your name" required>
@@ -350,7 +352,53 @@
         SEND MESSAGE
         <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
+      <p id="form-status" style="margin-top:1rem;font-size:0.9rem;min-height:1.2em;"></p>
     </form>
+
+    <script>
+    (function(){
+      var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzhMixwmUj4TYEGhyi2ty1ok3xOgffWpjm-YX6Redfd5KLg6pLn16k4kNJ1Sfkxb60z/exec';
+      var form = document.getElementById('contact-form');
+      var status = document.getElementById('form-status');
+      var btn = document.getElementById('contact-submit');
+
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        btn.disabled = true;
+        btn.textContent = 'SENDING...';
+        status.textContent = '';
+
+        var data = {
+          name:    document.getElementById('name').value,
+          email:   document.getElementById('email').value,
+          message: document.getElementById('message').value
+        };
+
+        fetch(SCRIPT_URL, {
+          method: 'POST',
+          body: JSON.stringify(data)
+        })
+        .then(function(r){ return r.json(); })
+        .then(function(res){
+          if(res.result === 'success'){
+            status.style.color = '#2a7a2a';
+            status.textContent = 'Message sent! I\'ll be in touch soon.';
+            form.reset();
+          } else {
+            throw new Error('failed');
+          }
+        })
+        .catch(function(){
+          status.style.color = '#c00';
+          status.textContent = 'Something went wrong. Please try again or email directly.';
+        })
+        .finally(function(){
+          btn.disabled = false;
+          btn.innerHTML = 'SEND MESSAGE <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        });
+      });
+    })();
+    </script>
   </div>
 </main>
 
@@ -382,6 +430,12 @@
 
 </body>
 </html>
+
+
+
+
+
+
 
 
 
