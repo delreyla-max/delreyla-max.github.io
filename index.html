@@ -28,7 +28,7 @@
       pointer-events:auto;
     }
 
-    /* â”€â”€ NAV â€” fixed, sits above everything (splash + canvas + panels) â”€â”€ */
+    /* â"€â"€ NAV â€" fixed, sits above everything (splash + canvas + panels) â"€â"€ */
     #site-nav {
       position:fixed; top:0; left:0; right:0; z-index:300;
       display:flex; align-items:center; justify-content:space-between;
@@ -62,7 +62,7 @@
     #nav-links a:hover { opacity:0.5; }
     
 
-    /* â”€â”€ "All Projects" mega-menu â€” full-width dropdown under the nav â”€â”€ */
+    /* â"€â"€ "All Projects" mega-menu â€" full-width dropdown under the nav â"€â"€ */
     #nav-megamenu {
       position:fixed; top:0; right:0; bottom:0; z-index:290;
       width:clamp(240px,24vw,340px);
@@ -87,7 +87,7 @@
       #nav-megamenu { width:80% !important; min-width:0; top:4rem; }
     }
 
-    /* â”€â”€ MAIN LAYOUT â”€â”€ */
+    /* â"€â"€ MAIN LAYOUT â"€â"€ */
     #splash-layout {
       position:absolute; inset:0; z-index:2;
       display:grid;
@@ -96,7 +96,7 @@
       align-items:start;
     }
 
-    /* â”€â”€ LEFT: type stack â”€â”€ */
+    /* â"€â"€ LEFT: type stack â"€â"€ */
     #splash-left {
       display:flex; flex-direction:column;
       align-items:flex-start;
@@ -135,7 +135,7 @@
     @keyframes sReveal  { to { transform:translateY(0); } }
     @keyframes sFadeUp  { to { opacity:1; } }
 
-    /* â”€â”€ Hero project cards (under the headline) â”€â”€ */
+    /* â"€â"€ Hero project cards (under the headline) â"€â"€ */
     #hero-projects {
       display:grid;
       grid-template-columns:repeat(4, minmax(0,1fr));
@@ -207,7 +207,7 @@
     }
     #end-card .hero-card-thumb img { object-fit:contain; }
 
-    /* â”€â”€ "All Projects" card variant â”€â”€ */
+    /* â"€â"€ "All Projects" card variant â"€â"€ */
     .hero-card-list {
       display:grid; grid-template-columns:repeat(2, 1fr);
       gap:0.21rem 0.56rem; margin-bottom:0.7rem;
@@ -243,7 +243,7 @@
       color:#000;
     }
 
-    /* â”€â”€ SCROLL CTA â”€â”€ */
+    /* â"€â"€ SCROLL CTA â"€â"€ */
     #splash-cta {
       position:fixed; top:calc(36vh + 30px); left:50%; transform:translateX(-50%);
       z-index:250;
@@ -281,7 +281,7 @@
       #nav-links { gap:0.9rem; }
 
       /* Hero cards: stack into a single column AND switch to the compact
-         (thumbnail-left) layout together â€” desktop/mobile only, no
+         (thumbnail-left) layout together â€" desktop/mobile only, no
          intermediate tablet breakpoint */
       #hero-projects, #nav-megamenu-grid { grid-template-columns:1fr; max-width:26rem; }
       .hero-card {
@@ -354,7 +354,7 @@
     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
     #canvas { position:fixed; inset:0; width:100%; height:100%; display:block; transform:translateY(0); will-change:transform, opacity; z-index:0; opacity:1; }
 
-    /* â”€â”€ VIGNETTE â”€â”€ */
+    /* â"€â"€ VIGNETTE â"€â"€ */
     #vig {
       position:fixed; inset:0; pointer-events:none; z-index:2;
       background:
@@ -362,7 +362,7 @@
         linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.5) 100%);
     }
 
-    /* â”€â”€ PROGRESS â”€â”€ */
+    /* â"€â"€ PROGRESS â"€â"€ */
     #prog-track {
       position:fixed; bottom:0; left:0; right:0; height:2px;
       background:rgba(255,255,255,0.06); z-index:20;
@@ -377,7 +377,7 @@
     }
     .stop-dot.active { background:#fff; transform:translate(-50%,-50%) scale(1.8); }
 
-    /* â”€â”€ LOCK HINT â”€â”€ */
+    /* â"€â"€ LOCK HINT â"€â"€ */
     #lock-hint {
       position:fixed; bottom:1.2rem; left:50%; transform:translateX(-50%);
       z-index:20; font-size:0.52rem; letter-spacing:0.25em; text-transform:uppercase;
@@ -404,7 +404,7 @@
     }
     .panel.visible { opacity:1; transform:translateY(-50%) translateX(0); pointer-events:all; }
 
-    /* Nissan panel â€” left side, vertically centered like the others */
+    /* Nissan panel â€" left side, vertically centered like the others */
     #panel-1 {
       right:auto; left:clamp(1.5rem,5vw,4rem);
       top:50%; transform:translateY(-50%) translateX(-40px);
@@ -489,7 +489,7 @@
 <body>
 
 <!-- â•â•â•â•â•â•â•â•â•â•â• SPLASH â•â•â•â•â•â•â•â•â•â•â• -->
-<!-- Sticky nav â€” persists across the splash AND the scroll-scrub experience -->
+<!-- Sticky nav â€" persists across the splash AND the scroll-scrub experience -->
 <nav id="site-nav">
   <a id="nav-brand" href="#" onclick="if(window.goToHomeStart){ window.goToHomeStart(); } return false;"><span class="nav-brand-name">GARMAN</span></a>
   <div id="nav-links">
@@ -500,7 +500,7 @@
   
 </nav>
 
-<!-- Full-width "All Projects" mega-menu â€” opens on hover, mirrors the cards from the end of the scroll -->
+<!-- Full-width "All Projects" mega-menu â€" opens on hover, mirrors the cards from the end of the scroll -->
 <div id="nav-megamenu">
   <div id="nav-megamenu-grid">
     <a class="hero-card" href="project.html?id=toyota-ai-pipeline">
@@ -565,7 +565,7 @@
 
   </div>
 
-  <!-- Scroll CTA â€” fixed to the bottom of the viewport, always visible -->
+  <!-- Scroll CTA â€" fixed to the bottom of the viewport, always visible -->
   <div id="splash-cta" class="intro">
     <div id="splash-cta-label">SCROLL</div>
     <div id="splash-cta-icon">
@@ -593,20 +593,7 @@
 <div id="prog-track"><div id="prog-fill"></div></div>
 <div id="lock-hint">Keep scrolling</div>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â• PANELS â•â•â•â•â•â•â•â•â•â•â• -->
-<style>
-.panel .panel-btn {
-  display:inline-flex !important; align-items:center; gap:0.45rem;
-  font-size:0.58rem !important; font-weight:600 !important;
-  letter-spacing:0.18em; text-transform:uppercase;
-  color:#fff !important; background:#000 !important;
-  border:none; border-radius:2px;
-  padding:0.65rem 1.2rem; cursor:pointer;
-  font-family:'Inter',sans-serif !important;
-  text-decoration:none !important;
-}
-.panel .panel-btn svg { width:10px !important; height:10px !important; }
-</style>
+<!-- PANELS -->
 <div class="panel" id="panel-0">
   <button class="panel-close" aria-label="Close">&times;</button>
   <div class="panel-title">Toyota AI Pipeline</div>
@@ -615,14 +602,14 @@
     <button class="panel-thumb-nav prev" aria-label="Previous image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button class="panel-thumb-nav next" aria-label="Next image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   </div>
-  <div class=”panel-tags”>
-    <div class=”panel-tag”>AI Production</div>
-    <div class=”panel-tag”>Compositing</div>
-    <div class=”panel-tag”>Adobe Firefly</div>
+  <div class="panel-tags">
+    <div class="panel-tag">AI Production</div>
+    <div class="panel-tag">Compositing</div>
+    <div class="panel-tag">Adobe Firefly</div>
   </div>
-  <div class=”panel-divider”></div>
-  <div class=”panel-desc”>Proprietary AI system converting engineering sketches into photoreal lifestyle product imagery &mdash; enabling seasonal campaigns for thousands of parts without a single reshoot.</div>
-  <a class=”panel-btn” href=”project.html?id=toyota-ai-pipeline”>View Project <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  <div class="panel-divider"></div>
+  <div class="panel-desc">Proprietary AI system converting engineering sketches into photoreal lifestyle product imagery &mdash; enabling seasonal campaigns for thousands of parts without a single reshoot.</div>
+  <a class="panel-btn" href="project.html?id=toyota-ai-pipeline">View Project <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 </div>
 
 <div class="panel" id="panel-1">
@@ -652,14 +639,14 @@
     <button class="panel-thumb-nav prev" aria-label="Previous image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button class="panel-thumb-nav next" aria-label="Next image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   </div>
-  <div class=”panel-tags”>
-    <div class=”panel-tag”>Product Design</div>
-    <div class=”panel-tag”>UI/UX</div>
-    <div class=”panel-tag”>Web &amp; App</div>
+  <div class="panel-tags">
+    <div class="panel-tag">Product Design</div>
+    <div class="panel-tag">UI/UX</div>
+    <div class="panel-tag">Web &amp; App</div>
   </div>
-  <div class=”panel-divider”></div>
-  <div class=”panel-desc”>Creator platform for collaborative content &mdash; writing, video, blogs &mdash; with Blaze token economy. 100+ screens designed across web and mobile app from the ground up.</div>
-  <a class=”panel-btn” href=”project.html?id=storyfire”>View Project <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  <div class="panel-divider"></div>
+  <div class="panel-desc">Creator platform for collaborative content &mdash; writing, video, blogs &mdash; with Blaze token economy. 100+ screens designed across web and mobile app from the ground up.</div>
+  <a class="panel-btn" href="project.html?id=storyfire">View Project <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 </div>
 
 <!-- â•â•â•â•â•â•â•â•â•â•â• END CARD â•â•â•â•â•â•â•â•â•â•â• -->
@@ -741,7 +728,7 @@
 </div>
 
 <script>
-// â”€â”€â”€ SPLASH: background frame flasher â”€â”€â”€â”€â”€
+// â"€â"€â"€ SPLASH: background frame flasher â"€â"€â"€â"€â"€
 // Pin the homepage headline to sit exactly 30px below the nav bar,
 // regardless of nav height across breakpoints.
 (function positionHeadline() {
@@ -767,7 +754,7 @@ if (splashCtaEl) {
     splashCtaEl.style.opacity = '1';
   });
 }
-// â”€â”€â”€ "All Projects" mega-menu â€” full-width dropdown shown on hover â”€â”€
+// â"€â"€â"€ "All Projects" mega-menu â€" full-width dropdown shown on hover â"€â"€
 (function () {
   var navEl    = document.getElementById('site-nav');
   var trigger  = document.getElementById('nav-all-projects');
@@ -791,15 +778,15 @@ if (splashCtaEl) {
   });
 })();
 
-// â”€â”€â”€ PANELS: cross-fade carousel through each panel's set of images â”€â”€
+// â"€â"€â"€ PANELS: cross-fade carousel through each panel's set of images â"€â"€
 // Auto-advances on a timer, but visitors can also click the prev/next
-// arrows (which appear on hover) to flip through the images themselves â€”
+// arrows (which appear on hover) to flip through the images themselves â€"
 // doing so resets the auto-advance timer so it doesn't fight the user.
 function initThumbCarousel(container, intervalMs) {
   if (!container) return;
 
   // Build <img> elements from data-folder + data-images="image1.png,image2.png,..."
-  // â€” list as many or as few "imageN" files as you like per panel; just name
+  // â€" list as many or as few "imageN" files as you like per panel; just name
   // your files image1, image2, image3 (any extension) and list them here in order.
   var folder = container.getAttribute('data-folder');
   var list   = container.getAttribute('data-images');
@@ -841,7 +828,7 @@ document.querySelectorAll('.panel-thumb').forEach(function(el) {
 });
 
 
-// â”€â”€â”€ CONFIG â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€â"€ CONFIG â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 var FOLDER_FRAME_COUNTS = [152, 242, 182, 84];   // frames1, frames2, frames3, frames4
 var FPS             = 24;
 var PX_PER_FRAME    = 12;
@@ -849,7 +836,7 @@ var PANEL_FRAMES    = 40;
 var ESCAPE_DELTA    = 600;
 var PAUSE_MS        = 1000;
 var TRANSITION_DIST = 500;
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 
 var TOTAL_FRAMES = FOLDER_FRAME_COUNTS.reduce(function(a, b){ return a + b; }, 0);
 
@@ -861,7 +848,7 @@ FOLDER_FRAME_COUNTS.reduce(function(acc, count) { folderStarts.push(acc); return
 var stopFrames = folderStarts.map(function(start, idx) {
   return start + FOLDER_FRAME_COUNTS[idx] - 1;
 });
-// the final stop holds on the true last frame â€” the end card appears only
+// the final stop holds on the true last frame â€" the end card appears only
 // once that pause finishes (sequential, not overlapping)
 var lastStopIdx = stopFrames.length - 1;
 stopFrames[lastStopIdx] = TOTAL_FRAMES - 1;
@@ -904,7 +891,7 @@ function resizeCanvas() {
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
-// â”€â”€â”€ LOAD FRAMES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€â"€ LOAD FRAMES â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 function padNum(n, d) { return String(n).padStart(d, '0'); }
 
 function framePath(i) {
@@ -954,7 +941,7 @@ function onLoaded(i, img) {
   }
 }
 
-// â”€â”€â”€ DRAW â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€â"€ DRAW â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 function drawFrame(idx) {
   idx = Math.max(0, Math.min(TOTAL_FRAMES - 1, Math.round(idx)));
   var img = frames[idx];
@@ -962,7 +949,7 @@ function drawFrame(idx) {
   var iw = img.naturalWidth, ih = img.naturalHeight;
   var cw = canvas.width, ch = canvas.height;
 
-  // Always fill the viewport edge-to-edge top-to-bottom (“cover”) â€” the
+  // Always fill the viewport edge-to-edge top-to-bottom ("cover") â€" the
   // truck stays full height with no letterbox bars on mobile, even if the
   // sides crop slightly.
   var scale = Math.max(cw / iw, ch / ih);
@@ -970,14 +957,14 @@ function drawFrame(idx) {
   ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
 }
 
-// â”€â”€â”€ SCROLL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€â"€ SCROLL â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 function addDelta(delta) {
   if (phase === 'transition') {
     transitionScroll += delta;
     if (transitionScroll < 0) transitionScroll = 0;
 
     // Drive the frame scrub in parallel with the text exit so the truck
-    // animation starts playing immediately on scroll â€” no need to wait
+    // animation starts playing immediately on scroll â€" no need to wait
     // for the hero text to fully clear the screen first.
     if (ready && delta > 0) {
       virtualScroll += delta;
@@ -1001,7 +988,7 @@ function addDelta(delta) {
       return;
     }
     if (locked) {
-      // ignore input â€” pause is timed, not scroll-escaped
+      // ignore input â€" pause is timed, not scroll-escaped
     } else {
       virtualScroll += delta;
       virtualScroll = Math.max(0, Math.min(maxScroll, virtualScroll));
@@ -1080,19 +1067,19 @@ window.addEventListener('touchmove', function(e) {
   addDelta(dy * 5);
 }, { passive: false });
 
-// â”€â”€â”€ RAF â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€â"€ RAF â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 (function loop() {
   requestAnimationFrame(loop);
 
   smoothTransition += (transitionScroll - smoothTransition) * 0.1;
   var t = smoothTransition / TRANSITION_DIST;
 
-  // Only the hero text + CTA slide up and clear the screen â€” the truck
+  // Only the hero text + CTA slide up and clear the screen â€" the truck
   // (canvas, showing frame 0 of frames1) stays put as the background.
   splashTextEl.style.transform = 'translateY(' + (-t * 120) + 'vh)';
   splashTextEl.style.opacity   = String(1 - t);
 
-  // The truck is visible immediately on load (frame 0 of frames1) â€” no
+  // The truck is visible immediately on load (frame 0 of frames1) â€" no
   // fade-in; the canvas is the page background from the very start.
   canvas.style.opacity = '1';
 
