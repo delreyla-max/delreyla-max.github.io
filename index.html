@@ -35,7 +35,7 @@
 
     /* NAV */
     #site-nav {
-      position:fixed; top:0; left:0; right:0; z-index:300;
+      position:fixed; top:0; left:0; right:0; z-index:400;
       display:flex; align-items:center; justify-content:space-between;
       padding:1.4rem clamp(1.2rem,4vw,2.8rem);
       border-bottom:1px solid rgba(0,0,0,0.1);
@@ -60,8 +60,15 @@
       letter-spacing:0.04em;
       color:#000; text-decoration:none;
       transition:opacity 0.25s;
+      position:relative; padding-bottom:2px;
     }
-    #nav-links a:hover { opacity:0.5; }
+    #nav-links a::after {
+      content:''; position:absolute; left:0; bottom:0; width:0; height:2px;
+      background:#dc2626; transition:width 0.25s ease;
+    }
+    #nav-links a:hover { opacity:1; }
+    #nav-links a:hover::after,
+    #nav-links a.active::after { width:100%; }
 
     /* MAIN LAYOUT */
     #splash-layout {
@@ -451,7 +458,42 @@
     .static-hero-cta-btn:hover { opacity:0.7; }
     .static-hero-cta-primary { background:#000; color:#fff; }
     .static-hero-cta-secondary { background:transparent; color:#000; border:1px solid rgba(0,0,0,0.25); }
-  </style>
+    /* HAMBURGER NAV */
+    @media (max-width: 768px) {
+      #nav-links { display: none; }
+      #nav-hamburger {
+        display: flex; flex-direction: column; justify-content: center; gap: 5px;
+        width: 2rem; height: 2rem; cursor: pointer; background: none; border: none; padding: 0;
+      }
+      #nav-hamburger span {
+        display: block; height: 2px; width: 100%; background: #000;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+      #nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      #nav-hamburger.open span:nth-child(2) { opacity: 0; }
+      #nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+      #mobile-menu {
+        display: flex; flex-direction: column; align-items: flex-end; gap: 1.2rem;
+        position: fixed; top: 65px; left: 0; right: 0;
+        background: rgba(0,0,0,0.97); backdrop-filter: blur(10px);
+        z-index: 399; padding: 1.5rem 2rem 1.8rem;
+        max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.25s ease; opacity: 0;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+      #mobile-menu.open { max-height: 400px; opacity: 1; }
+      #mobile-menu a {
+        font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.06em;
+        color: #fff; text-decoration: none; transition: opacity 0.2s; text-align: right;
+      }
+      #mobile-menu a:hover { opacity: 0.4; }
+    }
+    @media (min-width: 769px) {
+      #nav-hamburger { display: none; }
+      #mobile-menu { display: none !important; }
+    }
+    #nav-brand { position:relative; padding-bottom:2px; }
+    #nav-brand::after { content:""; position:absolute; left:0; bottom:0; width:0; height:2px; background:#dc2626; transition:width 0.25s ease; }
+    #nav-brand:hover::after, #nav-brand.active::after { width:100%; }  </style>
 </head>
 <body>
 
@@ -462,7 +504,14 @@
     <a href="resume.html">Resume</a>
     <a href="contact.html">Contact</a>
   </div>
+<button id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
+<div id="mobile-menu">
+  <a href="index.html" onclick="document.getElementById('mobile-menu').classList.remove('open');document.getElementById('nav-hamburger').classList.remove('open');">Home</a>
+  <a href="all-projects.html" onclick="document.getElementById('mobile-menu').classList.remove('open');document.getElementById('nav-hamburger').classList.remove('open');">Projects</a>
+  <a href="resume.html" onclick="document.getElementById('mobile-menu').classList.remove('open');document.getElementById('nav-hamburger').classList.remove('open');">Resume</a>
+  <a href="contact.html" onclick="document.getElementById('mobile-menu').classList.remove('open');document.getElementById('nav-hamburger').classList.remove('open');">Contact</a>
+</div>
 
 
 <div id="splash">
@@ -868,6 +917,34 @@ if (!prefersReducedMotion) {
     }, 50);
   };
 }
+</script>
+<script>
+(function(){
+  var btn = document.getElementById('nav-hamburger');
+  var menu = document.getElementById('mobile-menu');
+  if (!btn || !menu) return;
+  btn.addEventListener('click', function() {
+    btn.classList.toggle('open');
+    menu.classList.toggle('open');
+  });
+})();
+</script>
+<script>
+(function(){
+  var path = window.location.pathname.split("/").pop() || "index.html";
+  // Brand active on homepage
+  if (path === "index.html" || path === "") {
+    var brand = document.getElementById("nav-brand");
+    if (brand) brand.classList.add("active");
+  }
+  // Projects active on case study / project pages
+  var isProject = path.indexOf("-case-study") !== -1 || path === "project.html" || path === "all-projects.html";
+  document.querySelectorAll("#nav-links a").forEach(function(a) {
+    var href = a.getAttribute("href");
+    if (href === path) { a.classList.add("active"); }
+    else if (isProject && href === "all-projects.html") { a.classList.add("active"); }
+  });
+})();
 </script>
 </body>
 </html>

@@ -71,10 +71,14 @@
       overflow:hidden;
       box-shadow:0 4px 24px rgba(0,0,0,0.12);
     }
-    .project-frame {
-      width:100%; display:block;
-      aspect-ratio:16/9; object-fit:cover;
+    .project-carousel {
+      width:100%; aspect-ratio:16/9; position:relative; overflow:hidden;
     }
+    .project-carousel img {
+      position:absolute; inset:0; width:100%; height:100%;
+      object-fit:cover; opacity:0; transition:opacity 0.6s ease;
+    }
+    .project-carousel img.show { opacity:1; }
     .project-info {
       padding:1.2rem 1.2rem 1.4rem;
     }
@@ -137,7 +141,39 @@
     .footer-btn-primary { background:#fff; color:#000; }
     .footer-btn-secondary { background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.2); }
     .footer-btns { display:flex; flex-wrap:wrap; gap:0.75rem; }
-  </style>
+    /* HAMBURGER NAV */
+    @media (max-width: 768px) {
+      #nav-links { display: none; }
+      #nav-hamburger {
+        display: flex; flex-direction: column; justify-content: center; gap: 5px;
+        width: 2rem; height: 2rem; cursor: pointer; background: none; border: none; padding: 0;
+      }
+      #nav-hamburger span {
+        display: block; height: 2px; width: 100%; background: #000;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+      #nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      #nav-hamburger.open span:nth-child(2) { opacity: 0; }
+      #nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+      #mobile-menu {
+        display: flex; flex-direction: column; align-items: flex-end; gap: 1.2rem;
+        position: fixed; top: 65px; left: 0; right: 0;
+        background: rgba(0,0,0,0.97); backdrop-filter: blur(10px);
+        z-index: 399; padding: 1.5rem 2rem 1.8rem;
+        max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.25s ease; opacity: 0;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+      #mobile-menu.open { max-height: 400px; opacity: 1; }
+      #mobile-menu a {
+        font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.06em;
+        color: #fff; text-decoration: none; transition: opacity 0.2s; text-align: right;
+      }
+      #mobile-menu a:hover { opacity: 0.4; }
+    }
+    @media (min-width: 769px) {
+      #nav-hamburger { display: none; }
+      #mobile-menu { display: none !important; }
+    }  </style>
 </head>
 <body>
 
@@ -148,7 +184,14 @@
     <a href="resume.html">Resume</a>
     <a href="contact.html">Contact</a>
   </div>
+<button id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
+<div id="mobile-menu">
+  <a href="index.html" onclick="document.getElementById('mobile-menu').classList.remove('open');document.getElementById('nav-hamburger').classList.remove('open');">Home</a>
+  <a href="all-projects.html" onclick="document.getElementById('mobile-menu').classList.remove('open');document.getElementById('nav-hamburger').classList.remove('open');">Projects</a>
+  <a href="resume.html" onclick="document.getElementById('mobile-menu').classList.remove('open');document.getElementById('nav-hamburger').classList.remove('open');">Resume</a>
+  <a href="contact.html" onclick="document.getElementById('mobile-menu').classList.remove('open');document.getElementById('nav-hamburger').classList.remove('open');">Contact</a>
+</div>
 
 <section id="hero">
   <span class="hero-tagline">Brand Design + Creative Director</span>
@@ -160,7 +203,7 @@
 <div id="projects">
 
   <div class="project-section">
-    <img class="project-frame" src="frames/frames2/frames200.jpg" alt="Toyota AI Pipeline" loading="eager">
+    <div class="project-carousel" data-images="projects/toyota-ai-pipeline-project/image1.jpg,projects/toyota-ai-pipeline-project/final1.jpg,projects/toyota-ai-pipeline-project/final2.jpg"></div>
     <div class="project-info">
       <span class="project-num">01</span>
       <div class="project-title">Toyota AI Pipeline</div>
@@ -175,7 +218,7 @@
   </div>
 
   <div class="project-section">
-    <img class="project-frame" src="frames/frames2/frames241.jpg" alt="Nissan Brand System" loading="lazy">
+    <div class="project-carousel" data-images="projects/nissal-global-branding-project/nissan5.jpg,projects/nissal-global-branding-project/nissan2.jpg,projects/nissal-global-branding-project/nissan6.jpg"></div>
     <div class="project-info">
       <span class="project-num">02</span>
       <div class="project-title">Nissan Brand System</div>
@@ -191,7 +234,7 @@
   </div>
 
   <div class="project-section">
-    <img class="project-frame" src="frames/frames3/frames359.jpg" alt="Storyfire" loading="lazy">
+    <div class="project-carousel" data-images="projects/storyfire-project/storyfire3.jpg,projects/storyfire-project/storyfire4.jpg,projects/storyfire-project/storyfire7.jpg"></div>
     <div class="project-info">
       <span class="project-num">03</span>
       <div class="project-title">Storyfire Product + Platform Design</div>
@@ -217,5 +260,48 @@
   </div>
 </section>
 
+<script>
+document.querySelectorAll('.project-carousel').forEach(function(el) {
+  var srcs = el.getAttribute('data-images').split(',');
+  srcs.forEach(function(src, i) {
+    var img = document.createElement('img');
+    img.src = src.trim();
+    if (i === 0) img.classList.add('show');
+    el.appendChild(img);
+  });
+  var idx = 0;
+  setInterval(function() {
+    el.querySelectorAll('img')[idx].classList.remove('show');
+    idx = (idx + 1) % srcs.length;
+    el.querySelectorAll('img')[idx].classList.add('show');
+  }, 2600);
+});
+</script>
+<script>
+(function(){
+  var btn = document.getElementById('nav-hamburger');
+  var menu = document.getElementById('mobile-menu');
+  if (!btn || !menu) return;
+  btn.addEventListener('click', function() {
+    btn.classList.toggle('open');
+    menu.classList.toggle('open');
+  });
+})();
+</script>
+<script>
+(function(){
+  var path = window.location.pathname.split("/").pop() || "index.html";
+  if (path === "index.html" || path === "") {
+    var brand = document.getElementById("nav-brand");
+    if (brand) brand.classList.add("active");
+  }
+  var isProject = path.indexOf("-case-study") !== -1 || path === "project.html" || path === "all-projects.html";
+  document.querySelectorAll("#nav-links a").forEach(function(a) {
+    var href = a.getAttribute("href");
+    if (href === path) { a.classList.add("active"); }
+    else if (isProject && href === "all-projects.html") { a.classList.add("active"); }
+  });
+})();
+</script>
 </body>
 </html>
