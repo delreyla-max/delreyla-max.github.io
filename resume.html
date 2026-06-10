@@ -12,15 +12,6 @@
     html, body { width:100%; min-height:100%; background:#fff; font-family:'Inter',sans-serif; color:#000; }
     body { display:flex; flex-direction:column; }
 
-    #site-nav { position:fixed; top:0; left:0; right:0; z-index:400; display:flex; align-items:center; justify-content:space-between; padding:1.4rem clamp(1.2rem,4vw,2.8rem); border-bottom:1px solid rgba(0,0,0,0.1); background:rgba(255,255,255,0.92); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
-    #nav-brand { font-family:'Bebas Neue',sans-serif; font-size:1.25rem; letter-spacing:0.04em; color:#000; text-decoration:none; }
-    #nav-links { display:flex; align-items:center; gap:clamp(1rem,2.4vw,1.8rem); }
-    #nav-hamburger { display: none; }
-    #nav-links a { font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:0.04em; color:#000; text-decoration:none; transition:opacity 0.25s; position:relative; padding-bottom:2px; }
-    #nav-links a::after { content:''; position:absolute; left:0; bottom:0; width:0; height:2px; background:#dc2626; transition:width 0.25s ease; }
-    #nav-links a:hover { opacity:1; }
-    #nav-links a:hover::after, #nav-links a.active::after { width:100%; }
-
     main { flex:1; padding:calc(65px + 50px) 20px clamp(4rem,8vw,6rem); }
     #page-wrap { width:100%; max-width:56rem; margin:0 auto; }
 
@@ -61,46 +52,7 @@
       #page-wrap { max-width:100%; }
       #resume-iframe { border-radius:0; height:2200px; width:calc(136% + 40px); margin-left:calc(-18% - 20px); }
     }
-    @media (max-width:480px) {
-      #nav-brand { font-size:1.5rem !important; }
-      #nav-links a { font-size:1.4rem !important; }
-    }
-    /* HAMBURGER NAV */
-    @media (max-width: 768px) {
-      #nav-links { display: none; }
-      #nav-hamburger {
-        display: flex; flex-direction: column; justify-content: center; gap: 5px;
-        width: 2rem; height: 2rem; cursor: pointer; background: none; border: none; padding: 0;
-      }
-      #nav-hamburger span {
-        display: block; height: 2px; width: 100%; background: #000;
-        transition: transform 0.3s ease, opacity 0.3s ease;
-      }
-      #nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-      #nav-hamburger.open span:nth-child(2) { opacity: 0; }
-      #nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-      #mobile-menu {
-        display: flex; flex-direction: column; align-items: flex-end; gap: 1.2rem;
-        position: fixed; top: 65px; left: 0; right: 0;
-        background: rgba(0,0,0,0.97); backdrop-filter: blur(10px);
-        z-index: 399; padding: 1.5rem 2rem 1.8rem;
-        max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.25s ease; opacity: 0;
-        border-bottom: 1px solid rgba(255,255,255,0.08);
-      }
-      #mobile-menu.open { max-height: 400px; opacity: 1; }
-      #mobile-menu a {
-        font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.06em;
-        color: #fff; text-decoration: none; transition: opacity 0.2s; text-align: right;
-      }
-      #mobile-menu a:hover { opacity: 0.4; }
-    }
-    @media (min-width: 769px) {
-      #nav-hamburger { display: none; }
-      #mobile-menu { display: none !important; }
-    }
-    #nav-brand { position:relative; padding-bottom:2px; }
-    #nav-brand::after { content:""; position:absolute; left:0; bottom:0; width:0; height:2px; background:#dc2626; transition:width 0.25s ease; }
-    #nav-brand:hover::after, #nav-brand.active::after { width:100%; }  </style>
+  </style>
 </head>
 <body>
 <script src="nav.js"></script>
@@ -108,7 +60,7 @@
 <main>
   <div id="page-wrap">
     <div class="resume-dl-wrap">
-      <a class="resume-dl-btn" href="https://docs.google.com/document/d/e/2PACX-1vTE-f1_-pZi2wnhGWdtrbOOzba7e0_zhEuUoQNwAtyRVWNY-wYSlOA94AUwUmVnPQ/pub?output=pdf" target="_blank" download="Garman_Resume.pdf">
+      <a class="resume-dl-btn" href="https://docs.google.com/document/d/e/2PACX-1vR354cYhmbs1YbpsLhFoUxH8XE7qSgFEIwH13BB-bzSsJ3L1E3GQZjEaDQcSp-pXw/pub?output=pdf" target="_blank" download="Garman_Resume.pdf">
         DOWNLOAD RESUME
         <svg viewBox="0 0 10 10" fill="none"><path d="M5 1V8M5 8L2 5M5 8L8 5M1.5 9H8.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>

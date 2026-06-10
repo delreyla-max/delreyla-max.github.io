@@ -11,13 +11,6 @@
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
     html, body { width:100%; min-height:100%; background:#fff; font-family:'Poppins',sans-serif; color:#000; }
     body { display:flex; flex-direction:column; }
-    #site-nav { position:fixed; top:0; left:0; right:0; z-index:400; display:flex; align-items:center; justify-content:space-between; padding:1.4rem clamp(1.2rem,4vw,2.8rem); border-bottom:1px solid rgba(0,0,0,0.1); background:rgba(255,255,255,0.92); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
-    #nav-brand { font-family:'Bebas Neue',sans-serif; font-size:1.25rem; letter-spacing:0.04em; color:#000; text-decoration:none; }
-    #nav-links { display:flex; align-items:center; gap:clamp(1rem,2.4vw,1.8rem); }
-    #nav-links a { font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:0.04em; color:#000; text-decoration:none; transition:opacity 0.25s; position:relative; padding-bottom:2px; }
-    #nav-links a::after { content:''; position:absolute; left:0; bottom:0; width:0; height:2px; background:#dc2626; transition:width 0.25s ease; }
-    #nav-links a:hover { opacity:1; }
-    #nav-links a:hover::after, #nav-links a.active::after { width:100%; }
     .hero-line { overflow:hidden; line-height:1; }
     .hero-line > * { display:block; transform:translateY(110%); animation:sReveal 0.75s cubic-bezier(0.16,1,0.3,1) forwards 0.22s; }
     @keyframes sReveal { to { transform:translateY(0); } }
@@ -59,10 +52,6 @@
     .eyebrow-arrow-btn:hover { background:rgba(0,0,0,0.06); border-color:rgba(0,0,0,0.3); }
     .eyebrow-arrow-btn.disabled { opacity:0.2; pointer-events:none; }
     .eyebrow-arrow-btn svg { width:9px; height:9px; }
-  @media (max-width: 480px) {
-    #nav-brand  { font-size: 1.5rem !important; }
-    #nav-links a { font-size: 1.4rem !important; }
-  }
   @media (max-width: 640px) {
     .psi-row { flex-direction: column !important; }
     .psi-div { display: none !important; }
@@ -76,42 +65,7 @@
     .outputs-row { flex-direction: column !important; }
     .outputs-row > div { height: 200px !important; }
   }
-    /* HAMBURGER NAV */
-    @media (max-width: 768px) {
-      #nav-links { display: none; }
-      #nav-hamburger {
-        display: flex; flex-direction: column; justify-content: center; gap: 5px;
-        width: 2rem; height: 2rem; cursor: pointer; background: none; border: none; padding: 0;
-      }
-      #nav-hamburger span {
-        display: block; height: 2px; width: 100%; background: #000;
-        transition: transform 0.3s ease, opacity 0.3s ease;
-      }
-      #nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-      #nav-hamburger.open span:nth-child(2) { opacity: 0; }
-      #nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-      #mobile-menu {
-        display: flex; flex-direction: column; align-items: flex-end; gap: 1.2rem;
-        position: fixed; top: 65px; left: 0; right: 0;
-        background: rgba(0,0,0,0.97); backdrop-filter: blur(10px);
-        z-index: 399; padding: 1.5rem 2rem 1.8rem;
-        max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.25s ease; opacity: 0;
-        border-bottom: 1px solid rgba(255,255,255,0.08);
-      }
-      #mobile-menu.open { max-height: 400px; opacity: 1; }
-      #mobile-menu a {
-        font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.06em;
-        color: #fff; text-decoration: none; transition: opacity 0.2s; text-align: right;
-      }
-      #mobile-menu a:hover { opacity: 0.4; }
-    }
-    @media (min-width: 769px) {
-      #nav-hamburger { display: none; }
-      #mobile-menu { display: none !important; }
-    }
-    #nav-brand { position:relative; padding-bottom:2px; }
-    #nav-brand::after { content:""; position:absolute; left:0; bottom:0; width:0; height:2px; background:#dc2626; transition:width 0.25s ease; }
-    #nav-brand:hover::after, #nav-brand.active::after { width:100%; }  </style>
+  </style>
 </head>
 <body>
 <script src="nav.js"></script>
