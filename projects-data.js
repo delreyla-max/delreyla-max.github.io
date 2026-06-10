@@ -14,7 +14,7 @@ window.PROJECTS = [
     credit: "Rapp · Associate Creative Director",
     tags: ["AI Production","Compositing"],
     folder: "projects/toyota-ai-pipeline-project",
-    images: ["hero.jpg"],
+    images: ["hero-cropped.jpg"],
     media: [{"type":"image-grid","src":"","id":"","items":["final1.png","final4.png","final5.png","final6.png","final8.png"],"columns":3,"caption":""}],
     brief: "How do you produce product-correct lifestyle imagery for thousands of Toyota parts and accessories that have never been photographed?",
     work: "Built an AI production workflow at Rapp using Nano Banana Pro, Adobe Firefly, and Photoshop — rendering parts and environments separately from engineering sketches, then compositing them together while keeping every product accurate to spec.",
