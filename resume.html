@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -12,411 +12,78 @@
     html, body { width:100%; min-height:100%; background:#fff; font-family:'Inter',sans-serif; color:#000; }
     body { display:flex; flex-direction:column; }
 
-    /* â"€â"€ NAV â€" mirrors the homepage nav â"€â"€ */
-    #site-nav {
-      position:fixed; top:0; left:0; right:0; z-index:300;
-      display:flex; align-items:center; justify-content:space-between;
-      padding:1.4rem clamp(1.2rem,4vw,2.8rem);
-      border-bottom:1px solid rgba(0,0,0,0.1);
-      background:rgba(255,255,255,0.92);
-      backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-    }
-    #nav-brand {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:1.25rem;
-      letter-spacing:0.04em;
-      color:#000;
-      display:flex; flex-direction:row; align-items:baseline; gap:0.5em; line-height:1.15;
-      text-decoration:none; cursor:pointer;
-    }
-    #nav-brand .nav-brand-name { color:#000; }
-    #nav-brand .nav-brand-tagline { color:#000000; letter-spacing:0.03em; }
+    #site-nav { position:fixed; top:0; left:0; right:0; z-index:300; display:flex; align-items:center; justify-content:space-between; padding:1.4rem clamp(1.2rem,4vw,2.8rem); border-bottom:1px solid rgba(0,0,0,0.1); background:rgba(255,255,255,0.92); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
+    #nav-brand { font-family:'Bebas Neue',sans-serif; font-size:1.25rem; letter-spacing:0.04em; color:#000; text-decoration:none; }
     #nav-links { display:flex; align-items:center; gap:clamp(1rem,2.4vw,1.8rem); }
-    #nav-links a {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:1rem;
-      letter-spacing:0.04em;
-      color:#000; text-decoration:none;
-      transition:opacity 0.25s;
-    }
+    #nav-links a { font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:0.04em; color:#000; text-decoration:none; transition:opacity 0.25s; }
     #nav-links a:hover { opacity:0.5; }
-    
 
-    /* â"€â"€ PAGE LAYOUT â"€â"€ */
-    main {
-      flex:1;
-      max-width:54rem; width:100%; margin:0 auto;
-      padding:clamp(7rem,14vw,9rem) clamp(1.2rem,4vw,2.8rem) clamp(4rem,8vw,6rem);
-    }
+    main { flex:1; display:flex; justify-content:center; padding:calc(65px + 50px) clamp(1.2rem,4vw,2.8rem) clamp(4rem,8vw,6rem); }
+    #page-wrap { width:100%; max-width:54rem; }
 
     .hero-line { overflow:hidden; line-height:1; }
-    .hero-line > * {
-      display:block;
-      transform:translateY(110%);
-      animation:sReveal 0.75s cubic-bezier(0.16,1,0.3,1) forwards;
-    }
-    .d0 > * { animation-delay:0.1s; }
-    .d1 > * { animation-delay:0.26s; }
+    .hero-line > * { display:block; transform:translateY(110%); animation:sReveal 0.75s cubic-bezier(0.16,1,0.3,1) forwards 0.22s; }
     @keyframes sReveal { to { transform:translateY(0); } }
     @keyframes sFadeUp { to { opacity:1; } }
 
-    /* â"€â"€ HEADER â"€â"€ */
-    #resume-name {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(3rem,9vw,6.5rem);
-      letter-spacing:-0.015em;
-      color:#000;
-      line-height:0.95;
-    }
-    #resume-role {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(1.2rem,3.4vw,1.9rem);
-      letter-spacing:-0.01em;
-      color:#999999;
-      line-height:1.2;
-      margin-top:0.4rem;
-    }
-    #resume-contact {
-      margin-top:1.1rem;
-      font-family:'Poppins',sans-serif;
-      font-size:0.72rem; letter-spacing:0.02em;
-      color:rgba(0,0,0,0.45);
-      line-height:1.8;
-      opacity:0; animation:sFadeUp 0.6s ease forwards; animation-delay:0.4s;
-    }
-    #resume-contact a { color:rgba(0,0,0,0.45); text-decoration:none; border-bottom:1px solid rgba(0,0,0,0.15); transition:color 0.2s, border-color 0.2s; }
-    #resume-contact a:hover { color:#000; border-color:#000; }
+    .cs-eyebrow { font-family:'Bebas Neue',sans-serif; letter-spacing:0.18em; text-transform:uppercase; color:#999; font-size:clamp(0.75rem,1.4vw,0.9rem); display:block; padding:0 0 8px; }
+    .cs-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.6rem,7.5vw,5rem); letter-spacing:0.02em; line-height:0.95; color:#000; }
 
-    /* â"€â"€ DOWNLOAD RESUME LINK â"€â"€ */
-    .resume-download {
+    .resume-dl-wrap {
+      display:flex; justify-content:center; padding:10px 0;
+    }
+    .resume-dl-btn {
       display:inline-flex; align-items:center; gap:0.5rem;
-      font-family:'Bebas Neue',sans-serif;
-      font-size:0.85rem; letter-spacing:0.16em;
-      color:#fff; background:#000;
-      border-radius:5px;
-      padding:0.7rem 1.4rem;
-      text-decoration:none;
+      font-family:'Bebas Neue',sans-serif; font-size:0.85rem; letter-spacing:0.16em;
+      color:#fff; background:#000; border-radius:5px;
+      padding:0.7rem 1.4rem; text-decoration:none;
       transition:opacity 0.25s ease, transform 0.25s ease;
+      opacity:0; animation:sFadeUp 0.6s ease forwards 0.5s;
     }
-    .resume-download:hover { opacity:0.8; transform:translateY(-1px); }
-    .resume-download svg { width:10px; height:10px; }
-    .resume-download-top {
-      margin-top:1.4rem;
-      opacity:0; animation:sFadeUp 0.6s ease forwards; animation-delay:0.46s;
-    }
-    .resume-download-bottom {
-      margin-top:clamp(2.6rem,5.5vw,3.6rem);
-      display:flex; justify-content:flex-start;
-      opacity:0; animation:sFadeUp 0.7s ease forwards; animation-delay:0.9s;
+    .resume-dl-btn:hover { opacity:0.8; transform:translateY(-1px); }
+    .resume-dl-btn svg { width:10px; height:10px; }
+
+    #resume-iframe {
+      width:100%;
+      border:none;
+      border-radius:4px;
+      margin-top:0;
+      height:2400px;
     }
 
-    /* â"€â"€ SECTIONS â"€â"€ */
-    .resume-section {
-      margin-top:clamp(2.4rem,5vw,3.4rem);
-      opacity:0; animation:sFadeUp 0.7s ease forwards;
+    @media (max-width:480px) {
+      #nav-brand { font-size:1.5rem !important; }
+      #nav-links a { font-size:1.4rem !important; }
     }
-    .resume-section:nth-of-type(1) { animation-delay:0.5s; }
-    .resume-section:nth-of-type(2) { animation-delay:0.58s; }
-    .resume-section:nth-of-type(3) { animation-delay:0.66s; }
-    .resume-section:nth-of-type(4) { animation-delay:0.74s; }
-    .resume-section:nth-of-type(5) { animation-delay:0.82s; }
-
-    .resume-eyebrow {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:0.85rem; letter-spacing:0.3em; text-transform:uppercase;
-      color:#000;
-      margin-bottom:1.1rem;
-      padding-bottom:0.6rem;
-      border-bottom:1px solid rgba(0,0,0,0.1);
-    }
-
-    .resume-summary {
-      font-family:'Poppins',sans-serif;
-      font-size:0.82rem; line-height:1.9; font-weight:300;
-      color:rgba(0,0,0,0.6);
-      max-width:46rem;
-    }
-
-    .resume-tags { display:flex; flex-wrap:wrap; gap:0.4rem; }
-    .resume-tag {
-      font-family:'Poppins',sans-serif;
-      font-size:0.62rem; letter-spacing:0.04em;
-      padding:0.32rem 0.75rem; border-radius:7px;
-      background:rgba(0,0,0,0.05); color:rgba(0,0,0,0.6);
-    }
-
-    /* â"€â"€ EXPERIENCE â"€â"€ */
-    .resume-job { margin-bottom:clamp(1.6rem,3.4vw,2.2rem); }
-    .resume-job:last-child { margin-bottom:0; }
-    .resume-job-head {
-      display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between;
-      gap:0.4rem 1rem;
-      margin-bottom:0.2rem;
-    }
-    .resume-job-title {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(1rem,2vw,1.3rem);
-      letter-spacing:0.01em; color:#000;
-    }
-    .resume-job-title span { color:#999999; }
-    .resume-job-dates {
-      font-family:'Poppins',sans-serif;
-      font-size:0.66rem; letter-spacing:0.1em; text-transform:uppercase;
-      color:rgba(0,0,0,0.4); white-space:nowrap;
-    }
-    .resume-job-loc {
-      font-family:'Poppins',sans-serif;
-      font-size:0.68rem; letter-spacing:0.04em;
-      color:rgba(0,0,0,0.35);
-      margin-bottom:0.7rem;
-    }
-    .resume-job ul {
-      list-style:none;
-      display:flex; flex-direction:column; gap:0.5rem;
-    }
-    .resume-job li {
-      font-family:'Poppins',sans-serif;
-      font-size:0.74rem; line-height:1.75; font-weight:300;
-      color:rgba(0,0,0,0.55);
-      padding-left:1.1rem; position:relative;
-    }
-    .resume-job li::before {
-      content:''; position:absolute; left:0; top:0.6em;
-      width:5px; height:5px; border-radius:50%;
-      background:rgba(0,0,0,0.25);
-    }
-
-    /* â"€â"€ EDUCATION â"€â"€ */
-    .resume-edu { margin-bottom:1rem; }
-    .resume-edu:last-child { margin-bottom:0; }
-    .resume-edu-deg {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(0.95rem,1.8vw,1.15rem);
-      letter-spacing:0.01em; color:#000;
-    }
-    .resume-edu-school {
-      font-family:'Poppins',sans-serif;
-      font-size:0.72rem; letter-spacing:0.03em;
-      color:rgba(0,0,0,0.45);
-      margin-top:0.2rem;
-    }
-
-    /* â"€â"€ TECHNICAL SKILLS â"€â"€ */
-    .resume-skill { margin-bottom:1rem; }
-    .resume-skill:last-child { margin-bottom:0; }
-    .resume-skill-label {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:0.78rem; letter-spacing:0.16em; text-transform:uppercase;
-      color:#999999;
-      margin-bottom:0.35rem;
-    }
-    .resume-skill-body {
-      font-family:'Poppins',sans-serif;
-      font-size:0.74rem; line-height:1.8; font-weight:300;
-      color:rgba(0,0,0,0.55);
-    }
-
-    @media(max-width:640px){
-      #resume-name { font-size:clamp(2.6rem,15vw,4rem); }
-      #resume-role { font-size:clamp(1.05rem,5.6vw,1.4rem); }
-      #resume-contact { font-size:0.66rem; }
-      .resume-job-head { flex-direction:column; align-items:flex-start; gap:0.2rem; }
-    }
-    /* â"€â"€ "All Projects" mega-menu (mirrors homepage) â"€â"€ */
-  @media (max-width: 480px) {
-    #nav-brand  { font-size: 1.5rem !important; }
-    #nav-links a { font-size: 1.4rem !important; }
-  }
   </style>
 </head>
 <body>
 
 <nav id="site-nav">
-  <a id="nav-brand" href="index.html"><span class="nav-brand-name">GARMAN</span></a>
+  <a id="nav-brand" href="index.html">GARMAN Y.</a>
   <div id="nav-links">
     <a href="all-projects.html">Projects</a>
     <a href="resume.html">Resume</a>
     <a href="contact.html">Contact</a>
   </div>
-  
 </nav>
 
-
 <main>
+  <div id="page-wrap">
+    <div class="resume-dl-wrap">
+      <a class="resume-dl-btn" href="https://docs.google.com/document/d/e/2PACX-1vR354cYhmbs1YbpsLhFoUxH8XE7qSgFEIwH13BB-bzSsJ3L1E3GQZjEaDQcSp-pXw/pub?output=pdf" target="_blank" download="Garman_Resume.pdf">
+        DOWNLOAD RESUME
+        <svg viewBox="0 0 10 10" fill="none"><path d="M5 1V8M5 8L2 5M5 8L8 5M1.5 9H8.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
 
-  <!-- Header -->
-  <div class="hero-line d0"><span id="resume-name">GARMAN Y.</span></div>
-  <div class="hero-line d1"><span id="resume-role">Brand Design | Creative Director | Generative AI</span></div>
-  <div id="resume-contact">
-    Los Angeles, CA &nbsp;&middot;&nbsp; <a href="mailto:gyip@me.com">gyip@me.com</a> &nbsp;&middot;&nbsp; (310) 562-7326 &nbsp;&middot;&nbsp;
-    <a href="https://www.gyip.com" target="_blank">gyip.com</a> &nbsp;&middot;&nbsp;
-    <a href="https://linkedin.com/in/gyipla" target="_blank">linkedin.com/in/gyipla</a>
+    <iframe
+      id="resume-iframe"
+      src="https://docs.google.com/document/d/e/2PACX-1vR354cYhmbs1YbpsLhFoUxH8XE7qSgFEIwH13BB-bzSsJ3L1E3GQZjEaDQcSp-pXw/pub?embedded=true"
+      title="Resume"
+    ></iframe>
   </div>
-
-  <div class="resume-download-top">
-    <a class="resume-download" href="https://drive.google.com/file/d/10zp5fhJLZHglP9F1tiSsa9WwjpbuPnnB/view?usp=sharing" target="_blank">
-      DOWNLOAD RESUME
-      <svg viewBox="0 0 10 10" fill="none"><path d="M5 1V8M5 8L2 5M5 8L8 5M1.5 9H8.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
-  </div>
-
-  <!-- Professional Summary -->
-  <section class="resume-section">
-    <div class="resume-eyebrow">Professional Summary</div>
-    <p class="resume-summary">Hands-on Creative Director with 15+ years of experience building brands and crafting immersive 360 creative across physical and digital surfaces. Deep fluency in generative AI and emerging trends, with a track record of leading multidisciplinary creative teams from concept through execution at top agencies including RAPP, Saatchi &amp; Saatchi, TBWA\Chiat\Day, and Walt Disney Imagineering. Adept at translating culturally rich, community-driven briefs into show-stopping experiences â€" from digitally native activations to large-scale in-person events. Equally comfortable in the brainstorm and the build, with low ego and a bias toward action.</p>
-  </section>
-
-  <!-- Core Competencies -->
-  <section class="resume-section">
-    <div class="resume-eyebrow">Core Competencies</div>
-    <div class="resume-tags">
-      <div class="resume-tag">AI-Driven Product Experiences</div>
-      <div class="resume-tag">Brand 360 Creative</div>
-      <div class="resume-tag">Physical &amp; Digital Event Design</div>
-      <div class="resume-tag">Social-First Storytelling</div>
-      <div class="resume-tag">Creative Management &amp; Mentorship</div>
-      <div class="resume-tag">Campaign Strategy &amp; Briefing</div>
-      <div class="resume-tag">Cross-Functional Collaboration</div>
-      <div class="resume-tag">Agency &amp; Contractor Management</div>
-      <div class="resume-tag">Figma</div>
-      <div class="resume-tag">Adobe Creative Suite</div>
-      <div class="resume-tag">Data-Informed Creative</div>
-    </div>
-  </section>
-
-  <!-- Professional Experience -->
-  <section class="resume-section">
-    <div class="resume-eyebrow">Professional Experience</div>
-
-    <div class="resume-job">
-      <div class="resume-job-head">
-        <div class="resume-job-title">Associate Creative Director <span>â€" RAPP</span></div>
-        <div class="resume-job-dates">Sep 2020 â€" Present</div>
-      </div>
-      <div class="resume-job-loc">Los Angeles, CA &nbsp;&middot;&nbsp; Hybrid</div>
-      <ul>
-        <li>Created an AI pipeline for Parts and Accessories utilizing engineering sketches.</li>
-        <li>Led end-to-end creative development for owner experiences successfully utilizing generative AI, video, and UI, across digital, direct, and in-person brand touchpoints.</li>
-        <li>Managed and mentored a team of junior designers, setting creative direction, providing ongoing feedback, and supporting career development in a fast-paced, collaborative environment.</li>
-        <li>Developed and presented creative strategies directly to brand stakeholders, translating business goals into compelling audience experiences that drove engagement through social and digital channels.</li>
-        <li>Championed culturally resonant, audience-first design across multiple simultaneous campaigns, balancing brand consistency with fresh, category-relevant creative execution using AI and traditional creative techniques.</li>
-      </ul>
-    </div>
-
-    <div class="resume-job">
-      <div class="resume-job-head">
-        <div class="resume-job-title">Creative <span>(Freelance) â€" Independent / Various Agencies</span></div>
-        <div class="resume-job-dates">Jul 2017 â€" Aug 2020</div>
-      </div>
-      <div class="resume-job-loc">Los Angeles, CA</div>
-      <ul>
-        <li>Operated as a senior creative consultant across the LA agency ecosystem, bringing a hybrid brand design and experiential perspective to fast-turn, high-visibility projects.</li>
-        <li>Embedded with agencies including Deutsch, 72andSunny, and TBWA\Chiat\Day, contributing to digital products and brand campaign activations for nationally recognized clients.</li>
-        <li>Built a reputation for adaptability, cultural fluency, and creative quality under compressed timelines â€" consistently earning repeat engagements across diverse brand categories.</li>
-      </ul>
-    </div>
-
-    <div class="resume-job">
-      <div class="resume-job-head">
-        <div class="resume-job-title">Creative Director <span>(Contract) â€" Saatchi &amp; Saatchi</span></div>
-        <div class="resume-job-dates">Jun 2016 â€" Oct 2017</div>
-      </div>
-      <div class="resume-job-loc">Greater Los Angeles Area</div>
-      <ul>
-        <li>Directed the redesign of Toyota.com and dealer digital tools, creating digitally native experiences that served millions of monthly users and supported dealer-level activations nationwide.</li>
-        <li>Conceptualized and led design of the 'Digital Garage,' an interactive real-time inventory platform bridging online brand experience with physical dealership retail.</li>
-        <li>Collaborated cross-functionally with product, marketing, and partner agencies to ensure cohesive brand expression across North American digital and physical surfaces.</li>
-        <li>Tracked emerging digital trends and platform innovations, proactively integrating new creative approaches to keep the brand experience fresh and forward-looking.</li>
-      </ul>
-    </div>
-
-    <div class="resume-job">
-      <div class="resume-job-head">
-        <div class="resume-job-title">Creative Lead <span>â€" Walt Disney Imagineering</span></div>
-        <div class="resume-job-dates">Jul 2014 â€" Jun 2015</div>
-      </div>
-      <div class="resume-job-loc">Greater Los Angeles Area</div>
-      <ul>
-        <li>Concepted and developed immersive creative projects enhancing the guest experience across Disney's theme parks, hotels, and cruise experiences â€" among the most demanding experiential briefs in the world.</li>
-        <li>Pitched original R&amp;D concepts spanning digital pre-arrival engagement, interactive in-park activations, and post-experience loyalty touchpoints â€" a full-funnel experiential model.</li>
-        <li>Conducted research into emerging storytelling technologies and entertainment innovations, translating findings into actionable creative concepts for a global audience.</li>
-      </ul>
-    </div>
-
-    <div class="resume-job">
-      <div class="resume-job-head">
-        <div class="resume-job-title">Associate Creative Director <span>â€" TBWA\Chiat\Day</span></div>
-        <div class="resume-job-dates">May 2011 â€" Jan 2014</div>
-      </div>
-      <div class="resume-job-loc">Los Angeles, CA</div>
-      <ul>
-        <li>Led creative strategy and execution for the Nissan account, directing multi-channel vehicle launch campaigns with global brand reach and local cultural relevance.</li>
-        <li>Built the visual identity system for Nissan's 'Innovation for All' brand platform, creating a comprehensive style guide deployed across corporate, retail, and experiential touchpoints.</li>
-        <li>Managed agency partnerships and cross-functional teams to maintain brand cohesion from campaign ideation through in-market execution.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Education -->
-  <section class="resume-section">
-    <div class="resume-eyebrow">Education</div>
-    <div class="resume-edu">
-      <div class="resume-edu-deg">Master of Arts, New Media â€" Academy of Art University</div>
-      <div class="resume-edu-school">2001 â€" 2003</div>
-    </div>
-    <div class="resume-edu">
-      <div class="resume-edu-deg">Bachelor of Business Administration, Marketing â€" University of Southern California</div>
-      <div class="resume-edu-school">1995 â€" 1999 &nbsp;&middot;&nbsp; Minor in Multimedia Studies</div>
-    </div>
-  </section>
-
-  <!-- Technical Skills -->
-  <section class="resume-section">
-    <div class="resume-eyebrow">Technical Skills</div>
-    <div class="resume-skill">
-      <div class="resume-skill-label">Design &amp; Prototyping</div>
-      <div class="resume-skill-body">Figma, Adobe Creative Suite (Photoshop, Illustrator, InDesign, Premiere, After Effects), Generative AI (Adobe Firefly, Midjourney, Higgsfield)</div>
-    </div>
-    <div class="resume-skill">
-      <div class="resume-skill-label">Disciplines</div>
-      <div class="resume-skill-body">Brand Identity, Experiential &amp; Event Creative, Art Direction, Social-First Campaigns, Digital Product Design, Creative Strategy, Photography</div>
-    </div>
-    <div class="resume-skill">
-      <div class="resume-skill-label">Industries</div>
-      <div class="resume-skill-body">Automotive (Toyota, Lexus, Nissan), Entertainment &amp; Experiential (Walt Disney Imagineering), Agency (RAPP, Saatchi &amp; Saatchi, TBWA\Chiat\Day, Deutsch, 72andSunny)</div>
-    </div>
-  </section>
-
-  <div class="resume-download-bottom">
-    <a class="resume-download" href="https://drive.google.com/file/d/10zp5fhJLZHglP9F1tiSsa9WwjpbuPnnB/view?usp=sharing" target="_blank">
-      DOWNLOAD RESUME
-      <svg viewBox="0 0 10 10" fill="none"><path d="M5 1V8M5 8L2 5M5 8L8 5M1.5 9H8.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
-  </div>
-
 </main>
-
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

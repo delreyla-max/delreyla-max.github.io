@@ -456,7 +456,7 @@
 <body>
 
 <nav id="site-nav">
-  <a id="nav-brand" href="index.html"><span class="nav-brand-name">GARMAN</span></a>
+  <a id="nav-brand" href="index.html"><span class="nav-brand-name">GARMAN Y.</span></a>
   <div id="nav-links">
     <a href="all-projects.html">Projects</a>
     <a href="resume.html">Resume</a>
@@ -508,7 +508,7 @@
   </div>
 </div>
 
-<video id="video-1" class="bg-video" src="frames/frames1/frames1.mp4" muted playsinline preload="auto"></video>
+<video id="video1" src="frames/frames1/frames1.mp4" muted playsinline preload="auto" style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;"></video>
 <canvas id="canvas"></canvas>
 <div id="vig"></div>
 <div id="fade-white" style="position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:150;transition:opacity 0.9s ease;"></div>
@@ -527,7 +527,7 @@
     <div class="panel-tag">Scalable Production</div>
   </div>
   <div class="panel-divider"></div>
-  <div class="panel-desc">Proprietary AI system converting engineering sketches into photoreal lifestyle product imagery.</div>
+  <div class="panel-desc">AI-assisted production workflow turning technical source material into product-correct campaign imagery at scale.</div>
   <a class="panel-btn" href="toyota-case-study.html">View Project <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 </div>
 
@@ -538,24 +538,25 @@
 
 <div class="panel" id="panel-1">
   <button class="panel-close" aria-label="Close">&times;</button>
-  <div class="panel-title">Nissan Rebrand</div>
+  <div class="panel-title">Nissan Brand System</div>
   <div class="panel-role">Associate Creative Director</div>
   <div class="panel-thumb" data-folder="projects/nissal-global-branding-project" data-images="nissan5.jpg,nissan2.jpg,nissan6.jpg" data-alt="Nissan">
     <button class="panel-thumb-nav prev" aria-label="Previous image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button class="panel-thumb-nav next" aria-label="Next image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   </div>
   <div class="panel-tags">
+    <div class="panel-tag">Creative Direction</div>
     <div class="panel-tag">Brand System</div>
-    
+    <div class="panel-tag">Launch Ecosystem</div>
   </div>
   <div class="panel-divider"></div>
-  <div class="panel-desc">Unified brand system giving each vehicle its own personality while maintaining consistency across all markets.</div>
+  <div class="panel-desc">A unified brand system extended across Nissan vehicle launches, retail environments, digital, OOH, and campaign touchpoints.</div>
   <a class="panel-btn" href="nissan-case-study.html">View Project <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 </div>
 
 <div class="panel" id="panel-2">
   <button class="panel-close" aria-label="Close">&times;</button>
-  <div class="panel-title">Storyfire</div>
+  <div class="panel-title">Storyfire Product + Platform Design</div>
   <div class="panel-role">Solo Designer</div>
   <div class="panel-thumb" data-folder="projects/storyfire-project" data-images="storyfire3.jpg,storyfire4.jpg,storyfire7.jpg" data-alt="Storyfire">
     <button class="panel-thumb-nav prev" aria-label="Previous image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -629,7 +630,6 @@ document.querySelectorAll('.panel-close').forEach(function(btn) {
 
 // ── Animation (skipped when prefers-reduced-motion) ───────────────────
 if (!prefersReducedMotion) {
-  var video1       = document.getElementById('video-1');
   var splashTextEl = document.getElementById('splash-text');
   var splashCtaEl  = document.getElementById('splash-cta');
   var panel0el     = document.getElementById('panel-0');
@@ -638,39 +638,34 @@ if (!prefersReducedMotion) {
   splashCtaEl.style.opacity       = '0';
   splashCtaEl.style.pointerEvents = 'none';
 
-  // phases: video1 -> toyota-hold -> shrink -> panel-hold -> done
+  // phases: video1 -> toyota-hold -> scrub -> done
   var animPhase = 'video1';
+  var video1el = document.getElementById('video1');
 
   function triggerTextAnims() {
     document.querySelectorAll('#splash-layout .hero-line > *').forEach(function(el) {
       el.style.animation = 'none';
-      el.offsetHeight; // force reflow to restart CSS animation
+      el.offsetHeight;
       el.style.animation = '';
     });
   }
 
-  // Show first frame immediately so there's no white flash before video plays
-  video1.style.display = 'block';
-  video1.addEventListener('loadeddata', function() { video1.currentTime = 0; }, { once: true });
-
-  // Headlines animate in + video1 plays simultaneously on load
   triggerTextAnims();
 
-  function startVideo1() {
-    animPhase = 'video1';
-    video1.style.display = 'block';
-    video1.currentTime = 0;
-    video1.play().catch(function() { startToyotaHold(); });
-    video1.addEventListener('ended', startToyotaHold, { once: true });
-    setTimeout(function() { if (animPhase === 'video1') startToyotaHold(); }, 15000);
-  }
-  startVideo1();
+  // Play intro video; when done transition to toyota-hold
+  video1el.play().catch(function(){});
+  video1el.addEventListener('ended', function() {
+    // Hold on last frame — don't hide the video yet
+    startToyotaHold();
+  });
+  video1el.addEventListener('error', function() {
+    video1el.style.display = 'none';
+    startToyotaHold();
+  });
 
   var panel1el = document.getElementById('panel-1');
 
-
   function startToyotaHold() {
-    if (animPhase !== 'video1') return;
     animPhase = 'toyota-hold';
     if (panel0el && !dismissedPanels.has('panel-0')) panel0el.classList.add('visible');
 
@@ -756,7 +751,7 @@ if (!prefersReducedMotion) {
     if (delta < 0 && virtualScroll <= 0) {
       animPhase = 'toyota-hold';
       scrubCanvas.style.display = 'none';
-      video1.style.display = 'block';
+      video1el.style.display = 'block';
       if (panel0el && !dismissedPanels.has('panel-0')) panel0el.classList.add('visible');
       if (panel1el) panel1el.classList.remove('visible');
       if (panel2el) panel2el.classList.remove('visible');
@@ -803,7 +798,7 @@ if (!prefersReducedMotion) {
     if (animPhase !== 'toyota-hold') return;
     animPhase = 'scrub';
     if (panel0el) panel0el.classList.remove('visible');
-    video1.style.display = 'none';
+    video1el.style.display = 'none';
     scrubCanvas.style.display = 'block';
     virtualScroll = 0; smoothScroll = 0; currentFrame = 0;
     // fade out headline, move skip button to top-left
@@ -813,6 +808,7 @@ if (!prefersReducedMotion) {
 
   window.addEventListener('wheel', function(e) {
     e.preventDefault();
+    if (animPhase === 'video1') return;
     if (animPhase === 'toyota-hold' && e.deltaY > 0) { startScrub(); addDelta(e.deltaY); return; }
     addDelta(e.deltaY);
   }, { passive: false });
@@ -823,7 +819,8 @@ if (!prefersReducedMotion) {
     e.preventDefault();
     var dy = touchLastY - e.touches[0].clientY;
     touchLastY = e.touches[0].clientY;
-    if ((animPhase === 'toyota-hold' || animPhase === 'video1') && dy > 0) { video1.pause(); startToyotaHold(); startScrub(); addDelta(dy * 2.5); return; }
+    if (animPhase === 'video1') return;
+    if (animPhase === 'toyota-hold' && dy > 0) { startScrub(); addDelta(dy * 2.5); return; }
     addDelta(dy * 2.5);
   }, { passive: false });
 
@@ -859,7 +856,6 @@ if (!prefersReducedMotion) {
     if (panel1el) panel1el.classList.remove('visible');
     if (panel2el) panel2el.classList.remove('visible');
     scrubCanvas.style.display = 'none';
-    video1.pause(); video1.style.display = 'none';
     virtualScroll = 0; smoothScroll = 0; currentFrame = 0;
     locked = false; recentlyUnlockedStop = -1; finalStopReached = false;
     setTimeout(function() {
