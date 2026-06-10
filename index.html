@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -511,13 +511,14 @@
 <video id="video-1" class="bg-video" src="frames/frames1/frames1.mp4" muted playsinline preload="auto"></video>
 <canvas id="canvas"></canvas>
 <div id="vig"></div>
+<div id="fade-white" style="position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:150;transition:opacity 0.9s ease;"></div>
 
 <!-- PANELS -->
 <div class="panel" id="panel-0">
   <button class="panel-close" aria-label="Close">&times;</button>
   <div class="panel-title">Toyota AI Pipeline</div>
   <div class="panel-role">Associate Creative Director</div>
-  <div class="panel-thumb" data-folder="projects/toyota-ai-pipeline-project" data-images="image1.png,final1.png,final2.png" data-alt="Toyota AI Pipeline">
+  <div class="panel-thumb" data-folder="projects/toyota-ai-pipeline-project" data-images="image1.jpg,final1.jpg,final2.jpg" data-alt="Toyota AI Pipeline">
     <button class="panel-thumb-nav prev" aria-label="Previous image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button class="panel-thumb-nav next" aria-label="Next image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   </div>
@@ -556,7 +557,7 @@
   <button class="panel-close" aria-label="Close">&times;</button>
   <div class="panel-title">Storyfire</div>
   <div class="panel-role">Solo Designer</div>
-  <div class="panel-thumb" data-folder="projects/storyfire-project" data-images="storyfire3.png,storyfire4.png,storyfire7.png" data-alt="Storyfire">
+  <div class="panel-thumb" data-folder="projects/storyfire-project" data-images="storyfire3.jpg,storyfire4.jpg,storyfire7.jpg" data-alt="Storyfire">
     <button class="panel-thumb-nav prev" aria-label="Previous image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button class="panel-thumb-nav next" aria-label="Next image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   </div>
@@ -677,9 +678,9 @@ if (!prefersReducedMotion) {
 
   // --- scroll-scrub engine (frames2, frames3, frames4) ---
   // frames1 is a video; scroll begins after the Toyota panel hold.
-  var FOLDER_FRAME_COUNTS = [85, 151, 84]; // frames2, frames3, frames4
-  var PX_PER_FRAME  = 12;
-  var PANEL_FRAMES  = 40;
+  var FOLDER_FRAME_COUNTS = [42, 60, 18]; // frames2, frames3, frames4
+  var PX_PER_FRAME  = 32;
+  var PANEL_FRAMES  = 20;
   var PAUSE_MS      = 1000;
 
   var TOTAL_FRAMES = FOLDER_FRAME_COUNTS.reduce(function(a,b){ return a+b; }, 0);
@@ -720,7 +721,7 @@ if (!prefersReducedMotion) {
     }
     var folder = folderIdx + 2; // offset: index 0 = frames2
     var local  = i - folderStarts[folderIdx];
-    var pad    = (folder === 2) ? 2 : 3; // frames2 uses 2-digit, frames3/4 use 3-digit
+    var pad    = 2; // all folders now use 2-digit padding
     var n = String(local); while (n.length < pad) n = '0' + n;
     return 'frames/frames' + folder + '/frames' + folder + n + '.jpg';
   }
@@ -781,7 +782,10 @@ if (!prefersReducedMotion) {
             recentlyUnlockedStop = stopIdx;
             if (stopIdx === lastStopIdx) {
               finalStopReached = true;
-              window.location.href = 'all-projects.html';
+              var fw = document.getElementById('fade-white');
+              fw.style.pointerEvents = 'all';
+              fw.style.opacity = '1';
+              setTimeout(function() { window.location.href = 'all-projects.html'; }, 950);
             }
           }, PAUSE_MS);
         })(i);
