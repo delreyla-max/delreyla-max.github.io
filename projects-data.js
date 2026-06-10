@@ -47,7 +47,7 @@ window.PROJECTS = [
     tags: ["Digital Experience","Brand Design"],
     folder: "projects/tacobell-redesign-project",
     images: ["tacobell.jpg"],
-    media: [{"type":"image-grid","src":"","id":"","items":["tacobell4.png","tacobell7.png","tacobell2.png","tacobell6.jpg","tacobell5.jpg","tacobell1.jpg"],"columns":3,"caption":""}],
+    media: [{"type":"image-grid","src":"","id":"","items":["tacobell4.jpg","tacobell7.jpg","tacobell2.jpg","tacobell6.jpg","tacobell5.jpg","tacobell1.jpg"],"columns":3,"caption":""}],
     brief: "Redesign tacobell.com end-to-end as freelance creative lead — without losing the brand's personality in translation.",
     work: "Led the redesign of the visual system, balancing Taco Bell's distinct brand voice with the practical needs of ordering, store-locator discovery, and brand storytelling.",
     outcome: "A refreshed site that lifted conversion while keeping Taco Bell feeling unmistakably like Taco Bell.",
@@ -64,7 +64,7 @@ window.PROJECTS = [
     images: ["garage.jpg"],
     media: [{"type":"image-grid","src":"","id":"","items":["toyotagarage2.jpg","toyotagarage4.jpg","toyotagarage6.jpg","toyotagarage8.jpg","toyotagarage9.jpg","toyotagarage10.jpg","toyotagarage11.jpg"],"columns":3,"caption":""}],
     brief: "Build a real-time shopping and inventory concept for toyota.com vehicle selection, live inventory, buyer-to-dealer handoff.",
-    work: "I led UI/UX at Saatchi on the initial concept, ran the team, and defined the full product across desktop and mobile before engineering came in  making a local, real-time shopping tool feel like a continuation of the Toyota brand",
+    work: "I led UI/UX at Saatchi on the initial concept, ran the team, and defined the full product across desktop and mobile before engineering came in  making a local, real-time shopping tool feel like a continuation of the Toyota brand.",
     outcome: "Shipped to Toyota as the initial design system that later deployed on toyota.com.",
     url: ""
   },
@@ -80,7 +80,7 @@ window.PROJECTS = [
     media: [{"type":"image-grid","src":"","id":"","items":["honda1.jpg","honda2.jpg","honda3.jpg","honda4.jpg","honda5.jpg"],"columns":5,"caption":""}],
     brief: "Honda owners needed a simpler way to keep track of their vehicles, service information, ownership details, and related resources across a single digital experience.",
     work: "Designed a centralized owner platform that allowed users to save their Honda vehicles, view relevant information, and access tools and content tailored to their specific model.",
-    outcome: "Designed a centralized Honda owner destination where users could save their vehicles, access model-specific information, and manage key ownership resources in one place.",
+    outcome: "Created a more useful owner experience by bringing vehicle information, resources, and ownership tools into one organized digital destination.",
     url: ""
   },
   {
@@ -118,8 +118,8 @@ window.PROJECTS = [
     id: "disney-habit-heroes",
     order: 9,
     title: "Disney Habit Heroes",
-    eyebrow: "Case Study",
-    credit: "Add credit line here",
+    eyebrow: "Attractions",
+    credit: "Disney - Creative Lead",
     tags: ["Interactive Experience","Product Design","Kids + Education"],
     folder: "projects/disney-habit-heroes-project",
     images: ["disney2.jpg"],
@@ -147,7 +147,7 @@ window.PROJECTS = [
   {
     id: "google-chromebook",
     order: 14,
-    title: "Google",
+    title: "Google Chromebook",
     eyebrow: "POS Design and Style Guide",
     credit: "72 and Sunny - Art Director",
     tags: ["Digital Campaign","Product Marketing","Brand Experience"],
@@ -167,7 +167,7 @@ window.PROJECTS = [
     credit: "RAPP · Associate Creative Director,  Design Lead",
     tags: ["CRM","Digital Experience","Design Systems"],
     folder: "projects/toyota-lexus-owners-project",
-    images: ["owners.PNG"],
+    images: ["owners.jpg"],
     media: [{"type":"heading","src":"Toyota Owners","id":"","items":[],"columns":3,"caption":""},{"type":"image-grid","src":"","id":"","items":["EM Welcome.jpg","EM Spec GR Corolla.jpg","EM Accessories.jpg","EM Connected Technology.jpg","EM Connected Technology-1.jpg","EM Service Introduction.jpg","EM RAV4 PHEV.jpg","EM Spec GR Supra.jpg"],"columns":5,"caption":""},{"type":"heading","src":"Lexus Owners","id":"","items":[],"columns":3,"caption":""},{"type":"image-grid","src":"","id":"","items":["EM Welcome.png","EM Accessories.png","EM Connected Technology.png","EM Lexuscare.png","EM NX.png","EM RX.png","EM Safety Features.png","EM Service Introduction.png"],"columns":5,"caption":""},{"type":"heading","src":"Vehicle Support","id":"","items":[],"columns":3,"caption":""}],
     brief: "Build the unified system that meets every new Toyota and Lexus owner across email, direct mail, and the Connected Technologies brand family.",
     work: "I led design across the whole Owner Experience system the email templates shipping with every Toyota and Lexus purchase, plus the branding and iconography for Safety Connect, Service Connect, CarPlay, Alexa, and the rest of the Connected Technologies family.",
@@ -215,8 +215,8 @@ window.PROJECTS = [
     images: ["ps3.jpg"],
     media: [{"type":"image-grid","src":"","id":"","items":["playstation2.jpg","playstation3.jpg","playstation5.jpg"],"columns":3,"caption":""},{"type":"youtube","src":"","id":"RYy6yUd8H28","items":[],"columns":2,"caption":"Smarter"},{"type":"vimeo","src":"","id":"653887","items":[],"columns":2,"caption":"Multidimentional"},{"type":"vimeo","src":"","id":"653616","items":[],"columns":2,"caption":"Control"},{"type":"youtube","src":"","id":"_WRUNyQiNtQ","items":[],"columns":2,"caption":"Capacity"},{"type":"youtube","src":"","id":"s2f_Fl7aZO8","items":[],"columns":2,"caption":"Space"},{"type":"vimeo","src":"","id":"24056294","items":[],"columns":2,"caption":"Engaging the Hardcore","embedWidth":"400","embedHeight":"300"},{"type":"heading","src":"Additional Launch Titles","id":"","items":[],"columns":3,"caption":""},{"type":"vimeo","src":"","id":"23071940","items":[],"columns":2,"caption":"Singstar"},{"type":"vimeo","src":"","id":"27033436","items":[],"columns":2,"caption":"Socom"},{"type":"vimeo","src":"","id":"","items":[],"columns":3,"caption":""},{"type":"image-grid","src":"","id":"","items":["playstation1.jpg","playstation4.jpg","playstation6.jpg"],"columns":3,"caption":""}],
     brief: "Launch campaign for the PlayStation 3. Sony's entry into the next console generation.",
-    work: "We created videos and hidden messages for hard-core gamers, a language based on the icons for the PS3 to introduce high-end hardware for North America.",
-    outcome: "In-store video displays, launch titles, website, banners, print, OOH",
+    work: "We created videos and hidden messages for hard-core gamers, a language based on the icons for the PS3 to introduce high-end hardware for North America. In-store video displays, launch titles, website, banners, print, OOH.",
+    outcome: "We started a conversation with Playstations biggest audience, hard core gamers, and created a language and World only they could understand.",
     url: ""
   },
   {
