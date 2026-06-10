@@ -23,7 +23,7 @@
     }
     #nav-brand {
       font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(1.14rem,1.6vw,1.39rem);
+      font-size:1.25rem;
       letter-spacing:0.04em;
       color:#000;
       display:flex; flex-direction:row; align-items:baseline; gap:0.5em; line-height:1.15;
@@ -34,7 +34,7 @@
     #nav-links { display:flex; align-items:center; gap:clamp(1rem,2.4vw,1.8rem); }
     #nav-links a {
       font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(0.85rem,1.4vw,1.1rem);
+      font-size:1rem;
       letter-spacing:0.04em;
       color:#000; text-decoration:none;
       transition:opacity 0.25s;
@@ -103,7 +103,13 @@
     }
     .ap-tag {
       font-family:'Poppins',sans-serif;
-      font-size:0.7rem; color:rgba(0,0,0,0.45);
+      font-size:0.7rem; letter-spacing:0.04em;
+      padding:0.35rem 0.85rem; border-radius:5px;
+      background:rgba(0,0,0,0.05); color:rgba(0,0,0,0.55);
+      display:inline-block;
+    }
+    .ap-tags {
+      display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.4rem;
     }
 
     @media(max-width:640px){
@@ -262,7 +268,10 @@
       .hero-card-cta { font-size:0.6rem; padding:0.42rem 0.8rem; gap:0.3rem; }
       .hero-card-cta svg { width:8px; height:8px; }
     }
-
+  @media (max-width: 480px) {
+    #nav-brand  { font-size: 1.5rem !important; }
+    #nav-links a { font-size: 1.4rem !important; }
+  }
   </style>
 </head>
 <body>
@@ -279,7 +288,7 @@
 
 <div id="nav-megamenu">
   <div id="nav-megamenu-grid">
-    <a class="hero-card" href="project.html?id=toyota-ai-pipeline">
+    <a class="hero-card" href="toyota-case-study.html">
       <div class="hero-card-thumb"><img src="projects/toyota-ai-pipeline-project/final1.png" alt="Toyota AI Pipeline" loading="lazy"></div>
       <div class="hero-card-body">
         <div class="hero-card-title">Toyota AI Pipeline</div>
@@ -290,7 +299,7 @@
       </div>
     </a>
 
-    <a class="hero-card" href="project.html?id=nissan-global-branding">
+    <a class="hero-card" href="nissan-case-study.html">
       <div class="hero-card-thumb"><img src="projects/nissal-global-branding-project/nissan5.jpg" alt="Nissan Global Rebrand" loading="lazy"></div>
       <div class="hero-card-body">
         <div class="hero-card-title">Nissan Global Rebrand</div>
@@ -301,7 +310,7 @@
       </div>
     </a>
 
-    <a class="hero-card" href="project.html?id=storyfire">
+    <a class="hero-card" href="storyfire-case-study.html">
       <div class="hero-card-thumb"><img src="projects/storyfire-project/storyfire4.png" alt="Storyfire" loading="lazy"></div>
       <div class="hero-card-body">
         <div class="hero-card-title">Storyfire</div>
@@ -344,7 +353,7 @@
   list.forEach(function (p) {
     var card = document.createElement('a');
     card.className = 'ap-card';
-    card.href = 'project.html?id=' + encodeURIComponent(p.id);
+    card.href = p.url || ('project.html?id=' + encodeURIComponent(p.id));
 
     var thumb = document.createElement('div');
     thumb.className = 'ap-thumb';
@@ -381,8 +390,13 @@
     name.textContent = p.title;
 
     var tag = document.createElement('div');
-    tag.className = 'ap-tag';
-    tag.textContent = (p.tags || []).join(' Â· ');
+    tag.className = 'ap-tags';
+    (p.tags || []).forEach(function(t) {
+      var pill = document.createElement('div');
+      pill.className = 'ap-tag';
+      pill.textContent = t;
+      tag.appendChild(pill);
+    });
 
     card.appendChild(thumb);
     card.appendChild(name);

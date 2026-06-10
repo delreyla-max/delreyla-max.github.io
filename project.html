@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    html, body { width:100%; min-height:100%; background:#fff; font-family:'Inter',sans-serif; color:#000; }
+    html, body { width:100%; min-height:100%; background:#fff; font-family:'Poppins',sans-serif; color:#000; }
     body { display:flex; flex-direction:column; }
 
     #site-nav {
@@ -22,7 +22,7 @@
     }
     #nav-brand {
       font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(1.14rem,1.6vw,1.39rem);
+      font-size:1.25rem;
       letter-spacing:0.04em;
       color:#000;
       display:flex; flex-direction:row; align-items:baseline; gap:0.5em; line-height:1.15;
@@ -33,7 +33,7 @@
     #nav-links { display:flex; align-items:center; gap:clamp(1rem,2.4vw,1.8rem); }
     #nav-links a {
       font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(0.85rem,1.4vw,1.1rem);
+      font-size:1rem;
       letter-spacing:0.04em;
       color:#000; text-decoration:none;
       transition:opacity 0.25s;
@@ -247,23 +247,6 @@
       .project-columns { grid-template-columns:1fr; gap:clamp(1.6rem,5vw,2.2rem); }
     }
 
-    .project-nav {
-      display:flex; justify-content:space-between; align-items:center;
-      margin-top:clamp(3rem,7vw,5rem);
-      padding-top:2rem;
-      border-top:1px solid rgba(0,0,0,0.08);
-    }
-    .project-nav-btn {
-      display:inline-flex; align-items:center; gap:0.5rem;
-      font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(0.85rem,1.4vw,1.05rem);
-      letter-spacing:0.1em; color:#000;
-      text-decoration:none;
-      transition:opacity 0.2s;
-    }
-    .project-nav-btn:hover { opacity:0.45; }
-    .project-nav-btn svg { width:14px; height:14px; flex-shrink:0; }
-    .project-nav-btn.next { margin-left:auto; }
 
     #project-not-found {
       font-family:'Poppins',sans-serif; font-size:0.95rem;
@@ -430,6 +413,15 @@
       .hero-card-cta svg { width:8px; height:8px; }
     }
 
+  @media (max-width: 480px) {
+    #nav-brand  { font-size: 1.5rem !important; }
+    #nav-links a { font-size: 1.4rem !important; }
+  }
+  @media (max-width: 640px) {
+    .psi-row { flex-direction: column !important; }
+    .psi-div { display: none !important; }
+    .psi-row > div { padding: 0 0 20px !important; }
+  }
   </style>
 </head>
 <body>
@@ -509,18 +501,23 @@
     <div class="project-credit" id="p-credit"></div>
     <div class="project-tags" id="p-tags"></div>
 
-    <div class="project-columns">
-      <div class="project-section" id="sec-brief">
-        <h2>Brief</h2>
-        <p id="p-brief"></p>
+    <div class="psi-row" style="display:flex;padding:40px 0 20px;">
+      <div id="sec-brief" style="flex:1;display:flex;flex-direction:column;gap:14px;padding:0 28px;">
+        <div style="background:#dc2626;height:2px;width:28px;margin-bottom:4px;"></div>
+        <p style="font-size:10px;font-weight:800;letter-spacing:1px;">PROBLEM</p>
+        <p id="p-brief" style="font-size:11px;color:#6e6e6e;line-height:18px;"></p>
       </div>
-      <div class="project-section" id="sec-work">
-        <h2>Work</h2>
-        <p id="p-work"></p>
+      <div class="psi-div" style="width:1px;background:#e1e1e1;align-self:stretch;"></div>
+      <div id="sec-work" style="flex:1;display:flex;flex-direction:column;gap:14px;padding:0 28px;">
+        <div style="background:#dc2626;height:2px;width:28px;margin-bottom:4px;"></div>
+        <p style="font-size:10px;font-weight:800;letter-spacing:1px;">SOLUTION</p>
+        <p id="p-work" style="font-size:11px;color:#6e6e6e;line-height:18px;"></p>
       </div>
-      <div class="project-section" id="sec-outcome">
-        <h2>Outcome</h2>
-        <p id="p-outcome"></p>
+      <div class="psi-div" style="width:1px;background:#e1e1e1;align-self:stretch;"></div>
+      <div id="sec-outcome" style="flex:1;display:flex;flex-direction:column;gap:14px;padding:0 28px;">
+        <div style="background:#dc2626;height:2px;width:28px;margin-bottom:4px;"></div>
+        <p style="font-size:10px;font-weight:800;letter-spacing:1px;">IMPACT</p>
+        <p id="p-outcome" style="font-size:11px;color:#6e6e6e;line-height:18px;"></p>
       </div>
     </div>
 
@@ -530,7 +527,6 @@
 
     <div class="project-media" id="project-media"></div>
 
-    <div class="project-nav" id="project-nav"></div>
   </div>
 
   <div id="project-not-found">
@@ -759,25 +755,9 @@
   // Eyebrow arrows
   var eyePrev = document.getElementById("eyebrow-arrow-prev");
   var eyeNext = document.getElementById("eyebrow-arrow-next");
-  if (prev) { eyePrev.href = "project.html?id=" + encodeURIComponent(prev.id); eyePrev.classList.remove("disabled"); }
-  if (next) { eyeNext.href = "project.html?id=" + encodeURIComponent(next.id); eyeNext.classList.remove("disabled"); }
+  if (prev) { eyePrev.href = prev.url || ("project.html?id=" + encodeURIComponent(prev.id)); eyePrev.classList.remove("disabled"); }
+  if (next) { eyeNext.href = next.url || ("project.html?id=" + encodeURIComponent(next.id)); eyeNext.classList.remove("disabled"); }
 
-  // Bottom prev/next
-  var navEl = document.getElementById("project-nav");
-  if (prev) {
-    var prevA = document.createElement("a");
-    prevA.className = "project-nav-btn prev";
-    prevA.href = "project.html?id=" + encodeURIComponent(prev.id);
-    prevA.innerHTML = '<svg viewBox="0 0 10 10" fill="none"><path d="M9 5H1M1 5L5 1M1 5L5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' + prev.title;
-    navEl.appendChild(prevA);
-  }
-  if (next) {
-    var nextA = document.createElement("a");
-    nextA.className = "project-nav-btn next";
-    nextA.href = "project.html?id=" + encodeURIComponent(next.id);
-    nextA.innerHTML = next.title + '<svg viewBox="0 0 10 10" fill="none"><path d="M1 5H9M9 5L5 1M9 5L5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    navEl.appendChild(nextA);
-  }
 })();
 </script>
 

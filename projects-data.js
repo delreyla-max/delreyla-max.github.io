@@ -8,6 +8,7 @@
 window.PROJECTS = [
   {
     id: "toyota-ai-pipeline",
+    url: "toyota-case-study.html",
     order: 1,
     title: "Toyota AI Pipeline",
     eyebrow: "AI Workflow",
@@ -22,6 +23,7 @@ window.PROJECTS = [
   },
   {
     id: "storyfire",
+    url: "storyfire-case-study.html",
     order: 3,
     title: "Storyfire",
     eyebrow: "Digital Product",
@@ -78,6 +80,7 @@ window.PROJECTS = [
   },
   {
     id: "nissan-global-branding",
+    url: "nissan-case-study.html",
     order: 2,
     title: "Nissan Global",
     eyebrow: "Brand System",

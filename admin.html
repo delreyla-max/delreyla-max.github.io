@@ -321,7 +321,8 @@
       media: (p.media || []).map(cloneMediaBlock),
       brief: p.brief || "",
       work: p.work || "",
-      outcome: p.outcome || ""
+      outcome: p.outcome || "",
+      url: p.url || ""
     };
   }
 
@@ -489,14 +490,17 @@
 
       thumbRow.style.marginBottom = "0.9rem";
       body.appendChild(thumbRow);
-      body.appendChild(buildField("Brief", "textarea", p.brief, function (v) {
+      body.appendChild(buildField("Problem", "textarea", p.brief, function (v) {
         p.brief = v; saveDraft();
       }));
-      body.appendChild(buildField("Work", "textarea", p.work, function (v) {
+      body.appendChild(buildField("Solution", "textarea", p.work, function (v) {
         p.work = v; saveDraft();
       }));
-      body.appendChild(buildField("Outcome", "textarea", p.outcome, function (v) {
+      body.appendChild(buildField("Impact", "textarea", p.outcome, function (v) {
         p.outcome = v; saveDraft();
+      }));
+      body.appendChild(buildField("Custom URL (overrides project.html)", "text", p.url || "", function (v) {
+        p.url = v.trim() || undefined; saveDraft();
       }));
       body.appendChild(buildMediaSection(p));
 

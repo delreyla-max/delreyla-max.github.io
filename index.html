@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -16,9 +16,7 @@
     }
     html, body { width:100%; height:100%; overflow:hidden; background:#fff; font-family:'Inter',sans-serif; color:#000; }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-       SPLASH
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    /* SPLASH */
     #splash {
       position:fixed; inset:0; background:transparent; z-index:200;
       overflow:hidden; pointer-events:none;
@@ -26,9 +24,16 @@
     #splash-text {
       position:absolute; inset:0; z-index:2; will-change:transform;
       pointer-events:auto;
+      transition: transform 0.9s cubic-bezier(0.16,1,0.3,1), opacity 0.6s ease;
+    }
+    #splash-text.shrunk {
+      transform-origin: top left;
+      transform: scale(0.22);
+      opacity: 0.65;
+      pointer-events: none;
     }
 
-    /* â"€â"€ NAV â€" fixed, sits above everything (splash + canvas + panels) â"€â"€ */
+    /* NAV */
     #site-nav {
       position:fixed; top:0; left:0; right:0; z-index:300;
       display:flex; align-items:center; justify-content:space-between;
@@ -40,29 +45,25 @@
     }
     #nav-brand {
       font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(1.14rem,1.6vw,1.39rem);
-      letter-spacing:0.04em;
-      color:#000;
+      font-size:1.25rem;
+      letter-spacing:0.04em; color:#000;
       display:flex; flex-direction:row; align-items:baseline; gap:0.5em; line-height:1.15;
-      text-decoration:none;
-      cursor:pointer;
+      text-decoration:none; cursor:pointer;
     }
     #nav-brand .nav-brand-name { color:#000; }
-    #nav-brand .nav-brand-tagline { color:#000000; letter-spacing:0.03em; }
     #nav-links {
       display:flex; align-items:center; gap:clamp(1rem,2.4vw,1.8rem);
     }
     #nav-links a {
       font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(0.85rem,1.4vw,1.1rem);
+      font-size:1rem;
       letter-spacing:0.04em;
       color:#000; text-decoration:none;
       transition:opacity 0.25s;
     }
     #nav-links a:hover { opacity:0.5; }
-    
 
-    /* â"€â"€ "All Projects" mega-menu â€" full-width dropdown under the nav â"€â"€ */
+    /* MEGA-MENU */
     #nav-megamenu {
       position:fixed; top:0; right:0; bottom:0; z-index:290;
       width:clamp(240px,24vw,340px);
@@ -79,28 +80,19 @@
       transition:transform 0.35s cubic-bezier(0.16,1,0.3,1), visibility 0s;
     }
     #nav-megamenu-grid {
-      display:flex;
-      flex-direction:column;
+      display:flex; flex-direction:column;
       gap:clamp(0.7rem,1.4vw,1.1rem);
     }
-    @media(max-width:640px){
-      #nav-megamenu { width:80% !important; min-width:0; top:4rem; }
-    }
+    @media(max-width:640px){ #nav-megamenu { width:80% !important; min-width:0; top:4rem; } }
 
-    /* â"€â"€ MAIN LAYOUT â"€â"€ */
+    /* MAIN LAYOUT */
     #splash-layout {
       position:absolute; inset:0; z-index:2;
-      display:grid;
-      grid-template-columns: 1fr;
+      display:grid; grid-template-columns:1fr;
       padding:clamp(5.5rem,11vw,8rem) clamp(1.2rem,4vw,2.8rem) clamp(3rem,7vw,5rem);
       align-items:start;
     }
-
-    /* â"€â"€ LEFT: type stack â"€â"€ */
-    #splash-left {
-      display:flex; flex-direction:column;
-      align-items:flex-start;
-    }
+    #splash-left { display:flex; flex-direction:column; align-items:flex-start; }
     .hero-line { overflow:hidden; line-height:1; }
     .hero-line > * {
       display:block;
@@ -109,50 +101,96 @@
     }
     .hero-brand-design, .hero-direction {
       font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(3.2rem,10.5vw,9.5rem);
-      letter-spacing:-0.015em;
-      color:#000;
-      line-height:0.95;
-      margin-left:-0.03em;
+      font-size:3.2rem !important;
+      letter-spacing:-0.015em; color:#000;
+      line-height:0.95; margin-left:-0.03em;
     }
-    .hero-direction {
-      font-size:clamp(1.6rem,5.25vw,4.75rem);
-      color:#999999;
-    }
-
+    .hero-direction { font-size:clamp(0.8rem,2.6vw,2.4rem); color:#999999; max-width:250px; }
     .d0 > * { animation-delay:0.1s; }
     .d1 > * { animation-delay:0.26s; }
     .d2 > * { animation-delay:0.42s; }
+    .d3 > * { animation-delay:0.58s; }
     .hero-tagline {
       font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(1.25rem,3vw,2.1rem);
-      letter-spacing:0.16em;
-      color:rgba(0,0,0,0.72);
+      font-size:clamp(0.79rem,1.875vw,1.31rem);
+      letter-spacing:0.04em; color:rgba(0,0,0,0.72);
+      margin-bottom:0.5rem; display:block;
+    }
+    .hero-tagline-block {
+      display:inline-block;
       margin-bottom:1.4rem;
-      display:block;
+      max-width:300px;
     }
-    /* Client name-drop under the headline â€" signals caliber before the scroll */
+    .hero-tagline-sub {
+      font-family:'Inter',sans-serif;
+      font-size:clamp(0.58rem,0.88vw,0.76rem);
+      letter-spacing:0; color:rgba(0,0,0,0.55);
+      display:block; font-weight:400; max-width:300px; line-height:1.5;
+    }
     .hero-clients {
-      font-family:'Poppins',sans-serif;
-      font-size:clamp(0.62rem,1.1vw,0.82rem);
-      letter-spacing:0.2em;
-      text-transform:uppercase;
-      font-weight:500;
-      color:rgba(0,0,0,0.55);
-      margin-top:1.2rem;
-      display:block;
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(0.59rem,1.25vw,1.09rem);
+      letter-spacing:0.04em;
+      color:rgba(0,0,0,0.3);
+      line-height:1.15; display:block;
+      margin-bottom:0.35rem;
+      margin-top:0.15rem;
     }
-
+    .hero-line--direction { overflow:visible; }
     @keyframes sReveal  { to { transform:translateY(0); } }
     @keyframes sFadeUp  { to { opacity:1; } }
+    #mobile-truck {
+      display: none;
+    }
+    @media (max-width: 480px) {
+      #mobile-truck {
+        display: block;
+        position: fixed;
+        right: -10px;
+        top: calc(50% + 100px);
+        transform: translateY(-50%);
+        width: 55vw;
+        opacity: 1;
+        pointer-events: none;
+        z-index: 1;
+      }
+      .hero-brand-design { font-size: 2rem !important; }
+    }
+      .hero-brand-design            { font-size: 3.2rem !important; }
+    @media (max-width: 480px) {
+      .hero-brand-design            { font-size: 2rem !important; }
+      #video-1 {
+        width: 184vw !important;
+        height: auto !important;
+        inset: unset !important;
+        top: auto !important;
+        left: auto !important;
+        right: -15.125rem !important;
+        bottom: 10.625rem !important;
+        object-fit: contain !important;
+        border-radius: 8px;
+        z-index: 1 !important;
+      }
+    }
+    @media (max-width: 480px) {
+      .hero-direction               { font-size: clamp(0.75rem, 3vw, 1rem) !important; }
+      .hero-tagline                 { font-size: clamp(1.1rem, 5.5vw, 1.5rem) !important; }
+      .hero-tagline-sub             { font-size: clamp(0.70rem, 3.08vw, 0.88rem) !important; max-width: 100% !important; }
+      .hero-clients                 { font-size: clamp(0.85rem, 3.5vw, 1.1rem) !important; }
+      #nav-brand                    { font-size: 1.5rem !important; }
+      #nav-links a                  { font-size: 1.4rem !important; }
+      #skip-to-work                 { font-size: 1rem !important; }
+      #skip-to-work svg             { width: 14px !important; height: 14px !important; }
+      #play-next-btn .scroll-label  { font-size: 1rem !important; }
+      #play-next-btn .scroll-mouse  { width: 22px !important; height: 34px !important; }
+      .static-hero-cta-btn          { font-size: 1rem !important; padding: 0.75rem 1.8rem !important; }
+    }
 
-    /* â"€â"€ Hero project cards (under the headline) â"€â"€ */
+    /* HERO PROJECT CARDS */
     #hero-projects {
-      display:grid;
-      grid-template-columns:repeat(4, minmax(0,1fr));
+      display:grid; grid-template-columns:repeat(4, minmax(0,1fr));
       gap:clamp(0.49rem,0.98vw,0.77rem);
-      width:100%;
-      margin-top:clamp(1.12rem,2.45vw,1.82rem);
+      width:100%; margin-top:clamp(1.12rem,2.45vw,1.82rem);
       max-width:54.6rem;
       opacity:0; animation:sFadeUp 0.7s ease forwards; animation-delay:0.75s;
     }
@@ -194,101 +232,66 @@
     .hero-card-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
     .hero-card-thumb a { display:block; width:100%; height:100%; }
     #nav-megamenu .hero-card-thumb img { object-fit:contain; }
-    /* Megamenu cards always use the side-by-side row layout */
     #nav-megamenu .hero-card {
       flex-direction:row; align-items:flex-start;
       gap:0.8rem; padding:0.85rem;
       max-height:none; overflow:visible;
     }
     #nav-megamenu .hero-card-body { flex:1; min-width:0; display:flex; flex-direction:column; }
-    #nav-megamenu .hero-card-thumb {
-      order:0; margin-top:0; flex-shrink:0;
-      width:5rem; aspect-ratio:1/1;
-    }
+    #nav-megamenu .hero-card-thumb { order:0; margin-top:0; flex-shrink:0; width:5rem; aspect-ratio:1/1; }
     #nav-megamenu .hero-card-title { font-size:0.95rem; margin-bottom:0.35rem; }
     #nav-megamenu .hero-card-tags { margin-bottom:0; }
-
     .hero-card-all-projects {
-      text-decoration:none;
-      display:flex; align-items:center; justify-content:center;
-      min-height:5rem;
+      text-decoration:none; display:flex; align-items:center; justify-content:center; min-height:5rem;
     }
-    .hero-card-all-inner {
-      display:flex; flex-direction:column; align-items:flex-start;
-    }
+    .hero-card-all-inner { display:flex; flex-direction:column; align-items:flex-start; }
     #end-card .hero-card-thumb img { object-fit:contain; }
-
-    /* â"€â"€ "All Projects" card variant â"€â"€ */
     .hero-card-list {
       display:grid; grid-template-columns:repeat(2, 1fr);
       gap:0.21rem 0.56rem; margin-bottom:0.7rem;
     }
     .hero-card-list .client-name { line-height:1.4; }
     .hero-card-cta {
-      margin-top:auto;
-      display:inline-flex; align-items:center; gap:0.28rem;
-      align-self:flex-start;
-      font-family:'Bebas Neue',sans-serif;
+      margin-top:auto; display:inline-flex; align-items:center; gap:0.28rem;
+      align-self:flex-start; font-family:'Bebas Neue',sans-serif;
       font-size:0.546rem; letter-spacing:0.16em;
-      color:#fff; background:#000;
-      padding:0.42rem 0.77rem; border-radius:4px;
-      text-decoration:none;
-      transition:opacity 0.25s ease, transform 0.25s ease;
+      color:#fff; background:#000; padding:0.42rem 0.77rem; border-radius:4px;
+      text-decoration:none; transition:opacity 0.25s ease, transform 0.25s ease;
     }
     .hero-card-cta:hover { opacity:0.8; transform:translateY(-1px); }
     .hero-card-cta svg { width:6px; height:6px; }
-
     .client-name {
       font-family:'Poppins',sans-serif;
-      font-size:clamp(0.46rem,0.72vw,0.56rem);
-      font-weight:400;
-      color:rgba(0,0,0,0.45);
-      line-height:1.45;
-      text-decoration:none;
-      display:inline-block;
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%;
+      font-size:clamp(0.46rem,0.72vw,0.56rem); font-weight:400;
+      color:rgba(0,0,0,0.45); line-height:1.45; text-decoration:none;
+      display:inline-block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%;
       transition:font-weight 0.3s ease, color 0.3s ease;
     }
-    .client-name:hover {
-      font-weight:600;
-      color:#000;
-    }
+    .client-name:hover { font-weight:600; color:#000; }
 
-    /* â"€â"€ SCROLL CTA â"€â"€ */
-    /* Skip-to-work escape â€" lets hiring managers bypass the scroll-jack */
+    /* BOTTOM-LEFT UI: skip button + scroll indicator */
+    #bottom-left-ui {
+      display:flex; flex-direction:column; align-items:flex-start; gap:1.2rem;
+      margin-top:1.4rem;
+    }
     #skip-to-work {
-      position:fixed; bottom:clamp(1.2rem,3vw,2rem); right:clamp(1.2rem,4vw,2.8rem);
-      z-index:260;
-      font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(0.85rem,1.4vw,1.05rem);
-      letter-spacing:0.08em;
-      color:rgba(0,0,0,0.6); text-decoration:none;
-      padding:0.5rem 0.95rem;
-      background:rgba(255,255,255,0.78);
-      backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-      border:1px solid rgba(0,0,0,0.12); border-radius:999px;
-      transition:color 0.25s, background 0.25s;
+      display:inline-flex; align-items:center; gap:0.3rem;
+      font-size:0.62rem; font-weight:700; letter-spacing:0.06em;
+      color:#000; font-family:'Inter',sans-serif;
+      text-decoration:none; transition:opacity 0.15s;
     }
-    #skip-to-work:hover { color:#000; background:rgba(255,255,255,0.95); }
-
+    #skip-to-work:hover { opacity:0.6; }
+    #skip-to-work svg { width:9px; height:9px; }
     #splash-cta {
       position:fixed; top:calc(36vh + 30px); left:50%; transform:translateX(-50%);
-      z-index:250;
-      display:flex; flex-direction:column; align-items:center; gap:0.4rem;
-      opacity:0;
-      pointer-events:none;
+      z-index:250; display:flex; flex-direction:column; align-items:center; gap:0.4rem;
+      opacity:0; pointer-events:none;
     }
-    #splash-cta.intro { animation:sFadeUp 0.6s ease forwards; animation-delay:1s; }
     #splash-cta-label {
       font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(1.1rem,2.1vw,1.4rem);
-      letter-spacing:0.1em;
-      color:#000;
+      font-size:clamp(1.1rem,2.1vw,1.4rem); letter-spacing:0.1em; color:#000;
     }
-    #splash-cta-icon {
-      width:27px; height:50px;
-      display:flex; align-items:center; justify-content:center;
-    }
+    #splash-cta-icon { width:27px; height:50px; display:flex; align-items:center; justify-content:center; }
     #splash-cta-icon svg { width:100%; height:100%; overflow:visible; }
     #splash-cta-icon .chevron {
       transform-origin:center;
@@ -302,14 +305,10 @@
     }
 
     @media(max-width:640px){
-      .hero-brand-design { font-size:clamp(2.66rem,14.7vw,4.2rem); text-align:left; }
-      .hero-direction { font-size:clamp(1.3rem,7.5vw,2rem); text-align:left; }
+      .hero-brand-design { font-size:clamp(1rem,5.5vw,1.6rem); text-align:left; white-space:nowrap; }
+      .hero-direction { font-size:clamp(0.7rem,3.8vw,1.1rem); text-align:left; }
       #splash-left { text-align:left; }
       #nav-links { gap:0.9rem; }
-
-      /* Hero cards: stack into a single column AND switch to the compact
-         (thumbnail-left) layout together â€" desktop/mobile only, no
-         intermediate tablet breakpoint */
       #hero-projects, #nav-megamenu-grid { grid-template-columns:1fr; max-width:26rem; }
       .hero-card {
         flex-direction:row; align-items:flex-start;
@@ -318,129 +317,49 @@
         max-height:none; overflow:visible;
       }
       .hero-card-body { flex:1; min-width:0; display:flex; flex-direction:column; }
-      .hero-card-thumb {
-        order:0; margin-top:0; flex-shrink:0;
-        width:clamp(4.2rem,22vw,5.5rem);
-        aspect-ratio:1/1;
-      }
-    .hero-card-title { font-size:0.95rem; margin-bottom:0.35rem; }
+      .hero-card-thumb { order:0; margin-top:0; flex-shrink:0; width:clamp(4.2rem,22vw,5.5rem); aspect-ratio:1/1; }
+      .hero-card-title { font-size:0.95rem; margin-bottom:0.35rem; }
       .hero-card-tags { margin-bottom:0.4rem; }
       .hero-card-tag { font-size:0.5rem; padding:0.22rem 0.5rem; }
       .hero-card-desc {
         font-size:0.62rem; line-height:1.55; margin-bottom:0;
         display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
       }
-
-      /* "All Projects" card: show the full project list on mobile too,
-         in a denser multi-column layout so it still fits comfortably */
-      .hero-card-list {
-        display:grid; grid-template-columns:repeat(3, 1fr);
-        gap:0.12rem 0.4rem; margin-bottom:0.5rem;
-        font-size:0.56rem;
-      }
+      .hero-card-list { display:grid; grid-template-columns:repeat(3, 1fr); gap:0.12rem 0.4rem; margin-bottom:0.5rem; font-size:0.56rem; }
       .hero-card-list .client-name { line-height:1.6; }
       .hero-card-cta { font-size:0.6rem; padding:0.42rem 0.8rem; gap:0.3rem; }
       .hero-card-cta svg { width:8px; height:8px; }
     }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-       LOADER
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-    #loader {
-      position:fixed; inset:0; background:#fff; z-index:190;
-      display:flex; flex-direction:column; align-items:center; justify-content:center;
-      transition:opacity 0.8s ease; opacity:0; pointer-events:none;
-    }
-    #loader.active { opacity:1; pointer-events:all; }
-    #loader.fade   { opacity:0; pointer-events:none; }
-    #loader-name {
-      font-size:0.55rem; font-weight:600;
-      letter-spacing:0.2em; text-transform:uppercase;
-      line-height:1; margin-bottom:1rem; position:relative;
-    }
-    #loader-name-fill {
-      display:block; color:#000;
-    }
-    #bar-wrap { width:clamp(160px,30vw,320px); height:1px; background:rgba(0,0,0,0.1); }
-    #loader-bar { height:100%; background:#000; width:0%; transition:width 0.08s linear; }
-    #loader-footer {
-      position:absolute; bottom:clamp(1.5rem,3vw,2.2rem);
-      left:clamp(1.5rem,4vw,3rem); right:clamp(1.5rem,4vw,3rem);
-      display:flex; justify-content:space-between; align-items:flex-end;
-    }
-    #loader-location { font-size:0.52rem; letter-spacing:0.25em; text-transform:uppercase; color:rgba(0,0,0,0.25); }
-    #loader-pct { font-size:0.58rem; letter-spacing:0.12em; color:rgba(0,0,0,0.3); font-variant-numeric:tabular-nums; }
+    /* VIDEOS + CANVAS */
+    #canvas { position:fixed; inset:0; width:100%; height:100%; display:none; z-index:0; }
+    .bg-video { position:fixed; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; display:none; }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-       CANVAS
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-    #canvas { position:fixed; inset:0; width:100%; height:100%; display:block; transform:translateY(0); will-change:transform, opacity; z-index:0; opacity:1; }
+    /* VIGNETTE — hidden, white bg throughout */
+    #vig { display:none; }
 
-    /* â"€â"€ VIGNETTE â"€â"€ */
-    #vig {
-      position:fixed; inset:0; pointer-events:none; z-index:2;
-      background:
-        linear-gradient(to right,  rgba(0,0,0,0.55) 0%, transparent 25%, transparent 65%, rgba(0,0,0,0.65) 100%),
-        linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.5) 100%);
-    }
-
-    /* â"€â"€ PROGRESS â"€â"€ */
-    #prog-track {
-      position:fixed; bottom:0; left:0; right:0; height:2px;
-      background:rgba(255,255,255,0.06); z-index:20;
-      opacity:0; transition:opacity 0.8s;
-    }
-    #prog-track.show { opacity:1; }
-    #prog-fill { height:100%; background:#fff; width:0%; }
-    .stop-dot {
-      position:absolute; top:50%; transform:translate(-50%,-50%);
-      width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,0.3);
-      transition:background 0.2s, transform 0.2s;
-    }
-    .stop-dot.active { background:#fff; transform:translate(-50%,-50%) scale(1.8); }
-
-    /* â"€â"€ LOCK HINT â"€â"€ */
-    #lock-hint {
-      position:fixed; bottom:1.2rem; left:50%; transform:translateX(-50%);
-      z-index:20; font-size:0.52rem; letter-spacing:0.25em; text-transform:uppercase;
-      color:rgba(255,255,255,0.25); opacity:0; transition:opacity 0.4s; pointer-events:none;
-    }
-    #lock-hint.show { opacity:1; }
-
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-       PANELS
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    /* PANELS */
     .panel {
       position:fixed; top:50%; right:clamp(1.5rem,5vw,4rem);
       transform:translateY(-50%) translateX(40px);
-      width:var(--panel-w);
-      max-height:90vh; overflow-y:auto;
-      color:#000;
-      background:#fff;
+      width:var(--panel-w); max-height:90vh; overflow-y:auto;
+      color:#fff; background:#1a1a1a;
       backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);
-      border:1px solid rgba(0,0,0,0.05); border-radius:14px;
-      box-shadow:0 6px 12px rgba(0,0,0,0.22), 0 14px 40px rgba(0,0,0,0.07);
-      padding:clamp(1.4rem,2.5vw,2rem);
-      z-index:10; opacity:0; pointer-events:none;
+      border:1px solid rgba(255,255,255,0.08); border-radius:14px;
+      box-shadow:0 6px 12px rgba(0,0,0,0.5), 0 14px 40px rgba(0,0,0,0.3);
+      padding:clamp(1rem,1.8vw,1.4rem);
+      z-index:210; opacity:0; pointer-events:none;
       transition:opacity 0.5s cubic-bezier(.4,0,.2,1), transform 0.5s cubic-bezier(.4,0,.2,1);
     }
     .panel.visible { opacity:1; transform:translateY(-50%) translateX(0); pointer-events:all; }
-
-    /* Nissan panel â€" left side, vertically centered like the others */
-    #panel-1 {
-      right:auto; left:clamp(1.5rem,5vw,4rem);
-      top:50%; transform:translateY(-50%) translateX(-40px);
-    }
+    #panel-1 { right:auto; left:clamp(1.5rem,5vw,4rem); top:50%; transform:translateY(-50%) translateX(-40px); }
     #panel-1.visible { transform:translateY(-50%) translateX(0); }
     #panel-2 { right:auto; left:clamp(1.5rem,5vw,4rem); transform:translateY(-50%) translateX(-40px); }
     #panel-2.visible { transform:translateY(-50%) translateX(0); }
-    .panel-title { font-family:'Inter',sans-serif; font-size:clamp(1.1rem,2.4vw,1.6rem); font-weight:700; letter-spacing:-0.03em; line-height:1.1; margin-bottom:0.5rem; color:#000; }
-    .panel-role { font-family:'Inter',sans-serif; font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(0,0,0,0.35); margin-bottom:1rem; }
-    .panel-thumb { position:relative; width:100%; aspect-ratio:4/3; border-radius:8px; margin-bottom:1rem; overflow:hidden; background:#111; }
-    .panel-thumb img {
-      position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-      opacity:0; transition:opacity 0.8s ease, transform 0.6s ease;
-    }
+    .panel-title { font-family:'Inter',sans-serif; font-size:clamp(1.1rem,2.4vw,1.6rem); font-weight:700; letter-spacing:-0.03em; line-height:1.1; margin-bottom:0.3rem; color:#fff; }
+    .panel-role { font-family:'Inter',sans-serif; font-size:0.6rem; letter-spacing:0.04em; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-bottom:0.5rem; }
+    .panel-thumb { position:relative; width:100%; aspect-ratio:16/9; border-radius:8px; margin-bottom:0.6rem; overflow:hidden; background:#111; }
+    .panel-thumb img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 0.8s ease, transform 0.6s ease; }
     .panel-thumb img.show { opacity:1; }
     .panel.visible .panel-thumb img.show { transform:scale(1.03); }
     .panel-thumb-nav {
@@ -457,32 +376,57 @@
     .panel-thumb-nav.next { right:8px; }
     .panel-thumb-nav svg { width:8px; height:8px; }
     .panel-thumb-nav.prev svg { transform:rotate(180deg); }
-    .panel-tags { display:flex; flex-wrap:wrap; gap:0.3rem; margin-bottom:0.5rem; }
-    .panel-tag { font-size:0.5rem; letter-spacing:0.12em; text-transform:uppercase; padding:0.18rem 0.55rem; border:1px solid rgba(0,0,0,0.12); border-radius:2px; color:#000; }
-    .panel-divider { width:100%; height:1px; background:rgba(0,0,0,0.08); margin-bottom:0.5rem; }
-    .panel-desc { font-family:'Inter',sans-serif; font-size:0.72rem; font-weight:300; line-height:1.8; color:#000; margin-bottom:1.2rem; }
+    .panel-tags { display:flex; flex-wrap:wrap; gap:0.3rem; margin-bottom:0.15rem; }
+    .panel-tag { font-size:0.5rem; letter-spacing:0.04em; text-transform:uppercase; padding:0.18rem 0.55rem; background:rgba(255,255,255,0.1); border-radius:5px; color:rgba(255,255,255,0.7); }
+    .panel-divider { width:100%; height:1px; background:rgba(255,255,255,0.1); margin-bottom:0.3rem; }
+    .panel-desc { font-family:'Inter',sans-serif; font-size:0.72rem; font-weight:300; line-height:1.5; color:rgba(255,255,255,0.75); margin-bottom:0.7rem; }
     .panel .panel-btn {
-      display:inline-flex; align-items:center; gap:0.45rem;
-      font-size:0.58rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase;
-      color:#fff; background:#000; border:none; border-radius:2px;
-      padding:0.65rem 1.2rem; cursor:pointer; font-family:'Inter',sans-serif;
-      text-decoration:none; transition:background 0.2s, transform 0.15s;
+      display:inline-flex; align-items:center; gap:0.3rem;
+      font-size:0.62rem; font-weight:700; letter-spacing:0.06em;
+      color:#fff; font-family:'Inter',sans-serif;
+      text-decoration:none; border:none; background:none; cursor:pointer;
+      padding:0; transition:opacity 0.15s;
     }
-    .panel .panel-btn:hover { background:#222; transform:translateY(-1px); }
-    .panel .panel-btn svg { width:10px; height:10px; }
+    .panel .panel-btn:hover { opacity:0.6; }
+    .panel .panel-btn svg { width:9px; height:9px; }
+    #play-next-btn {
+      display:flex; flex-direction:row; align-items:center; gap:0.65rem;
+    }
+    #play-next-btn .scroll-label {
+      font-family:'Inter',sans-serif; font-size:0.62rem; font-weight:700;
+      letter-spacing:0.06em; color:#000;
+    }
+    #play-next-btn .scroll-mouse {
+      width:18px; height:28px; border:1.5px solid #000; border-radius:9px;
+      position:relative; display:flex; justify-content:center; flex-shrink:0;
+    }
+    #play-next-btn .scroll-wheel {
+      width:2px; height:5px; background:#000; border-radius:2px;
+      position:absolute; top:4px;
+      animation:scrollWheel 1.4s ease-in-out infinite;
+    }
+    @keyframes scrollWheel {
+      0%   { opacity:1; transform:translateY(0); }
+      60%  { opacity:0; transform:translateY(8px); }
+      61%  { opacity:0; transform:translateY(0); }
+      100% { opacity:1; transform:translateY(0); }
+    }
+    /* headline lines fade when scrubbing starts, UI block stays visible */
+    #splash-text.scrubbing .hero-line,
+    #splash-text.scrubbing .hero-tagline {
+      opacity:0; transition:opacity 0.5s ease;
+    }
     .panel-close {
       position:absolute; top:0.7rem; right:0.7rem;
       width:1.5rem; height:1.5rem;
-      background:rgba(0,0,0,0.07); border:none; border-radius:50%;
+      background:rgba(255,255,255,0.1); border:none; border-radius:50%;
       display:flex; align-items:center; justify-content:center;
-      cursor:pointer; font-size:0.8rem; line-height:1; color:#000;
+      cursor:pointer; font-size:0.8rem; line-height:1; color:#fff;
       transition:background 0.2s;
     }
-    .panel-close:hover { background:rgba(0,0,0,0.15); }
+    .panel-close:hover { background:rgba(255,255,255,0.2); }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-       END CARD
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    /* END CARD */
     #end-card {
       position:fixed; inset:0; z-index:150;
       display:flex; flex-direction:column; align-items:center; justify-content:center;
@@ -492,36 +436,46 @@
     }
     #end-card.visible { opacity:1; pointer-events:all; }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-       MOBILE
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    /* MOBILE */
     @media(max-width:640px){
-      .panel { right:1rem; left:1rem; width:auto; top:auto; bottom:3.5rem; transform:translateY(20px); padding:1.1rem; }
+      .panel {
+        right:0.75rem; left:0.75rem; width:auto;
+        top:auto; bottom:2.5rem;
+        transform:translateY(20px); padding:0.85rem;
+        display:grid; grid-template-columns:38% 1fr; grid-template-rows:auto;
+        gap:0 0.75rem;
+      }
       .panel.visible { transform:translateY(0); }
-      #panel-1 { right:1rem; left:1rem; width:auto; top:auto; bottom:3.5rem; transform:translateY(20px); }
+      #panel-1 { right:0.75rem; left:0.75rem; width:auto; top:auto; bottom:2.5rem; transform:translateY(20px); }
       #panel-1.visible { transform:translateY(0); }
-      .panel-thumb { display:block; width:46%; aspect-ratio:16/9; margin-bottom:0.8rem; }
-      .panel-title { font-size:1rem; }
-      .panel-desc { font-size:0.72rem; line-height:1.65; margin-bottom:0.9rem; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
-      .panel-tags { margin-bottom:0.7rem; }
+      .panel-close { grid-column:2; grid-row:1; justify-self:end; }
+      .panel-thumb {
+        grid-column:1; grid-row:1 / 6;
+        width:100%; aspect-ratio:4/3; margin-bottom:0;
+      }
+      .panel-title { grid-column:2; font-size:0.85rem; margin-top:0.1rem; }
+      .panel-role  { grid-column:2; font-size:0.5rem; }
+      .panel-tags  { grid-column:2; margin-bottom:0.15rem !important; }
+      .panel-divider { grid-column:2; margin-bottom:0.1rem !important; }
+      .panel-desc {
+        grid-column:2; font-size:0.62rem; line-height:1.6; margin-bottom:0.6rem;
+        display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden;
+      }
+      .panel > div:last-child, .panel > a:last-child { grid-column:2; }
+      #play-next-btn { grid-column:1 / -1; margin-top:0.75rem; }
       #end-card { padding:1.5rem; }
     }
 
-    /* ── A4: prefers-reduced-motion — static hero, no scroll-jack ──────── */
+    /* A4: prefers-reduced-motion */
     html.reduced-motion,
     html.reduced-motion body { overflow:auto !important; height:auto !important; }
     html.reduced-motion #canvas,
-    html.reduced-motion #loader,
+    html.reduced-motion .bg-video,
     html.reduced-motion #vig,
-    html.reduced-motion #prog-track,
-    html.reduced-motion #lock-hint,
     html.reduced-motion #splash-cta,
     html.reduced-motion .panel,
     html.reduced-motion #skip-to-work { display:none !important; }
-    html.reduced-motion #splash {
-      position:static !important; height:auto !important;
-      overflow:visible !important; pointer-events:auto !important; background:#fff;
-    }
+    html.reduced-motion #splash { position:static !important; height:auto !important; overflow:visible !important; pointer-events:auto !important; background:#fff; }
     html.reduced-motion #splash-text { position:static !important; transform:none !important; opacity:1 !important; }
     html.reduced-motion #splash-layout { min-height:100vh; align-items:start; }
     html.reduced-motion .hero-line { overflow:visible; }
@@ -543,8 +497,6 @@
 </head>
 <body>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â• SPLASH â•â•â•â•â•â•â•â•â•â•â• -->
-<!-- Sticky nav â€" persists across the splash AND the scroll-scrub experience -->
 <nav id="site-nav">
   <a id="nav-brand" href="#" onclick="if(window.goToHomeStart){ window.goToHomeStart(); } return false;"><span class="nav-brand-name">GARMAN</span></a>
   <div id="nav-links">
@@ -552,16 +504,12 @@
     <a href="resume.html">Resume</a>
     <a href="contact.html">Contact</a>
   </div>
-
 </nav>
 
-<!-- Skip-to-work escape â€" jumps straight past the animation to the project grid -->
-<a id="skip-to-work" href="all-projects.html">Skip to work &darr;</a>
 
-<!-- Full-width "All Projects" mega-menu â€" opens on hover, mirrors the cards from the end of the scroll -->
 <div id="nav-megamenu">
   <div id="nav-megamenu-grid">
-    <a class="hero-card" href="project.html?id=toyota-ai-pipeline">
+    <a class="hero-card" href="toyota-case-study.html">
       <div class="hero-card-thumb"><img src="projects/toyota-ai-pipeline-project/final1.png" alt="Toyota AI Pipeline" loading="lazy"></div>
       <div class="hero-card-body">
         <div class="hero-card-title">Toyota AI Pipeline</div>
@@ -569,11 +517,9 @@
           <div class="hero-card-tag">AI Production</div>
           <div class="hero-card-tag">Compositing</div>
         </div>
-        
       </div>
     </a>
-
-    <a class="hero-card" href="project.html?id=nissan-global-branding">
+    <a class="hero-card" href="nissan-case-study.html">
       <div class="hero-card-thumb"><img src="projects/nissal-global-branding-project/nissan5.jpg" alt="Nissan Global Rebrand" loading="lazy"></div>
       <div class="hero-card-body">
         <div class="hero-card-title">Nissan Global Rebrand</div>
@@ -583,8 +529,7 @@
         </div>
       </div>
     </a>
-
-    <a class="hero-card" href="project.html?id=storyfire">
+    <a class="hero-card" href="storyfire-case-study.html">
       <div class="hero-card-thumb"><img src="projects/storyfire-project/storyfire4.png" alt="Storyfire" loading="lazy"></div>
       <div class="hero-card-body">
         <div class="hero-card-title">Storyfire</div>
@@ -594,7 +539,6 @@
         </div>
       </div>
     </a>
-
     <a class="hero-card hero-card-all-projects" href="all-projects.html">
       <div class="hero-card-all-inner">
         <div class="hero-card-title">View All Projects</div>
@@ -608,17 +552,25 @@
 </div>
 
 <div id="splash">
-
-
-  <!-- Sliding text layer: scrolls up & clears, truck stays put -->
   <div id="splash-text">
-
-    <!-- Main layout -->
     <div id="splash-layout">
       <div id="splash-left">
-        <div class="hero-line d0"><span class="hero-tagline">BRAND DES\GN + CREATIVE D\RECTOR</span></div>
-        <div class="hero-line d1"><span class="hero-brand-design">A brand without a story is just a name.</span></div>
-        <div class="hero-line d2"><span class="hero-clients">Toyota &middot; Nissan &middot; Disney &middot; Google &middot; PlayStation</span></div>
+        <div class="hero-line d0"><div class="hero-tagline-block"><span class="hero-tagline">BRAND DESIGN + CREATIVE DIRECTOR</span><span class="hero-tagline-sub">Creative direction for brand systems, AI workflows, and digital product experiences.</span></div></div>
+        <div class="hero-line d1"><span class="hero-brand-design">A Brand<br>Without a Story<br>Is just a name.</span></div>
+        <div style="margin-top:1.8rem;">
+          <div class="hero-line d3"><span class="hero-clients">Toyota</span></div>
+          <div class="hero-line d3"><span class="hero-clients">Nissan</span></div>
+          <div class="hero-line d3"><span class="hero-clients">Disney</span></div>
+          <div class="hero-line d3"><span class="hero-clients">Google</span></div>
+          <div class="hero-line d3"><span class="hero-clients">PlayStation</span></div>
+          <div class="hero-line d3"><div id="bottom-left-ui">
+            <a id="skip-to-work" href="all-projects.html">View All Projects <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <div id="play-next-btn" aria-hidden="true">
+              <span class="scroll-label">Scroll for Next</span>
+              <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+            </div>
+          </div></div>
+        </div>
         <div id="static-hero-cta" style="display:none; margin-top:2.5rem; flex-wrap:wrap; gap:0.75rem;">
           <a href="all-projects.html" class="static-hero-cta-btn static-hero-cta-primary">View Work</a>
           <a href="resume.html" class="static-hero-cta-btn static-hero-cta-secondary">Resume</a>
@@ -626,11 +578,9 @@
         </div>
       </div>
     </div>
-
   </div>
 
-  <!-- Scroll CTA â€" fixed to the bottom of the viewport, always visible -->
-  <div id="splash-cta" class="intro">
+  <div id="splash-cta">
     <div id="splash-cta-label">SCROLL</div>
     <div id="splash-cta-icon">
       <svg viewBox="0 0 200 360" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -643,56 +593,48 @@
   </div>
 </div>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â• LOADER â•â•â•â•â•â•â•â•â•â•â• -->
-<div id="loader">
-  <div id="loader-name"><span id="loader-name-fill">Loading</span></div>
-  <div id="bar-wrap"><div id="loader-bar"></div></div>
-  <div id="loader-footer">
-    <div id="loader-location">Los Angeles, CA</div>
-    <div id="loader-pct">0%</div>
-  </div>
-</div>
-
+<video id="video-1" class="bg-video" src="frames/frames1/frames1_1.mp4" muted playsinline preload="none"></video>
 <canvas id="canvas"></canvas>
-<div id="prog-track"><div id="prog-fill"></div></div>
-<div id="lock-hint">Keep scrolling</div>
+<div id="vig"></div>
 
 <!-- PANELS -->
 <div class="panel" id="panel-0">
   <button class="panel-close" aria-label="Close">&times;</button>
   <div class="panel-title">Toyota AI Pipeline</div>
-  <div class="panel-role">Associate Creative Director &nbsp;&middot;&nbsp; Rapp</div>
+  <div class="panel-role">Associate Creative Director</div>
   <div class="panel-thumb" data-folder="projects/toyota-ai-pipeline-project" data-images="image1.png,final1.png,final2.png" data-alt="Toyota AI Pipeline">
     <button class="panel-thumb-nav prev" aria-label="Previous image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button class="panel-thumb-nav next" aria-label="Next image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   </div>
   <div class="panel-tags">
-    <div class="panel-tag">AI Production</div>
-    <div class="panel-tag">Compositing</div>
-    <div class="panel-tag">Adobe Firefly</div>
+    <div class="panel-tag">AI Workflow</div>
+    <div class="panel-tag">Scalable Production</div>
   </div>
   <div class="panel-divider"></div>
-  <div class="panel-desc">Proprietary AI system converting engineering sketches into photoreal lifestyle product imagery &mdash; enabling seasonal campaigns for thousands of parts without a single reshoot.</div>
-  <a class="panel-btn" href="project.html?id=toyota-ai-pipeline">View Project <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  <div class="panel-desc">Proprietary AI system converting engineering sketches into photoreal lifestyle product imagery.</div>
+  <a class="panel-btn" href="toyota-case-study.html">View Project <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</div>
+
+<div id="play-next-btn" aria-hidden="true">
+  <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+  <span class="scroll-label">SCROLL FOR NEXT</span>
 </div>
 
 <div class="panel" id="panel-1">
   <button class="panel-close" aria-label="Close">&times;</button>
   <div class="panel-title">Nissan Global Rebrand</div>
-  <div class="panel-role">Associate Creative Director &nbsp;&middot;&nbsp; TBWA\Chiat\Day LA</div>
+  <div class="panel-role">Associate Creative Director</div>
   <div class="panel-thumb" data-folder="projects/nissal-global-branding-project" data-images="nissan5.jpg,nissan2.jpg,nissan6.jpg" data-alt="Nissan">
     <button class="panel-thumb-nav prev" aria-label="Previous image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button class="panel-thumb-nav next" aria-label="Next image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   </div>
   <div class="panel-tags">
-    <div class="panel-tag">Brand Design</div>
-    <div class="panel-tag">Visual Identity</div>
-    <div class="panel-tag">Style Guide</div>
-    <div class="panel-tag">Global</div>
+    <div class="panel-tag">Brand System</div>
+    <div class="panel-tag">Global Identity</div>
   </div>
   <div class="panel-divider"></div>
-  <div class="panel-desc">Unified global brand system giving each vehicle its own personality while maintaining consistency across all markets. The color grid became Nissan's visual signature for three years.</div>
-  <a class="panel-btn" href="project.html?id=nissan-global-branding">View Project <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  <div class="panel-desc">Unified global brand system giving each vehicle its own personality while maintaining consistency across all markets.</div>
+  <a class="panel-btn" href="nissan-case-study.html">View Project <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 </div>
 
 <div class="panel" id="panel-2">
@@ -705,68 +647,51 @@
   </div>
   <div class="panel-tags">
     <div class="panel-tag">Product Design</div>
-    <div class="panel-tag">UI/UX</div>
-    <div class="panel-tag">Web &amp; App</div>
+    <div class="panel-tag">Platform UX</div>
+    <div class="panel-tag">Solo Design Lead</div>
   </div>
   <div class="panel-divider"></div>
-  <div class="panel-desc">Creator platform for collaborative content &mdash; writing, video, blogs &mdash; with Blaze token economy. 100+ screens designed across web and mobile app from the ground up.</div>
-  <a class="panel-btn" href="project.html?id=storyfire">View Project <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  <div class="panel-desc">Creator platform for collaborative content &mdash; writing, video, blogs &mdash; with Blaze token economy.</div>
+  <a class="panel-btn" href="storyfire-case-study.html">View Project <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 </div>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â• END CARD â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- END CARD -->
 <div id="end-card">
   <div id="splash-left">
     <div class="hero-line d0"><span class="hero-brand-design">A brand without a story is just a name.</span></div>
-    <div class="hero-line d1"><span class="hero-direction">Technology can help tell it.</span></div>
-
-    <!-- Featured project cards -->
+    <div class="hero-line hero-line--direction d1"><span class="hero-direction">Technology can help tell it.</span></div>
     <div id="hero-projects">
       <div class="hero-card">
         <div class="hero-card-thumb"><img src="projects/toyota-ai-pipeline-project/final1.png" alt="Toyota AI Pipeline" loading="lazy"></div>
         <div class="hero-card-body">
-          <a class="hero-card-title" href="project.html?id=toyota-ai-pipeline">Toyota AI Pipeline</a>
-          <div class="hero-card-tags">
-            <div class="hero-card-tag">AI Production</div>
-            <div class="hero-card-tag">Compositing</div>
-          </div>
-          
+          <a class="hero-card-title" href="toyota-case-study.html">Toyota AI Pipeline</a>
+          <div class="hero-card-tags"><div class="hero-card-tag">AI Production</div><div class="hero-card-tag">Compositing</div></div>
         </div>
       </div>
-
       <div class="hero-card">
         <div class="hero-card-thumb"><img src="projects/nissal-global-branding-project/nissan5.jpg" alt="Nissan Global Rebrand" loading="lazy"></div>
         <div class="hero-card-body">
-          <a class="hero-card-title" href="project.html?id=nissan-global-branding">Nissan Global Rebrand</a>
-          <div class="hero-card-tags">
-            <div class="hero-card-tag">Brand Design</div>
-            <div class="hero-card-tag">Visual Identity</div>
-          </div>
-          
+          <a class="hero-card-title" href="nissan-case-study.html">Nissan Global Rebrand</a>
+          <div class="hero-card-tags"><div class="hero-card-tag">Brand Design</div><div class="hero-card-tag">Visual Identity</div></div>
         </div>
       </div>
-
       <div class="hero-card">
         <div class="hero-card-thumb"><img src="projects/storyfire-project/storyfire4.png" alt="Storyfire" loading="lazy"></div>
         <div class="hero-card-body">
-          <a class="hero-card-title" href="project.html?id=storyfire">Storyfire</a>
-          <div class="hero-card-tags">
-            <div class="hero-card-tag">Product Design</div>
-            <div class="hero-card-tag">UI/UX Design</div>
-          </div>
-          
+          <a class="hero-card-title" href="storyfire-case-study.html">Storyfire</a>
+          <div class="hero-card-tags"><div class="hero-card-tag">Product Design</div><div class="hero-card-tag">UI/UX Design</div></div>
         </div>
       </div>
-
       <div class="hero-card">
         <div class="hero-card-body" style="display:flex; flex-direction:column; flex:1;">
           <div class="hero-card-title">All Projects</div>
           <div class="hero-card-list" id="all-projects-list">
             <a class="client-name" href="project.html?id=tacobell-redesign">Tacobell.com</a>
-            <a class="client-name" href="project.html?id=storyfire">Storyfire</a>
-            <a class="client-name" href="project.html?id=toyota-ai-pipeline">Toyota AI Pipeline</a>
+            <a class="client-name" href="storyfire-case-study.html">Storyfire</a>
+            <a class="client-name" href="toyota-case-study.html">Toyota AI Pipeline</a>
             <a class="client-name" href="project.html?id=toyota-garage">Toyota Garage</a>
             <a class="client-name" href="project.html?id=honda-motorsports">Honda Motorsports</a>
-            <a class="client-name" href="project.html?id=nissan-global-branding">Nissan Global Branding</a>
+            <a class="client-name" href="nissan-case-study.html">Nissan Global Branding</a>
             <a class="client-name" href="project.html?id=mr-cooper-portal">Mr. Cooper Portal</a>
             <a class="client-name" href="project.html?id=disney-habit-heroes">Disney Habit Heroes</a>
             <a class="client-name" href="project.html?id=nissan-quest">Nissan Quest</a>
@@ -792,447 +717,312 @@
 </div>
 
 <script>
-// â"€â"€â"€ SPLASH: background frame flasher â"€â"€â"€â"€â"€
-// Pin the homepage headline to sit exactly 30px below the nav bar,
-// regardless of nav height across breakpoints.
-// A4: prefers-reduced-motion — skip scroll-jack, show static hero
+// ── prefers-reduced-motion ─────────────────────────────────────────────
 var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (prefersReducedMotion) { document.documentElement.classList.add('reduced-motion'); }
 
-(function positionHeadline() {
+// ── Headline sits 30px below nav bar ──────────────────────────────────
+(function() {
   var navEl    = document.getElementById('site-nav');
   var layoutEl = document.getElementById('splash-layout');
   if (!navEl || !layoutEl) return;
-  function update() {
-    layoutEl.style.paddingTop = (navEl.offsetHeight + 30) + 'px';
-  }
+  function update() { layoutEl.style.paddingTop = (navEl.offsetHeight + 30) + 'px'; }
   update();
   window.addEventListener('resize', update);
 })();
 
-var splashEl     = document.getElementById('splash');
-var splashTextEl = document.getElementById('splash-text');
-var splashCtaEl  = document.getElementById('splash-cta');
-if (splashCtaEl) {
-  // Once the entrance fade-in finishes, hand opacity control over to the
-  // scroll-driven fade-out logic in the RAF loop (avoids the CSS animation
-  // and inline-style opacity fighting each other).
-  splashCtaEl.addEventListener('animationend', function() {
-    splashCtaEl.classList.remove('intro');
-    splashCtaEl.style.opacity = '1';
-  });
-}
-// â"€â"€â"€ "All Projects" mega-menu â€" full-width dropdown shown on hover â"€â"€
-(function () {
-  var navEl    = document.getElementById('site-nav');
-  var trigger  = document.getElementById('nav-all-projects');
-  var menuEl   = document.getElementById('nav-megamenu');
-  if (!navEl || !trigger || !menuEl) return;
-
+// ── Mega-menu ──────────────────────────────────────────────────────────
+(function() {
+  var trigger = document.getElementById('nav-all-projects');
+  var menuEl  = document.getElementById('nav-megamenu');
+  if (!trigger || !menuEl) return;
   var hideTimer = null;
   function open()  { clearTimeout(hideTimer); menuEl.classList.add('open'); }
-  function close() { hideTimer = setTimeout(function () { menuEl.classList.remove('open'); }, 150); }
-
+  function close() { hideTimer = setTimeout(function(){ menuEl.classList.remove('open'); }, 150); }
   trigger.addEventListener('mouseenter', open);
   trigger.addEventListener('mouseleave', close);
   menuEl.addEventListener('mouseenter', open);
   menuEl.addEventListener('mouseleave', close);
-
-  // Close drawer on click outside
   document.addEventListener('click', function(e) {
-    if (menuEl.classList.contains('open') && !menuEl.contains(e.target) && !trigger.contains(e.target)) {
+    if (menuEl.classList.contains('open') && !menuEl.contains(e.target) && !trigger.contains(e.target))
       menuEl.classList.remove('open');
-    }
   });
 })();
 
-// â"€â"€â"€ PANELS: cross-fade carousel through each panel's set of images â"€â"€
-// Auto-advances on a timer, but visitors can also click the prev/next
-// arrows (which appear on hover) to flip through the images themselves â€"
-// doing so resets the auto-advance timer so it doesn't fight the user.
+// ── Panel thumbnail carousels ──────────────────────────────────────────
 function initThumbCarousel(container, intervalMs) {
   if (!container) return;
-
-  // Build <img> elements from data-folder + data-images="image1.png,image2.png,..."
-  // â€" list as many or as few "imageN" files as you like per panel; just name
-  // your files image1, image2, image3 (any extension) and list them here in order.
   var folder = container.getAttribute('data-folder');
   var list   = container.getAttribute('data-images');
   var alt    = container.getAttribute('data-alt') || '';
   if (folder && list) {
-    var names = list.split(',').map(function(s){ return s.trim(); }).filter(Boolean);
-    names.forEach(function(name, i) {
+    list.split(',').map(function(s){ return s.trim(); }).filter(Boolean).forEach(function(name, i) {
       var img = document.createElement('img');
-      img.src = folder + '/' + name;
-      img.alt = alt;
+      img.src = folder + '/' + name; img.alt = alt;
       if (i === 0) img.classList.add('show');
       container.appendChild(img);
     });
   }
-
   var imgs = container.querySelectorAll('img');
   if (imgs.length < 2) return;
-  var idx = 0;
-  var timer = null;
-
-  function show(nextIdx) {
-    imgs[idx].classList.remove('show');
-    idx = (nextIdx + imgs.length) % imgs.length;
-    imgs[idx].classList.add('show');
-  }
-  function restart() {
-    if (timer) clearInterval(timer);
-    timer = setInterval(function() { show(idx + 1); }, intervalMs);
-  }
+  var idx = 0, timer = null;
+  function show(n) { imgs[idx].classList.remove('show'); idx = (n + imgs.length) % imgs.length; imgs[idx].classList.add('show'); }
+  function restart() { clearInterval(timer); timer = setInterval(function(){ show(idx+1); }, intervalMs); }
   restart();
-
-  var prevBtn = container.querySelector('.panel-thumb-nav.prev');
-  var nextBtn = container.querySelector('.panel-thumb-nav.next');
-  if (prevBtn) prevBtn.addEventListener('click', function(e) { e.stopPropagation(); show(idx - 1); restart(); });
-  if (nextBtn) nextBtn.addEventListener('click', function(e) { e.stopPropagation(); show(idx + 1); restart(); });
+  var prev = container.querySelector('.panel-thumb-nav.prev');
+  var next = container.querySelector('.panel-thumb-nav.next');
+  if (prev) prev.addEventListener('click', function(e){ e.stopPropagation(); show(idx-1); restart(); });
+  if (next) next.addEventListener('click', function(e){ e.stopPropagation(); show(idx+1); restart(); });
 }
-document.querySelectorAll('.panel-thumb').forEach(function(el) {
-  initThumbCarousel(el, 2600);
-});
+document.querySelectorAll('.panel-thumb').forEach(function(el){ initThumbCarousel(el, 2600); });
 
-
-// â"€â"€â"€ CONFIG â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
-var FOLDER_FRAME_COUNTS = [152, 242, 182, 84];   // frames1, frames2, frames3, frames4
-var FPS             = 24;
-var PX_PER_FRAME    = 12;
-var PANEL_FRAMES    = 40;
-var ESCAPE_DELTA    = 600;
-var PAUSE_MS        = 1000;
-var TRANSITION_DIST = 500;
-// â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
-
-var TOTAL_FRAMES = FOLDER_FRAME_COUNTS.reduce(function(a, b){ return a + b; }, 0);
-
-// cumulative starting index of each folder within the combined sequence
-var folderStarts = [];
-FOLDER_FRAME_COUNTS.reduce(function(acc, count) { folderStarts.push(acc); return acc + count; }, 0);
-
-// panels appear at the end of each folder's run
-var stopFrames = folderStarts.map(function(start, idx) {
-  return start + FOLDER_FRAME_COUNTS[idx] - 1;
-});
-// the final stop holds on the true last frame â€" the end card appears only
-// once that pause finishes (sequential, not overlapping)
-var lastStopIdx = stopFrames.length - 1;
-stopFrames[lastStopIdx] = TOTAL_FRAMES - 1;
-var finalStopReached = false;
-
-var canvas         = document.getElementById('canvas');
-var ctx            = canvas.getContext('2d');
-var loaderEl       = document.getElementById('loader');
-var loaderBar      = document.getElementById('loader-bar');
-var loaderPct      = document.getElementById('loader-pct');
-var loaderNameFill = document.getElementById('loader-name-fill');
-var progFill       = document.getElementById('prog-fill');
-var progTrack      = document.getElementById('prog-track');
-var lockHint       = document.getElementById('lock-hint');
-var endCard        = document.getElementById('end-card');
-
-var frames      = new Array(TOTAL_FRAMES);
-var loadedCount = 0;
-var ready       = false;
-
-var phase            = 'transition';
-var transitionScroll = 0;
-var smoothTransition = 0;
-var virtualScroll    = 0;
-var maxScroll        = (TOTAL_FRAMES - 1) * PX_PER_FRAME;
-var smoothScroll     = 0;
-var currentFrame     = 0;
-var locked           = false;
-var lockTarget       = 0;
-var lockAccum        = 0;
-var recentlyUnlockedStop = -1;  // prevents instant re-lock right after a pause ends
-var showEndCard      = false;
-var endCardTimer     = null;
-
-function resizeCanvas() {
-  canvas.width  = window.innerWidth;
-  canvas.height = window.innerHeight;
-  if (ready) drawFrame(currentFrame);
-}
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
-
-// â"€â"€â"€ LOAD FRAMES â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
-function padNum(n, d) { return String(n).padStart(d, '0'); }
-
-function framePath(i) {
-  // find which folder index i falls into based on cumulative folder counts
-  var folderIdx = folderStarts.length - 1;
-  for (var f = 0; f < folderStarts.length; f++) {
-    if (i < folderStarts[f] + FOLDER_FRAME_COUNTS[f]) { folderIdx = f; break; }
-  }
-  var folder = folderIdx + 1;
-  var local  = i - folderStarts[folderIdx];
-  return 'frames/frames' + folder + '/frames' + folder + padNum(local, 3) + '.jpg';
-}
-
-if (!prefersReducedMotion) {
-for (var fi = 0; fi < TOTAL_FRAMES; fi++) {
-  (function(i) {
-    var img = new Image();
-    img.onload  = function(){ onLoaded(i, img); };
-    img.onerror = function(){ onLoaded(i, null); };
-    img.src = framePath(i);
-  })(fi);
-}
-}
-
-function onLoaded(i, img) {
-  frames[i] = img;
-  loadedCount++;
-  var pct    = loadedCount / TOTAL_FRAMES;
-  var pctVal = (pct * 100).toFixed(1);
-  loaderBar.style.width      = pctVal + '%';
-  loaderNameFill.style.clipPath = 'inset(0 ' + (100 - pctVal) + '% 0 0)';
-  loaderPct.textContent      = Math.floor(pct * 100) + '%';
-  if (i === 0 && img) drawFrame(0);
-
-  if (loadedCount >= TOTAL_FRAMES) {
-    ready = true;
-    stopFrames.forEach(function(f, idx) {
-      var dot = document.createElement('div');
-      dot.className = 'stop-dot'; dot.id = 'dot-' + idx;
-      dot.style.left = (f / (TOTAL_FRAMES - 1) * 100) + '%';
-      progTrack.appendChild(dot);
-    });
-    setTimeout(function() {
-      loaderEl.classList.remove('active');
-      loaderEl.classList.add('fade');
-      progTrack.classList.add('show');
-      setTimeout(function(){ loaderEl.style.display = 'none'; }, 700);
-    }, 300);
-  }
-}
-
-// â"€â"€â"€ DRAW â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
-function drawFrame(idx) {
-  idx = Math.max(0, Math.min(TOTAL_FRAMES - 1, Math.round(idx)));
-  var img = frames[idx];
-  if (!img || !img.naturalWidth) return;
-  var iw = img.naturalWidth, ih = img.naturalHeight;
-  var cw = canvas.width, ch = canvas.height;
-
-  // Always fill the viewport edge-to-edge top-to-bottom ("cover") â€" the
-  // truck stays full height with no letterbox bars on mobile, even if the
-  // sides crop slightly.
-  var scale = Math.max(cw / iw, ch / ih);
-  var w = iw * scale, h = ih * scale;
-  ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
-}
-
-// â"€â"€â"€ SCROLL â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
-function addDelta(delta) {
-  if (phase === 'transition') {
-    transitionScroll += delta;
-    if (transitionScroll < 0) transitionScroll = 0;
-
-    // Drive the frame scrub in parallel with the text exit so the truck
-    // animation starts playing immediately on scroll â€" no need to wait
-    // for the hero text to fully clear the screen first.
-    if (ready && delta > 0) {
-      virtualScroll += delta;
-      virtualScroll = Math.max(0, Math.min(maxScroll, virtualScroll));
-    }
-
-    if (transitionScroll >= TRANSITION_DIST) {
-      transitionScroll = TRANSITION_DIST;
-      if (!loaderEl.classList.contains('active') && loaderEl.style.display !== 'none') {
-        loaderEl.classList.add('active');
-      }
-      if (ready) phase = 'scrub';
-    }
-  } else {
-    if (virtualScroll <= 0 && delta < 0) {
-      phase = 'transition';
-      transitionScroll = TRANSITION_DIST;
-      smoothTransition = TRANSITION_DIST;
-      transitionScroll += delta;
-      if (transitionScroll < 0) transitionScroll = 0;
-      return;
-    }
-    if (locked) {
-      // ignore input â€" pause is timed, not scroll-escaped
-    } else {
-      virtualScroll += delta;
-      virtualScroll = Math.max(0, Math.min(maxScroll, virtualScroll));
-      var frame = virtualScroll / PX_PER_FRAME;
-
-      // once we've moved away from a stop we just paused at, it's eligible to lock again
-      if (recentlyUnlockedStop !== -1 && Math.abs(frame - stopFrames[recentlyUnlockedStop]) > 2) {
-        recentlyUnlockedStop = -1;
-      }
-
-      for (var i = 0; i < stopFrames.length; i++) {
-        if (i === recentlyUnlockedStop) continue;
-        if (Math.abs(frame - stopFrames[i]) < 1.5) {
-          virtualScroll = stopFrames[i] * PX_PER_FRAME;
-          locked = true; lockTarget = virtualScroll; lockAccum = 0;
-          lockHint.classList.add('show');
-          (function(stopIdx) {
-            setTimeout(function() {
-              locked = false;
-              lockHint.classList.remove('show');
-              recentlyUnlockedStop = stopIdx;
-              if (stopIdx === lastStopIdx) {
-                finalStopReached = true;
-                endCardTimer = setTimeout(function() {
-                  endCardTimer = null;
-                  window.location.href = 'all-projects.html';
-                }, 0);
-              }
-            }, PAUSE_MS);
-          })(i);
-          break;
-        }
-      }
-    }
-  }
-}
-
-// Reset everything back to the very start of the homepage (frame 0, hero visible)
-function goToHomeStart() {
-  phase = 'transition';
-  transitionScroll = 0;
-  smoothTransition = 0;
-  virtualScroll = 0;
-  smoothScroll = 0;
-  currentFrame = 0;
-  locked = false;
-  lockTarget = 0;
-  lockAccum = 0;
-  recentlyUnlockedStop = -1;
-  finalStopReached = false;
-  showEndCard = false;
-  if (endCardTimer) { clearTimeout(endCardTimer); endCardTimer = null; }
-  if (ready) drawFrame(0);
-
-  // Replay hero text animations
-  var animated = document.querySelectorAll('#splash-layout .hero-line > *');
-  animated.forEach(function(el) {
-    el.style.animation = 'none';
-    el.offsetHeight; // force reflow
-    el.style.animation = '';
-  });
-}
-window.goToHomeStart = goToHomeStart;
-
-if (!prefersReducedMotion) {
-window.addEventListener('wheel', function(e) {
-  e.preventDefault();
-  addDelta(e.deltaY);
-}, { passive: false });
-
-var touchLastY = 0;
-window.addEventListener('touchstart', function(e) { touchLastY = e.touches[0].clientY; }, { passive: true });
-window.addEventListener('touchmove', function(e) {
-  e.preventDefault();
-  var dy = touchLastY - e.touches[0].clientY;
-  touchLastY = e.touches[0].clientY;
-  addDelta(dy * 5);
-}, { passive: false });
-}
-
-// â"€â"€â"€ RAF â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
-if (!prefersReducedMotion) {
-(function loop() {
-  requestAnimationFrame(loop);
-
-  smoothTransition += (transitionScroll - smoothTransition) * 0.1;
-  var t = smoothTransition / TRANSITION_DIST;
-
-  // Only the hero text + CTA slide up and clear the screen â€" the truck
-  // (canvas, showing frame 0 of frames1) stays put as the background.
-  splashTextEl.style.transform = 'translateY(' + (-t * 120) + 'vh)';
-  splashTextEl.style.opacity   = String(1 - t);
-
-  // The truck is visible immediately on load (frame 0 of frames1) â€" no
-  // fade-in; the canvas is the page background from the very start.
-  canvas.style.opacity = '1';
-
-  // SCROLL cue disappears as soon as the user starts scrolling
-  if (splashCtaEl) {
-    var ctaFade = 1 - Math.min(1, transitionScroll / (TRANSITION_DIST * 0.12));
-    splashCtaEl.style.opacity = String(ctaFade);
-  }
-
-  if (phase === 'transition' && transitionScroll >= TRANSITION_DIST && ready && t > 0.98) {
-    phase = 'scrub';
-  }
-
-  if (!ready) return;
-
-  smoothScroll += (virtualScroll - smoothScroll) * 0.1;
-  var rf = Math.round(smoothScroll / PX_PER_FRAME);
-  if (rf !== currentFrame) { currentFrame = rf; drawFrame(currentFrame); }
-
-  var inScrub = (phase === 'scrub' || t > 0.5);
-  progFill.style.width = (currentFrame / (TOTAL_FRAMES - 1) * 100) + '%';
-
-  // scrolling back past the final stop un-does the end-card hand-off,
-  // so the Storyfire panel (and everything else) can reappear on reverse
-  if ((finalStopReached || showEndCard) && currentFrame < stopFrames[lastStopIdx]) {
-    finalStopReached = false;
-    showEndCard = false;
-    if (endCardTimer) { clearTimeout(endCardTimer); endCardTimer = null; }
-  }
-
-  stopFrames.forEach(function(sf, i) {
-    var inRange = inScrub && Math.abs(currentFrame - sf) <= PANEL_FRAMES;
-    if (i === lastStopIdx && (finalStopReached || showEndCard)) inRange = false;
-    var panelId = 'panel-' + i;
-    // Clear dismissed state once user scrolls away from that panel's range
-    if (!inRange) dismissedPanels.delete(panelId);
-    var show = inRange && !dismissedPanels.has(panelId);
-    var p = document.getElementById(panelId);
-    var d = document.getElementById('dot-' + i);
-    if (p) p.classList.toggle('visible', show);
-    if (d) d.classList.toggle('active', inRange);
-  });
-
-  // end card replaced by loop-back — keep hidden
-  endCard.classList.remove('visible');
-})();
-} // end if (!prefersReducedMotion)
-
-// Panel close buttons
+// ── Panel close buttons ────────────────────────────────────────────────
 var dismissedPanels = new Set();
 document.querySelectorAll('.panel-close').forEach(function(btn) {
   btn.addEventListener('click', function() {
     var panel = btn.closest('.panel');
-    if (panel) {
-      panel.classList.remove('visible');
-      dismissedPanels.add(panel.id);
-    }
+    if (panel) { panel.classList.remove('visible'); dismissedPanels.add(panel.id); }
   });
 });
+
+// ── Animation (skipped when prefers-reduced-motion) ───────────────────
+if (!prefersReducedMotion) {
+  var video1       = document.getElementById('video-1');
+  var splashTextEl = document.getElementById('splash-text');
+  var splashCtaEl  = document.getElementById('splash-cta');
+  var panel0el     = document.getElementById('panel-0');
+
+  // Scroll cta hidden until panel-hold
+  splashCtaEl.style.opacity       = '0';
+  splashCtaEl.style.pointerEvents = 'none';
+
+  // phases: video1 -> toyota-hold -> shrink -> panel-hold -> done
+  var animPhase = 'video1';
+
+  function triggerTextAnims() {
+    document.querySelectorAll('#splash-layout .hero-line > *').forEach(function(el) {
+      el.style.animation = 'none';
+      el.offsetHeight; // force reflow to restart CSS animation
+      el.style.animation = '';
+    });
+  }
+
+  // Headlines animate in + video1 plays simultaneously on load
+  triggerTextAnims();
+
+  function startVideo1() {
+    animPhase = 'video1';
+    video1.style.display = 'block';
+    video1.currentTime = 0;
+    video1.play().catch(function() { startToyotaHold(); });
+    video1.addEventListener('ended', startToyotaHold, { once: true });
+    setTimeout(function() { if (animPhase === 'video1') startToyotaHold(); }, 15000);
+  }
+  startVideo1();
+
+  var panel1el = document.getElementById('panel-1');
+
+
+  function startToyotaHold() {
+    if (animPhase !== 'video1') return;
+    animPhase = 'toyota-hold';
+    if (panel0el && !dismissedPanels.has('panel-0')) panel0el.classList.add('visible');
+
+  }
+
+  // --- scroll-scrub engine (frames2, frames3, frames4) ---
+  // frames1 is a video; scroll begins after the Toyota panel hold.
+  var FOLDER_FRAME_COUNTS = [85, 151, 84]; // frames2, frames3, frames4
+  var PX_PER_FRAME  = 12;
+  var PANEL_FRAMES  = 40;
+  var PAUSE_MS      = 1000;
+
+  var TOTAL_FRAMES = FOLDER_FRAME_COUNTS.reduce(function(a,b){ return a+b; }, 0);
+  var folderStarts = [];
+  FOLDER_FRAME_COUNTS.reduce(function(acc, count){ folderStarts.push(acc); return acc + count; }, 0);
+
+  // stop (lock) at the last frame of each folder
+  var stopFrames = folderStarts.map(function(start, idx){
+    return start + FOLDER_FRAME_COUNTS[idx] - 1;
+  });
+  var lastStopIdx = stopFrames.length - 1;
+
+  var scrubCanvas  = document.getElementById('canvas');
+  var scrubCtx     = scrubCanvas.getContext('2d');
+  var frames       = new Array(TOTAL_FRAMES);
+  var loadedCount  = 0;
+  var scrubReady   = false;
+  var virtualScroll = 0;
+  var maxScroll     = (TOTAL_FRAMES - 1) * PX_PER_FRAME;
+  var smoothScroll  = 0;
+  var currentFrame  = 0;
+  var locked        = false;
+  var recentlyUnlockedStop = -1;
+  var finalStopReached = false;
+
+  function resizeScrubCanvas() {
+    scrubCanvas.width  = window.innerWidth;
+    scrubCanvas.height = window.innerHeight;
+    if (scrubReady) drawFrame(currentFrame);
+  }
+  window.addEventListener('resize', resizeScrubCanvas);
+  resizeScrubCanvas();
+
+  function framePath(i) {
+    var folderIdx = folderStarts.length - 1;
+    for (var f = 0; f < folderStarts.length; f++) {
+      if (i < folderStarts[f] + FOLDER_FRAME_COUNTS[f]) { folderIdx = f; break; }
+    }
+    var folder = folderIdx + 2; // offset: index 0 = frames2
+    var local  = i - folderStarts[folderIdx];
+    var pad    = (folder === 2) ? 2 : 3; // frames2 uses 2-digit, frames3/4 use 3-digit
+    var n = String(local); while (n.length < pad) n = '0' + n;
+    return 'frames/frames' + folder + '/frames' + folder + n + '.jpg';
+  }
+
+  for (var fi = 0; fi < TOTAL_FRAMES; fi++) {
+    (function(i) {
+      var img = new Image();
+      img.onload  = function(){ frames[i] = img; loadedCount++; if (loadedCount >= TOTAL_FRAMES) scrubReady = true; };
+      img.onerror = function(){ loadedCount++; if (loadedCount >= TOTAL_FRAMES) scrubReady = true; };
+      img.src = framePath(i);
+      frames[i] = img;
+    })(fi);
+  }
+
+  function drawFrame(idx) {
+    idx = Math.max(0, Math.min(TOTAL_FRAMES - 1, Math.round(idx)));
+    var img = frames[idx];
+    if (!img || !img.naturalWidth) return;
+    var iw = img.naturalWidth, ih = img.naturalHeight;
+    var cw = scrubCanvas.width, ch = scrubCanvas.height;
+    var scale = Math.max(cw / iw, ch / ih);
+    var w = iw * scale, h = ih * scale;
+    scrubCtx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
+  }
+
+  function addDelta(delta) {
+    if (animPhase !== 'scrub') return;
+    if (locked) return;
+    virtualScroll += delta;
+    virtualScroll = Math.max(0, Math.min(maxScroll, virtualScroll));
+    // scroll back past start -> return to Toyota panel
+    if (delta < 0 && virtualScroll <= 0) {
+      animPhase = 'toyota-hold';
+      scrubCanvas.style.display = 'none';
+      video1.style.display = 'block';
+      if (panel0el && !dismissedPanels.has('panel-0')) panel0el.classList.add('visible');
+      if (panel1el) panel1el.classList.remove('visible');
+      if (panel2el) panel2el.classList.remove('visible');
+  
+      splashTextEl.classList.remove('scrubbing');
+
+      return;
+    }
+    var frame = virtualScroll / PX_PER_FRAME;
+
+    if (recentlyUnlockedStop !== -1 && Math.abs(frame - stopFrames[recentlyUnlockedStop]) > 2) {
+      recentlyUnlockedStop = -1;
+    }
+
+    for (var i = 0; i < stopFrames.length; i++) {
+      if (i === recentlyUnlockedStop) continue;
+      if (Math.abs(frame - stopFrames[i]) < 1.5) {
+        virtualScroll = stopFrames[i] * PX_PER_FRAME;
+        locked = true;
+        (function(stopIdx) {
+          setTimeout(function() {
+            locked = false;
+            recentlyUnlockedStop = stopIdx;
+            if (stopIdx === lastStopIdx) {
+              finalStopReached = true;
+              window.location.href = 'all-projects.html';
+            }
+          }, PAUSE_MS);
+        })(i);
+        break;
+      }
+    }
+  }
+
+  // panels: panel-0=Toyota (video phase), panel-1=Nissan (stop 0), panel-2=Storyfire (stop 1)
+  var panel1el = document.getElementById('panel-1');
+  var panel2el = document.getElementById('panel-2');
+
+
+  function startScrub() {
+    if (animPhase !== 'toyota-hold') return;
+    animPhase = 'scrub';
+    if (panel0el) panel0el.classList.remove('visible');
+    video1.style.display = 'none';
+    scrubCanvas.style.display = 'block';
+    virtualScroll = 0; smoothScroll = 0; currentFrame = 0;
+    // fade out headline, move skip button to top-left
+    splashTextEl.classList.add('scrubbing');
+    drawFrame(0);
+  }
+
+  window.addEventListener('wheel', function(e) {
+    e.preventDefault();
+    if (animPhase === 'toyota-hold' && e.deltaY > 0) { startScrub(); addDelta(e.deltaY); return; }
+    addDelta(e.deltaY);
+  }, { passive: false });
+
+  var touchLastY = 0;
+  window.addEventListener('touchstart', function(e) { touchLastY = e.touches[0].clientY; }, { passive: true });
+  window.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+    var dy = touchLastY - e.touches[0].clientY;
+    touchLastY = e.touches[0].clientY;
+    if (animPhase === 'toyota-hold' && dy > 0) { startScrub(); addDelta(dy * 2.5); return; }
+    addDelta(dy * 2.5);
+  }, { passive: false });
+
+  // RAF loop — smooth scrub + panel visibility
+  (function loop() {
+    requestAnimationFrame(loop);
+    if (animPhase !== 'scrub') return;
+    smoothScroll += (virtualScroll - smoothScroll) * 0.1;
+    var rf = Math.round(smoothScroll / PX_PER_FRAME);
+    if (rf !== currentFrame) { currentFrame = rf; drawFrame(currentFrame); }
+
+    stopFrames.forEach(function(sf, i) {
+      var show = Math.abs(currentFrame - sf) <= PANEL_FRAMES;
+      // panel-0 = Toyota, already handled by video phase; panels here are offset by 1
+      var panelId = 'panel-' + (i + 1);
+      var p = document.getElementById(panelId);
+      if (p && !dismissedPanels.has(panelId)) p.classList.toggle('visible', show && !locked || (show && locked));
+    });
+  })();
+
+  // Nav brand click resets experience
+  window.goToHomeStart = function() {
+    animPhase = 'text-in';
+    splashTextEl.style.transition   = 'none';
+    splashTextEl.style.opacity      = '1';
+    splashTextEl.classList.remove('shrunk');
+    splashTextEl.classList.remove('scrubbing');
+    if (skipBtn) skipBtn.classList.remove('scrubbing');
+    splashCtaEl.style.transition    = '';
+    splashCtaEl.style.opacity       = '0';
+    splashCtaEl.style.pointerEvents = 'none';
+    if (panel0el) panel0el.classList.remove('visible');
+    if (panel1el) panel1el.classList.remove('visible');
+    if (panel2el) panel2el.classList.remove('visible');
+    scrubCanvas.style.display = 'none';
+    video1.pause(); video1.style.display = 'none';
+    virtualScroll = 0; smoothScroll = 0; currentFrame = 0;
+    locked = false; recentlyUnlockedStop = -1; finalStopReached = false;
+    setTimeout(function() {
+      splashTextEl.style.transition = '';
+      triggerTextAnims();
+      setTimeout(function() {
+        animPhase = 'text-hold';
+        setTimeout(startVideo1, 1000);
+      }, 1300);
+    }, 50);
+  };
+}
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
