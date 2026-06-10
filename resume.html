@@ -55,7 +55,8 @@
     }
 
     @media (max-width:768px) {
-      html, body { overflow-x: hidden; }
+      html { overflow-x: clip; }
+      body { overflow-x: clip; overflow-y: auto; }
       main { padding-left:20px; padding-right:20px; }
       #page-wrap { max-width:100%; }
       #resume-iframe { border-radius:0; height:2200px; width:calc(136% + 40px); margin-left:calc(-18% - 20px); }
