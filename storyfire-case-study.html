@@ -112,21 +112,7 @@
     #nav-brand:hover::after, #nav-brand.active::after { width:100%; }  </style>
 </head>
 <body>
-<nav id="site-nav">
-  <a id="nav-brand" href="index.html">GARMAN Y.</a>
-  <div id="nav-links">
-    <a href="all-projects.html">Projects</a>
-    <a href="resume.html">Resume</a>
-    <a href="contact.html">Contact</a>
-  </div>
-<button id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-</nav>
-<div id="mobile-menu">
-  <a href="index.html" onclick="document.getElementById('mobile-menu').classList.remove('open');document.getElementById('nav-hamburger').classList.remove('open');">Home</a>
-  <a href="all-projects.html" onclick="document.getElementById('mobile-menu').classList.remove('open');document.getElementById('nav-hamburger').classList.remove('open');">Projects</a>
-  <a href="resume.html" onclick="document.getElementById('mobile-menu').classList.remove('open');document.getElementById('nav-hamburger').classList.remove('open');">Resume</a>
-  <a href="contact.html" onclick="document.getElementById('mobile-menu').classList.remove('open');document.getElementById('nav-hamburger').classList.remove('open');">Contact</a>
-</div>
+<script src="nav.js"></script>
 
 <main>
 <div id="project-wrap">
@@ -292,33 +278,6 @@
   if(next){ en.href = next.url||('project.html?id='+encodeURIComponent(next.id)); en.classList.remove('disabled'); }
 })();
 </script>
-<script>
-(function(){
-  var btn = document.getElementById('nav-hamburger');
-  var menu = document.getElementById('mobile-menu');
-  if (!btn || !menu) return;
-  btn.addEventListener('click', function() {
-    btn.classList.toggle('open');
-    menu.classList.toggle('open');
-  });
-})();
-</script>
-<script>
-(function(){
-  var path = window.location.pathname.split("/").pop() || "index.html";
-  // Brand active on homepage
-  if (path === "index.html" || path === "") {
-    var brand = document.getElementById("nav-brand");
-    if (brand) brand.classList.add("active");
-  }
-  // Projects active on case study / project pages
-  var isProject = path.indexOf("-case-study") !== -1 || path === "project.html" || path === "all-projects.html";
-  document.querySelectorAll("#nav-links a").forEach(function(a) {
-    var href = a.getAttribute("href");
-    if (href === path) { a.classList.add("active"); }
-    else if (isProject && href === "all-projects.html") { a.classList.add("active"); }
-  });
-})();
-</script>
+
 </body>
 </html>
