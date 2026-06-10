@@ -258,7 +258,7 @@ window.PROJECTS = [
     tags: ["Launch Campaign","OOH","Retail Campaign"],
     folder: "projects/nissan-versa-project",
     images: ["versa5.jpg"],
-    media: [],
+    media: [{"type":"image-grid","src":"","id":"","items":["versa5.jpg","versa10.jpg","versa4.jpg","versa3.jpg","versa7.jpg","versa6.jpg","versa9.jpg","versa8.jpg"],"columns":3,"caption":""}],
     brief: "Nissan needed to make the Versa stand out in the compact car category by showing that affordability did not have to mean sacrificing space, comfort, or everyday practicality.",
     work: "Created a campaign experience including TV and major OOH that highlighted the Versa's unexpected interior room and strong value with a lean into fashion. ",
     outcome: "The campaign came out fun and quirky and helped create one of Apple's first iAds.",
