@@ -975,7 +975,7 @@ if (!prefersReducedMotion) {
     e.preventDefault();
     var dy = touchLastY - e.touches[0].clientY;
     touchLastY = e.touches[0].clientY;
-    if (animPhase === 'toyota-hold' && dy > 0) { startScrub(); addDelta(dy * 2.5); return; }
+    if ((animPhase === 'toyota-hold' || animPhase === 'video1') && dy > 0) { video1.pause(); startToyotaHold(); startScrub(); addDelta(dy * 2.5); return; }
     addDelta(dy * 2.5);
   }, { passive: false });
 
