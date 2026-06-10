@@ -63,28 +63,6 @@
     }
     #nav-links a:hover { opacity:0.5; }
 
-    /* MEGA-MENU */
-    #nav-megamenu {
-      position:fixed; top:0; right:0; bottom:0; z-index:290;
-      width:clamp(240px,24vw,340px);
-      background:rgba(204,204,204,0.6);
-      backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
-      border-left:1px solid rgba(0,0,0,0.08);
-      padding:clamp(4.5rem,8vw,6rem) clamp(1.2rem,2.4vw,2rem) clamp(1.6rem,3vw,2.4rem);
-      overflow-y:auto;
-      visibility:hidden; transform:translateX(100%);
-      transition:transform 0.35s cubic-bezier(0.16,1,0.3,1), visibility 0s linear 0.35s;
-    }
-    #nav-megamenu.open {
-      visibility:visible; transform:translateX(0);
-      transition:transform 0.35s cubic-bezier(0.16,1,0.3,1), visibility 0s;
-    }
-    #nav-megamenu-grid {
-      display:flex; flex-direction:column;
-      gap:clamp(0.7rem,1.4vw,1.1rem);
-    }
-    @media(max-width:640px){ #nav-megamenu { width:80% !important; min-width:0; top:4rem; } }
-
     /* MAIN LAYOUT */
     #splash-layout {
       position:absolute; inset:0; z-index:2;
@@ -232,21 +210,10 @@
     }
     .hero-card-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
     .hero-card-thumb a { display:block; width:100%; height:100%; }
-    #nav-megamenu .hero-card-thumb img { object-fit:contain; }
-    #nav-megamenu .hero-card {
-      flex-direction:row; align-items:flex-start;
-      gap:0.8rem; padding:0.85rem;
-      max-height:none; overflow:visible;
-    }
-    #nav-megamenu .hero-card-body { flex:1; min-width:0; display:flex; flex-direction:column; }
-    #nav-megamenu .hero-card-thumb { order:0; margin-top:0; flex-shrink:0; width:5rem; aspect-ratio:1/1; }
-    #nav-megamenu .hero-card-title { font-size:0.95rem; margin-bottom:0.35rem; }
-    #nav-megamenu .hero-card-tags { margin-bottom:0; }
     .hero-card-all-projects {
       text-decoration:none; display:flex; align-items:center; justify-content:center; min-height:5rem;
     }
     .hero-card-all-inner { display:flex; flex-direction:column; align-items:flex-start; }
-    #end-card .hero-card-thumb img { object-fit:contain; }
     .hero-card-list {
       display:grid; grid-template-columns:repeat(2, 1fr);
       gap:0.21rem 0.56rem; margin-bottom:0.7rem;
@@ -310,7 +277,7 @@
       .hero-direction { font-size:clamp(0.7rem,3.8vw,1.1rem); text-align:left; }
       #splash-left { text-align:left; }
       #nav-links { gap:0.9rem; }
-      #hero-projects, #nav-megamenu-grid { grid-template-columns:1fr; max-width:26rem; }
+      #hero-projects { grid-template-columns:1fr; max-width:26rem; }
       .hero-card {
         flex-direction:row; align-items:flex-start;
         gap:0.8rem; padding:0.85rem;
@@ -427,16 +394,6 @@
     }
     .panel-close:hover { background:rgba(255,255,255,0.2); }
 
-    /* END CARD */
-    #end-card {
-      position:fixed; inset:0; z-index:150;
-      display:flex; flex-direction:column; align-items:center; justify-content:center;
-      overflow-y:auto; padding:clamp(1.5rem,4vw,4rem) clamp(1.2rem,4vw,2.8rem);
-      opacity:0; pointer-events:none; transition:opacity 0.8s ease;
-      background:#fff;
-    }
-    #end-card.visible { opacity:1; pointer-events:all; }
-
     /* MOBILE */
     @media(max-width:640px){
       .panel {
@@ -464,7 +421,6 @@
       }
       .panel > div:last-child, .panel > a:last-child { grid-column:2; }
       #play-next-btn { grid-column:1 / -1; margin-top:0.75rem; }
-      #end-card { padding:1.5rem; }
     }
 
     /* A4: prefers-reduced-motion */
@@ -499,58 +455,14 @@
 <body>
 
 <nav id="site-nav">
-  <a id="nav-brand" href="#" onclick="if(window.goToHomeStart){ window.goToHomeStart(); } return false;"><span class="nav-brand-name">GARMAN</span></a>
+  <a id="nav-brand" href="index.html"><span class="nav-brand-name">GARMAN</span></a>
   <div id="nav-links">
-    <a href="all-projects.html" id="nav-all-projects">Projects</a>
+    <a href="all-projects.html">Projects</a>
     <a href="resume.html">Resume</a>
     <a href="contact.html">Contact</a>
   </div>
 </nav>
 
-
-<div id="nav-megamenu">
-  <div id="nav-megamenu-grid">
-    <a class="hero-card" href="toyota-case-study.html">
-      <div class="hero-card-thumb"><img src="projects/toyota-ai-pipeline-project/final1.png" alt="Toyota AI Pipeline" loading="lazy"></div>
-      <div class="hero-card-body">
-        <div class="hero-card-title">Toyota AI Pipeline</div>
-        <div class="hero-card-tags">
-          <div class="hero-card-tag">AI Production</div>
-          <div class="hero-card-tag">Compositing</div>
-        </div>
-      </div>
-    </a>
-    <a class="hero-card" href="nissan-case-study.html">
-      <div class="hero-card-thumb"><img src="projects/nissal-global-branding-project/nissan5.jpg" alt="Nissan Global Rebrand" loading="lazy"></div>
-      <div class="hero-card-body">
-        <div class="hero-card-title">Nissan Global Rebrand</div>
-        <div class="hero-card-tags">
-          <div class="hero-card-tag">Brand Design</div>
-          <div class="hero-card-tag">Visual Identity</div>
-        </div>
-      </div>
-    </a>
-    <a class="hero-card" href="storyfire-case-study.html">
-      <div class="hero-card-thumb"><img src="projects/storyfire-project/storyfire4.png" alt="Storyfire" loading="lazy"></div>
-      <div class="hero-card-body">
-        <div class="hero-card-title">Storyfire</div>
-        <div class="hero-card-tags">
-          <div class="hero-card-tag">Product Design</div>
-          <div class="hero-card-tag">UI/UX Design</div>
-        </div>
-      </div>
-    </a>
-    <a class="hero-card hero-card-all-projects" href="all-projects.html">
-      <div class="hero-card-all-inner">
-        <div class="hero-card-title">View All Projects</div>
-        <div class="hero-card-cta" style="margin-top:0.6rem;">
-          ALL PROJECTS
-          <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-      </div>
-    </a>
-  </div>
-</div>
 
 <div id="splash">
   <div id="splash-text">
@@ -623,7 +535,7 @@
 
 <div class="panel" id="panel-1">
   <button class="panel-close" aria-label="Close">&times;</button>
-  <div class="panel-title">Nissan Global Rebrand</div>
+  <div class="panel-title">Nissan Rebrand</div>
   <div class="panel-role">Associate Creative Director</div>
   <div class="panel-thumb" data-folder="projects/nissal-global-branding-project" data-images="nissan5.jpg,nissan2.jpg,nissan6.jpg" data-alt="Nissan">
     <button class="panel-thumb-nav prev" aria-label="Previous image"><svg viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -631,10 +543,10 @@
   </div>
   <div class="panel-tags">
     <div class="panel-tag">Brand System</div>
-    <div class="panel-tag">Global Identity</div>
+    
   </div>
   <div class="panel-divider"></div>
-  <div class="panel-desc">Unified global brand system giving each vehicle its own personality while maintaining consistency across all markets.</div>
+  <div class="panel-desc">Unified brand system giving each vehicle its own personality while maintaining consistency across all markets.</div>
   <a class="panel-btn" href="nissan-case-study.html">View Project <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 </div>
 
@@ -656,66 +568,6 @@
   <a class="panel-btn" href="storyfire-case-study.html">View Project <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 </div>
 
-<!-- END CARD -->
-<div id="end-card">
-  <div id="splash-left">
-    <div class="hero-line d0"><span class="hero-brand-design">A brand without a story is just a name.</span></div>
-    <div class="hero-line hero-line--direction d1"><span class="hero-direction">Technology can help tell it.</span></div>
-    <div id="hero-projects">
-      <div class="hero-card">
-        <div class="hero-card-thumb"><img src="projects/toyota-ai-pipeline-project/final1.png" alt="Toyota AI Pipeline" loading="lazy"></div>
-        <div class="hero-card-body">
-          <a class="hero-card-title" href="toyota-case-study.html">Toyota AI Pipeline</a>
-          <div class="hero-card-tags"><div class="hero-card-tag">AI Production</div><div class="hero-card-tag">Compositing</div></div>
-        </div>
-      </div>
-      <div class="hero-card">
-        <div class="hero-card-thumb"><img src="projects/nissal-global-branding-project/nissan5.jpg" alt="Nissan Global Rebrand" loading="lazy"></div>
-        <div class="hero-card-body">
-          <a class="hero-card-title" href="nissan-case-study.html">Nissan Global Rebrand</a>
-          <div class="hero-card-tags"><div class="hero-card-tag">Brand Design</div><div class="hero-card-tag">Visual Identity</div></div>
-        </div>
-      </div>
-      <div class="hero-card">
-        <div class="hero-card-thumb"><img src="projects/storyfire-project/storyfire4.png" alt="Storyfire" loading="lazy"></div>
-        <div class="hero-card-body">
-          <a class="hero-card-title" href="storyfire-case-study.html">Storyfire</a>
-          <div class="hero-card-tags"><div class="hero-card-tag">Product Design</div><div class="hero-card-tag">UI/UX Design</div></div>
-        </div>
-      </div>
-      <div class="hero-card">
-        <div class="hero-card-body" style="display:flex; flex-direction:column; flex:1;">
-          <div class="hero-card-title">All Projects</div>
-          <div class="hero-card-list" id="all-projects-list">
-            <a class="client-name" href="project.html?id=tacobell-redesign">Tacobell.com</a>
-            <a class="client-name" href="storyfire-case-study.html">Storyfire</a>
-            <a class="client-name" href="toyota-case-study.html">Toyota AI Pipeline</a>
-            <a class="client-name" href="project.html?id=toyota-garage">Toyota Garage</a>
-            <a class="client-name" href="project.html?id=honda-motorsports">Honda Motorsports</a>
-            <a class="client-name" href="nissan-case-study.html">Nissan Global Branding</a>
-            <a class="client-name" href="project.html?id=mr-cooper-portal">Mr. Cooper Portal</a>
-            <a class="client-name" href="project.html?id=disney-habit-heroes">Disney Habit Heroes</a>
-            <a class="client-name" href="project.html?id=nissan-quest">Nissan Quest</a>
-            <a class="client-name" href="project.html?id=google-chromebook">Google Chromebook</a>
-            <a class="client-name" href="project.html?id=toyota-lexus-owners">Toyota/Lexus Owners</a>
-            <a class="client-name" href="project.html?id=xome-real-estate">Xome Real Estate</a>
-            <a class="client-name" href="project.html?id=jeffrys-bbq">Jeffry's Wine Country BBQ</a>
-            <a class="client-name" href="project.html?id=playstation-3-launch">Playstation 3 Launch</a>
-            <a class="client-name" href="project.html?id=pixar-walle">Pixar's Wall-E</a>
-            <a class="client-name" href="project.html?id=nissan-leaf">Nissan Leaf</a>
-            <a class="client-name" href="project.html?id=nissan-versa">Nissan Versa Launch</a>
-            <a class="client-name" href="project.html?id=adidas-golf">Adidas Golf</a>
-            <a class="client-name" href="project.html?id=saints-row-iv">Saints Row IV</a>
-          </div>
-          <a class="hero-card-cta" href="all-projects.html">
-            ALL PROJECTS
-            <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <script>
 // ── prefers-reduced-motion ─────────────────────────────────────────────
@@ -732,23 +584,6 @@ if (prefersReducedMotion) { document.documentElement.classList.add('reduced-moti
   window.addEventListener('resize', update);
 })();
 
-// ── Mega-menu ──────────────────────────────────────────────────────────
-(function() {
-  var trigger = document.getElementById('nav-all-projects');
-  var menuEl  = document.getElementById('nav-megamenu');
-  if (!trigger || !menuEl) return;
-  var hideTimer = null;
-  function open()  { clearTimeout(hideTimer); menuEl.classList.add('open'); }
-  function close() { hideTimer = setTimeout(function(){ menuEl.classList.remove('open'); }, 150); }
-  trigger.addEventListener('mouseenter', open);
-  trigger.addEventListener('mouseleave', close);
-  menuEl.addEventListener('mouseenter', open);
-  menuEl.addEventListener('mouseleave', close);
-  document.addEventListener('click', function(e) {
-    if (menuEl.classList.contains('open') && !menuEl.contains(e.target) && !trigger.contains(e.target))
-      menuEl.classList.remove('open');
-  });
-})();
 
 // ── Panel thumbnail carousels ──────────────────────────────────────────
 function initThumbCarousel(container, intervalMs) {

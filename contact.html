@@ -120,154 +120,6 @@
       #contact-sub   { font-size:clamp(1.3rem,7.5vw,2rem); }
     }
     /* â"€â"€ "All Projects" mega-menu (mirrors homepage) â"€â"€ */
-    #nav-megamenu {
-      position:fixed; top:0; right:0; bottom:0; z-index:290;
-      width:clamp(240px,24vw,340px);
-      background:rgba(204,204,204,0.6);
-      backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
-      border-left:1px solid rgba(0,0,0,0.08);
-      padding:clamp(4.5rem,8vw,6rem) clamp(1.2rem,2.4vw,2rem) clamp(1.6rem,3vw,2.4rem);
-      overflow-y:auto;
-      visibility:hidden; transform:translateX(100%);
-      transition:transform 0.35s cubic-bezier(0.16,1,0.3,1), visibility 0s linear 0.35s;
-    }
-    #nav-megamenu.open {
-      visibility:visible; transform:translateX(0);
-      transition:transform 0.35s cubic-bezier(0.16,1,0.3,1), visibility 0s;
-    }
-    #nav-megamenu-grid {
-      display:flex;
-      flex-direction:column;
-      gap:clamp(0.7rem,1.4vw,1.1rem);
-    }
-    @media(max-width:640px){
-      #nav-megamenu { width:80% !important; min-width:0; top:4rem; }
-    }
-    .hero-card {
-      background:#fff; border-radius:10px;
-      padding:clamp(0.7rem,1.12vw,0.91rem);
-      box-shadow:0 6px 12px rgba(0,0,0,0.22), 0 14px 40px rgba(0,0,0,0.07);
-      border:1px solid rgba(0,0,0,0.05);
-      display:flex; flex-direction:column;
-      max-height:252px; overflow:hidden;
-      transition:transform 0.35s ease, box-shadow 0.35s ease;
-    }
-    .hero-card:hover { transform:translateY(-4px); box-shadow:0 20px 50px rgba(0,0,0,0.1); }
-    a.hero-card-title { text-decoration:none; display:block; transition:opacity 0.2s ease; }
-    a.hero-card { text-decoration:none; color:inherit; }
-    a.hero-card-title:hover { opacity:0.6; }
-    .hero-card-title {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(0.77rem,1.26vw,1.05rem);
-      letter-spacing:0.01em; color:#000; margin-bottom:0.385rem;
-    }
-    .hero-card-tags { display:flex; flex-wrap:wrap; gap:0.245rem; margin-bottom:0.49rem; }
-    .hero-card-tag {
-      font-family:'Poppins',sans-serif;
-      font-size:0.41rem; letter-spacing:0.04em;
-      padding:0.196rem 0.455rem; border-radius:5px;
-      background:rgba(0,0,0,0.05); color:rgba(0,0,0,0.55);
-    }
-    .hero-card-desc {
-      font-family:'Poppins',sans-serif;
-      font-size:0.49rem; line-height:1.7; font-weight:300;
-      color:rgba(0,0,0,0.5); margin-bottom:0.63rem;
-    }
-    .hero-card-body { display:contents; }
-    .hero-card-thumb {
-      order:1; margin-top:auto; border-radius:6px; overflow:hidden;
-      aspect-ratio:16/10; background:#111;
-    }
-    .hero-card-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
-    #nav-megamenu .hero-card-thumb img { object-fit:contain; }
-    /* Megamenu cards always use the side-by-side row layout */
-    #nav-megamenu .hero-card {
-      flex-direction:row; align-items:flex-start;
-      gap:0.8rem; padding:0.85rem;
-      max-height:none; overflow:visible;
-    }
-    #nav-megamenu .hero-card-body { flex:1; min-width:0; display:flex; flex-direction:column; }
-    #nav-megamenu .hero-card-thumb {
-      order:0; margin-top:0; flex-shrink:0;
-      width:5rem; aspect-ratio:1/1;
-    }
-    #nav-megamenu .hero-card-title { font-size:0.95rem; margin-bottom:0.35rem; }
-    #nav-megamenu .hero-card-tags { margin-bottom:0; }
-
-    .hero-card-all-projects {
-      text-decoration:none;
-      display:flex; align-items:center; justify-content:center;
-      min-height:5rem;
-    }
-    .hero-card-all-inner {
-      display:flex; flex-direction:column; align-items:flex-start;
-    }
-
-    .hero-card-list {
-      display:grid; grid-template-columns:repeat(2, 1fr);
-      gap:0.21rem 0.56rem; margin-bottom:0.7rem;
-    }
-    .hero-card-list .client-name { line-height:1.4; }
-    .hero-card-cta {
-      margin-top:auto;
-      display:inline-flex; align-items:center; gap:0.28rem;
-      align-self:flex-start;
-      font-family:'Bebas Neue',sans-serif;
-      font-size:0.546rem; letter-spacing:0.16em;
-      color:#fff; background:#000;
-      padding:0.42rem 0.77rem; border-radius:4px;
-      text-decoration:none;
-      transition:opacity 0.25s ease, transform 0.25s ease;
-    }
-    .hero-card-cta:hover { opacity:0.8; transform:translateY(-1px); }
-    .hero-card-cta svg { width:6px; height:6px; }
-
-    .client-name {
-      font-family:'Poppins',sans-serif;
-      font-size:clamp(0.46rem,0.72vw,0.56rem);
-      font-weight:400;
-      color:rgba(0,0,0,0.45);
-      line-height:1.45;
-      text-decoration:none;
-      display:inline-block;
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%;
-      transition:font-weight 0.3s ease, color 0.3s ease;
-    }
-    .client-name:hover {
-      font-weight:600;
-      color:#000;
-    }
-
-    @media(max-width:640px){
-      #nav-megamenu-grid { grid-template-columns:1fr; max-width:26rem; }
-      .hero-card {
-        flex-direction:row; align-items:flex-start;
-        gap:0.8rem; padding:0.85rem;
-        min-height:clamp(5.5rem,26vw,7.2rem);
-        max-height:none; overflow:visible;
-      }
-      .hero-card-body { flex:1; min-width:0; display:flex; flex-direction:column; }
-      .hero-card-thumb {
-        order:0; margin-top:0; flex-shrink:0;
-        width:clamp(4.2rem,22vw,5.5rem);
-        aspect-ratio:1/1;
-      }
-    .hero-card-title { font-size:0.95rem; margin-bottom:0.35rem; }
-      .hero-card-tags { margin-bottom:0.4rem; }
-      .hero-card-tag { font-size:0.5rem; padding:0.22rem 0.5rem; }
-      .hero-card-desc {
-        font-size:0.62rem; line-height:1.55; margin-bottom:0;
-        display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
-      }
-      .hero-card-list {
-        display:grid; grid-template-columns:repeat(3, 1fr);
-        gap:0.12rem 0.4rem; margin-bottom:0.5rem;
-        font-size:0.56rem;
-      }
-      .hero-card-list .client-name { line-height:1.6; }
-      .hero-card-cta { font-size:0.6rem; padding:0.42rem 0.8rem; gap:0.3rem; }
-      .hero-card-cta svg { width:8px; height:8px; }
-    }
   @media (max-width: 480px) {
     #nav-brand  { font-size: 1.5rem !important; }
     #nav-links a { font-size: 1.4rem !important; }
@@ -279,58 +131,12 @@
 <nav id="site-nav">
   <a id="nav-brand" href="index.html"><span class="nav-brand-name">GARMAN</span></a>
   <div id="nav-links">
-    <a id="nav-all-projects" href="all-projects.html">Projects</a>
+    <a href="all-projects.html">Projects</a>
     <a href="resume.html">Resume</a>
     <a href="contact.html">Contact</a>
   </div>
   
 </nav>
-<div id="nav-megamenu">
-  <div id="nav-megamenu-grid">
-    <a class="hero-card" href="project.html?id=toyota-ai-pipeline">
-      <div class="hero-card-thumb"><img src="projects/toyota-ai-pipeline-project/final1.png" alt="Toyota AI Pipeline" loading="lazy"></div>
-      <div class="hero-card-body">
-        <div class="hero-card-title">Toyota AI Pipeline</div>
-        <div class="hero-card-tags">
-          <div class="hero-card-tag">AI Production</div>
-          <div class="hero-card-tag">Compositing</div>
-        </div>
-      </div>
-    </a>
-
-    <a class="hero-card" href="project.html?id=nissan-global-branding">
-      <div class="hero-card-thumb"><img src="projects/nissal-global-branding-project/nissan5.jpg" alt="Nissan Global Rebrand" loading="lazy"></div>
-      <div class="hero-card-body">
-        <div class="hero-card-title">Nissan Global Rebrand</div>
-        <div class="hero-card-tags">
-          <div class="hero-card-tag">Brand Design</div>
-          <div class="hero-card-tag">Visual Identity</div>
-        </div>
-      </div>
-    </a>
-
-    <a class="hero-card" href="project.html?id=storyfire">
-      <div class="hero-card-thumb"><img src="projects/storyfire-project/storyfire4.png" alt="Storyfire" loading="lazy"></div>
-      <div class="hero-card-body">
-        <div class="hero-card-title">Storyfire</div>
-        <div class="hero-card-tags">
-          <div class="hero-card-tag">Product Design</div>
-          <div class="hero-card-tag">UI/UX Design</div>
-        </div>
-      </div>
-    </a>
-
-    <a class="hero-card hero-card-all-projects" href="all-projects.html">
-      <div class="hero-card-all-inner">
-        <div class="hero-card-title">View All Projects</div>
-        <div class="hero-card-cta" style="margin-top:0.6rem;">
-          ALL PROJECTS
-          <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-      </div>
-    </a>
-  </div>
-</div>
 
 
 <main>
@@ -405,31 +211,6 @@
   </div>
 </main>
 
-<script>
-// â"€â"€â"€ "All Projects" mega-menu â€" full-width dropdown shown on hover â"€â"€
-(function () {
-  var navEl    = document.getElementById('site-nav');
-  var trigger  = document.getElementById('nav-all-projects');
-  var menuEl   = document.getElementById('nav-megamenu');
-  if (!navEl || !trigger || !menuEl) return;
-
-  var hideTimer = null;
-  function open()  { clearTimeout(hideTimer); menuEl.classList.add('open'); }
-  function close() { hideTimer = setTimeout(function () { menuEl.classList.remove('open'); }, 150); }
-
-  trigger.addEventListener('mouseenter', open);
-  trigger.addEventListener('mouseleave', close);
-  menuEl.addEventListener('mouseenter', open);
-  menuEl.addEventListener('mouseleave', close);
-
-  // Close drawer on click outside
-  document.addEventListener('click', function(e) {
-    if (menuEl.classList.contains('open') && !menuEl.contains(e.target) && !trigger.contains(e.target)) {
-      menuEl.classList.remove('open');
-    }
-  });
-})();
-</script>
 
 </body>
 </html>

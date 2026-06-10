@@ -312,6 +312,7 @@
     return {
       id: p.id || "",
       order: (typeof p.order === "number") ? p.order : 0,
+      featured: !!p.featured,
       title: p.title || "",
       eyebrow: p.eyebrow || "",
       credit: p.credit || "",
@@ -392,8 +393,12 @@
       idEl.textContent = "id: " + (p.id || "-");
       titleWrap.appendChild(titleEl);
       titleWrap.appendChild(idEl);
+      var featuredBadge = document.createElement("div");
+      featuredBadge.style.cssText = "font-family:'Bebas Neue',sans-serif;font-size:0.62rem;letter-spacing:0.1em;padding:0.2rem 0.5rem;border-radius:4px;background:#1a1a1a;color:#fff;flex-shrink:0;display:" + (p.featured ? "block" : "none") + ";";
+      featuredBadge.textContent = "Featured";
       left.appendChild(badge);
       left.appendChild(titleWrap);
+      left.appendChild(featuredBadge);
 
       var right = document.createElement("div");
       right.className = "proj-head-right";
@@ -446,6 +451,29 @@
 
       var body = document.createElement("div");
       body.className = "proj-body";
+      var featuredWrap = document.createElement("div");
+      featuredWrap.className = "field";
+      featuredWrap.style.flexDirection = "row";
+      featuredWrap.style.alignItems = "center";
+      featuredWrap.style.gap = "0.5rem";
+      var featuredCheck = document.createElement("input");
+      featuredCheck.type = "checkbox";
+      featuredCheck.checked = !!p.featured;
+      featuredCheck.style.width = "1rem"; featuredCheck.style.height = "1rem"; featuredCheck.style.cursor = "pointer";
+      var featuredLabel = document.createElement("label");
+      featuredLabel.textContent = "Featured (dark top row on All Projects)";
+      featuredLabel.style.cursor = "pointer";
+      featuredLabel.htmlFor = "feat-" + dataIndex;
+      featuredCheck.id = "feat-" + dataIndex;
+      featuredCheck.addEventListener("change", function () {
+        p.featured = featuredCheck.checked;
+        featuredBadge.style.display = p.featured ? "block" : "none";
+        saveDraft();
+      });
+      featuredWrap.appendChild(featuredCheck);
+      featuredWrap.appendChild(featuredLabel);
+      body.appendChild(featuredWrap);
+
       body.appendChild(buildField("Project ID (URL slug, no spaces)", "text", p.id, function (v) {
         p.id = v.trim(); saveDraft(); idEl.textContent = "id: " + (p.id || "-");
       }, "Used as project.html?id=" + (p.id || "your-slug")));
@@ -1195,6 +1223,7 @@
       return "  {\n" +
         "    id: " + JSON.stringify(p.id) + ",\n" +
         "    order: " + (p.order || 0) + ",\n" +
+        (p.featured ? "    featured: true,\n" : "") +
         "    title: " + JSON.stringify(p.title) + ",\n" +
         "    eyebrow: " + JSON.stringify(p.eyebrow) + ",\n" +
         "    credit: " + JSON.stringify(p.credit) + ",\n" +
@@ -1209,7 +1238,8 @@
         })) + ",\n" +
         "    brief: " + JSON.stringify(p.brief) + ",\n" +
         "    work: " + JSON.stringify(p.work) + ",\n" +
-        "    outcome: " + JSON.stringify(p.outcome) + "\n" +
+        "    outcome: " + JSON.stringify(p.outcome) + ",\n" +
+        "    url: " + JSON.stringify(p.url || "") + "\n" +
         "  }";
     });
 

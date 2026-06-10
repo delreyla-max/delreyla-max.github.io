@@ -27,9 +27,6 @@
     .cs-credit { font-size:12px; color:#6e6e6e; padding:14px 0 0; opacity:0; animation:sFadeUp 0.7s ease forwards 0.5s; }
     .cs-tags { display:flex; flex-wrap:wrap; gap:8px; padding:14px 0 0; opacity:0; animation:sFadeUp 0.7s ease forwards 0.6s; }
     .cs-tag { font-family:'Poppins',sans-serif; font-size:0.7rem; letter-spacing:0.04em; padding:0.35rem 0.85rem; border-radius:5px; background:rgba(0,0,0,0.05); color:rgba(0,0,0,0.55); }
-    #nav-megamenu { position:fixed; top:0; right:0; bottom:0; z-index:290; width:clamp(240px,24vw,340px); background:rgba(204,204,204,0.6); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border-left:1px solid rgba(0,0,0,0.08); padding:clamp(4.5rem,8vw,6rem) clamp(1.2rem,2.4vw,2rem) clamp(1.6rem,3vw,2.4rem); overflow-y:auto; visibility:hidden; transform:translateX(100%); transition:transform 0.35s cubic-bezier(0.16,1,0.3,1),visibility 0s linear 0.35s; }
-    #nav-megamenu.open { visibility:visible; transform:translateX(0); transition:transform 0.35s cubic-bezier(0.16,1,0.3,1),visibility 0s; }
-    #nav-megamenu-grid { display:flex; flex-direction:column; gap:clamp(0.7rem,1.4vw,1.1rem); }
     .hero-card { background:#fff; border-radius:10px; padding:0.85rem; box-shadow:0 6px 12px rgba(0,0,0,0.22),0 14px 40px rgba(0,0,0,0.07); border:1px solid rgba(0,0,0,0.05); display:flex; flex-direction:row; align-items:flex-start; gap:0.8rem; transition:transform 0.35s ease,box-shadow 0.35s ease; text-decoration:none; color:inherit; }
     .hero-card:hover { transform:translateY(-4px); box-shadow:0 20px 50px rgba(0,0,0,0.1); }
     .hero-card-thumb { flex-shrink:0; width:5rem; aspect-ratio:1/1; border-radius:6px; overflow:hidden; background:#111; }
@@ -83,19 +80,11 @@
 <nav id="site-nav">
   <a id="nav-brand" href="index.html">GARMAN</a>
   <div id="nav-links">
-    <a id="nav-all-projects" href="all-projects.html">Projects</a>
+    <a href="all-projects.html">Projects</a>
     <a href="resume.html">Resume</a>
     <a href="contact.html">Contact</a>
   </div>
 </nav>
-<div id="nav-megamenu">
-  <div id="nav-megamenu-grid">
-    <a class="hero-card" href="toyota-case-study.html"><div class="hero-card-thumb"><img src="projects/toyota-ai-pipeline-project/final1.png" alt="Toyota" loading="lazy"></div><div class="hero-card-body"><div class="hero-card-title">Toyota AI Pipeline</div><div class="hero-card-tags"><div class="hero-card-tag">AI Production</div><div class="hero-card-tag">Compositing</div></div></div></a>
-    <a class="hero-card" href="nissan-case-study.html"><div class="hero-card-thumb"><img src="projects/nissal-global-branding-project/nissan5.jpg" alt="Nissan" loading="lazy"></div><div class="hero-card-body"><div class="hero-card-title">Nissan Global Rebrand</div><div class="hero-card-tags"><div class="hero-card-tag">Brand Design</div><div class="hero-card-tag">Visual Identity</div></div></div></a>
-    <a class="hero-card" href="storyfire-case-study.html"><div class="hero-card-thumb"><img src="projects/storyfire-project/storyfire4.png" alt="Storyfire" loading="lazy"></div><div class="hero-card-body"><div class="hero-card-title">Storyfire</div><div class="hero-card-tags"><div class="hero-card-tag">Product Design</div><div class="hero-card-tag">UI/UX Design</div></div></div></a>
-    <a class="hero-card hero-card-all-projects" href="all-projects.html"><div class="hero-card-all-inner"><div class="hero-card-title">View All Projects</div><div class="hero-card-cta">ALL PROJECTS <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div></a>
-  </div>
-</div>
 
 <main>
 <div id="project-wrap">
@@ -199,10 +188,6 @@
   if(prev){ ep.href = prev.url||('project.html?id='+encodeURIComponent(prev.id)); ep.classList.remove('disabled'); }
   if(next){ en.href = next.url||('project.html?id='+encodeURIComponent(next.id)); en.classList.remove('disabled'); }
 })();
-</script>
-<script>
-(function(){var t=document.getElementById('nav-all-projects'),m=document.getElementById('nav-megamenu'),ti=null;if(!t||!m)return;function o(){clearTimeout(ti);m.classList.add('open');}function c(){ti=setTimeout(function(){m.classList.remove('open');},150);}t.addEventListener('mouseenter',o);t.addEventListener('mouseleave',c);m.addEventListener('mouseenter',o);m.addEventListener('mouseleave',c);document.addEventListener('click',function(e){if(m.classList.contains('open')&&!m.contains(e.target)&&!t.contains(e.target))m.classList.remove('open');});})();
-(function(){var lb=document.getElementById('lightbox'),li=document.getElementById('lightbox-img'),lc=document.getElementById('lightbox-close'),lp=document.getElementById('lightbox-prev'),ln=document.getElementById('lightbox-next'),lct=document.getElementById('lightbox-counter'),imgs=[],cur=0;function collect(){imgs=Array.from(document.querySelectorAll('img.z'));}function open(i){cur=i;li.src=imgs[i].src;li.alt=imgs[i].alt||'';lb.classList.add('open');document.body.style.overflow='hidden';upd();}function close(){lb.classList.remove('open');document.body.style.overflow='';setTimeout(function(){li.src='';},250);}function upd(){lct.textContent=(cur+1)+' / '+imgs.length;lp.classList.toggle('hidden',cur===0);ln.classList.toggle('hidden',cur===imgs.length-1);}window.addEventListener('load',function(){collect();imgs.forEach(function(el,i){el.style.cursor='zoom-in';el.addEventListener('click',function(){open(i);});});});lc.addEventListener('click',close);lp.addEventListener('click',function(){if(cur>0){cur--;li.src=imgs[cur].src;upd();}});ln.addEventListener('click',function(){if(cur<imgs.length-1){cur++;li.src=imgs[cur].src;upd();}});lb.addEventListener('click',function(e){if(e.target===lb)close();});document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowLeft'&&cur>0){cur--;li.src=imgs[cur].src;upd();}if(e.key==='ArrowRight'&&cur<imgs.length-1){cur++;li.src=imgs[cur].src;upd();}});})();
 </script>
 </body>
 </html>
