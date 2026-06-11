@@ -18,8 +18,8 @@ window.PROJECTS = [
     images: ["hero-cropped.jpg"],
     media: [{"type":"image-grid","src":"","id":"","items":["final1.png","final4.png","final5.png","final6.png","final8.png"],"columns":3,"caption":""}],
     brief: "How do you produce product-correct lifestyle imagery for thousands of Toyota parts and accessories that have never been photographed?",
-    work: "Built an AI production workflow at Rapp using Nano Banana Pro, Adobe Firefly, and Photoshop — rendering parts and environments separately from engineering sketches, then compositing them together while keeping every product accurate to spec.",
-    outcome: "The pipeline produced marketing imagery for thousands of previously unphotographed parts and made it possible to spin up seasonal variations for campaigns like Memorial Day and Parts and Accessories — without a single reshoot.",
+    work: "Built an AI production workflow at Rapp using propietary generative AI — rendering parts and environments separately from engineering sketches, then compositing them together while keeping every product accurate to spec.",
+    outcome: "The pipeline produced marketing imagery for potneitally thousands of previously unphotographed parts and made it possible to spin up seasonal variations for campaigns like Memorial Day and Parts and Accessories — without a single reshoot.",
     url: "toyota-case-study.html"
   },
   {
@@ -34,7 +34,7 @@ window.PROJECTS = [
     images: ["storyfire.jpg"],
     media: [{"type":"image-grid","src":"","id":"","items":["storyfire2.png","storyfire4.png","storyfire5.png","storyfire6.png","storyfire7.png"],"columns":3,"caption":""}],
     brief: "Build a creator-economy platform from scratch, where fans and creators write, film, and publish together using a token currency called Blaze.",
-    work: "Designed the entire experience solo — over 100 web screens plus the full mobile app — building a dark-mode visual system with the Blaze flame mark woven into every point of contribution, and shipping it all through Sketch, Adobe XD, and Zeplin.",
+    work: "Designed the experience — over 100 screens plus mobile app — building a dark-mode visual system with the Blaze flame mark woven into every point of contribution, and shipping it all through Sketch, Adobe XD, and Zeplin.",
     outcome: "One designer covering an entire platform end-to-end, across web and mobile, from first sketch to shipped product.",
     url: "storyfire-case-study.html"
   },
@@ -48,7 +48,7 @@ window.PROJECTS = [
     folder: "projects/tacobell-redesign-project",
     images: ["tacobell.jpg"],
     media: [{"type":"image-grid","src":"","id":"","items":["tacobell4.jpg","tacobell7.jpg","tacobell2.jpg","tacobell6.jpg","tacobell5.jpg","tacobell1.jpg"],"columns":3,"caption":""}],
-    brief: "Redesign tacobell.com end-to-end as freelance creative lead — without losing the brand's personality in translation.",
+    brief: "Redesign tacobell.com as freelance creative lead — without losing the brand's personality in translation.",
     work: "Led the redesign of the visual system, balancing Taco Bell's distinct brand voice with the practical needs of ordering, store-locator discovery, and brand storytelling.",
     outcome: "A refreshed site that lifted conversion while keeping Taco Bell feeling unmistakably like Taco Bell.",
     url: ""
@@ -63,8 +63,8 @@ window.PROJECTS = [
     folder: "projects/toyota-garage-project",
     images: ["garage.jpg"],
     media: [{"type":"image-grid","src":"","id":"","items":["toyotagarage2.jpg","toyotagarage4.jpg","toyotagarage6.jpg","toyotagarage8.jpg","toyotagarage9.jpg","toyotagarage10.jpg","toyotagarage11.jpg"],"columns":3,"caption":""}],
-    brief: "Build a real-time shopping and inventory concept for toyota.com vehicle selection, live inventory, buyer-to-dealer handoff.",
-    work: "I led UI/UX at Saatchi on the initial concept, ran the team, and defined the full product across desktop and mobile before engineering came in  making a local, real-time shopping tool feel like a continuation of the Toyota brand.",
+    brief: "Concepted and designed first draft of a real-time shopping and inventory tool for toyota.com for live inventory, buyer-to-dealer handoff.",
+    work: "I led UI/UX at Saatchi on the initial concept, ran the team, and defined the full product across desktop and mobile before engineering came in making a local, real-time shopping tool feel like a continuation of the Toyota brand.",
     outcome: "Shipped to Toyota as the initial design system that later deployed on toyota.com.",
     url: ""
   },
