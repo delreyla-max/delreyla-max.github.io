@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Garman Portfolio — Handoff Doc</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap');
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; font-size:14px; color:#111; background:#fff; padding:48px; max-width:860px; margin:0 auto; line-height:1.6; }
+  h1 { font-family:'Bebas Neue',sans-serif; font-size:3rem; letter-spacing:0.02em; margin-bottom:4px; }
+  .meta { font-size:12px; color:#999; margin-bottom:40px; }
+  h2 { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:0.04em; margin:40px 0 12px; padding-bottom:6px; border-bottom:2px solid #dc2626; color:#000; }
+  h3 { font-size:13px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#dc2626; margin:20px 0 6px; }
+  p { margin-bottom:10px; color:#333; }
+  ul { padding-left:20px; margin-bottom:12px; }
+  li { margin-bottom:5px; color:#333; }
+  code { font-family:monospace; background:#f2f2f2; padding:2px 6px; border-radius:3px; font-size:12px; color:#c00; }
+  .file { font-family:monospace; font-size:12px; background:#f7f7f7; border-left:3px solid #dc2626; padding:3px 10px; margin:4px 0; display:inline-block; }
+  .tag { display:inline-block; font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; background:#111; color:#fff; padding:2px 8px; border-radius:3px; margin-right:4px; }
+  .tag.green { background:#16a34a; }
+  .tag.red { background:#dc2626; }
+  .tag.gray { background:#666; }
+  table { width:100%; border-collapse:collapse; margin:12px 0 20px; font-size:13px; }
+  th { text-align:left; font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#999; border-bottom:1px solid #e5e5e5; padding:6px 10px; }
+  td { padding:8px 10px; border-bottom:1px solid #f0f0f0; vertical-align:top; }
+  tr:last-child td { border-bottom:none; }
+  .note { background:#fff8f0; border-left:3px solid #f59e0b; padding:10px 14px; font-size:13px; margin:12px 0; border-radius:0 4px 4px 0; }
+  .security { background:#fff0f0; border-left:3px solid #dc2626; padding:10px 14px; font-size:13px; margin:12px 0; border-radius:0 4px 4px 0; }
+  @media print {
+    body { padding:32px; }
+    h2 { page-break-before: auto; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Garman Portfolio</h1>
+<p class="meta">Handoff Document &nbsp;·&nbsp; June 2026 &nbsp;·&nbsp; <span class="tag gray">Static HTML Site</span></p>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>Site Overview</h2>
+<p>A scroll-scrub animated portfolio site for Garman Y. — creative director / brand designer. Built entirely in plain HTML/CSS/JS with no frameworks or build tools. Hosted as static files.</p>
+
+<table>
+  <tr><th>Page</th><th>File</th><th>Notes</th></tr>
+  <tr><td>Homepage (desktop)</td><td><span class="file">index.html</span></td><td>Scroll-scrub animation, video intro, frame sequence</td></tr>
+  <tr><td>Homepage (mobile)</td><td><span class="file">index-mobile.html</span></td><td>Card layout with auto-playing carousels</td></tr>
+  <tr><td>All Work</td><td><span class="file">all-projects.html</span></td><td>Dynamic grid, renders from projects-data.js</td></tr>
+  <tr><td>Project detail</td><td><span class="file">project.html</span></td><td>Generic case study template, driven by projects-data.js</td></tr>
+  <tr><td>Toyota case study</td><td><span class="file">toyota-case-study.html</span></td><td>Hardcoded case study</td></tr>
+  <tr><td>Nissan case study</td><td><span class="file">nissan-case-study.html</span></td><td>Hardcoded case study</td></tr>
+  <tr><td>Storyfire case study</td><td><span class="file">storyfire-case-study.html</span></td><td>Hardcoded case study</td></tr>
+  <tr><td>Resume</td><td><span class="file">resume.html</span></td><td>Live Google Docs iframe embed</td></tr>
+  <tr><td>Contact</td><td><span class="file">contact.html</span></td><td>Form submits to Google Apps Script</td></tr>
+</table>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>Shared / Global Files</h2>
+
+<h3>nav.js</h3>
+<p>Single source of truth for the navigation across all pages. Injects nav HTML + CSS + JS into every page at runtime. To update the nav (links, logo, styling), edit only this file.</p>
+<ul>
+  <li>Logo: <code>GARMAN Y.</code> linking to <code>index.html</code></li>
+  <li>Links: Work → <code>all-projects.html</code>, Resume → <code>resume.html</code>, Contact → <code>contact.html</code></li>
+  <li>Active state: red underline on current page link; homepage highlights the brand name</li>
+  <li>Mobile: hamburger menu, black overlay drawer, slides down from under nav</li>
+  <li>Desktop hover: red <code>#dc2626</code> underline on all nav links</li>
+</ul>
+
+<h3>projects-data.js</h3>
+<p>All project content for the <code>all-projects.html</code> grid and <code>project.html</code> template. Add, edit, or reorder projects here without touching HTML.</p>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>Homepage Animation (desktop)</h2>
+<p>The desktop homepage uses a custom scroll-scrub engine with a video intro phase.</p>
+
+<h3>Animation phases</h3>
+<ul>
+  <li><code>video1</code> — Intro video plays automatically on load (<code>frames/frames1/frames1.mp4</code>)</li>
+  <li><code>toyota-hold</code> — Video ends, holds on last frame. Scrub hasn't started yet.</li>
+  <li><code>scrub</code> — User scrolls down; video hides, canvas shows, frame sequence begins</li>
+  <li><code>done</code> — All frames scrubbed through</li>
+</ul>
+<p>Scrolling back to top from <code>scrub</code> restores the held video frame.</p>
+
+<h3>Frame sequences</h3>
+<p>Stored in <code>frames/</code> subdirectories. The canvas scrub reads sequential JPEGs. The intro video is <code>frames/frames1/frames1.mp4</code>.</p>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>Resume Page</h2>
+
+<h3>Two separate Google Docs</h3>
+<table>
+  <tr><th>Purpose</th><th>Doc</th></tr>
+  <tr>
+    <td><strong>Iframe (public, no contact info)</strong></td>
+    <td><span class="file">2PACX-1vTE-f1_-pZi2wnhGWd…</span></td>
+  </tr>
+  <tr>
+    <td><strong>Download button (with contact info)</strong></td>
+    <td><span class="file">2PACX-1vR354cYhmbs1Ybps…</span></td>
+  </tr>
+</table>
+<div class="note">The iframe displays the doc without phone/email to reduce spam exposure. The download button fetches the full resume PDF (with contact info) every time — always the latest version.</div>
+<div class="note">Google Docs publish cache has a 5–30 min delay after edits. This is not controllable from the site.</div>
+
+<h3>Mobile iframe workaround</h3>
+<p>Google Doc internal margins make the iframe content appear shifted left on mobile. Compensated with <code>width: calc(136% + 40px); margin-left: calc(-18% - 20px)</code>. The <code>overflow-x: clip</code> on <code>html/body</code> prevents horizontal page scroll.</p>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>Contact Form</h2>
+<p>Submissions go to a Google Apps Script endpoint. The URL is hardcoded in <code>contact.html</code>. Name, email, and message are sent as JSON via <code>fetch POST</code>.</p>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>Design Tokens</h2>
+<table>
+  <tr><th>Token</th><th>Value</th><th>Usage</th></tr>
+  <tr><td>Accent red</td><td><code>#dc2626</code></td><td>Nav underlines, bullets, highlights</td></tr>
+  <tr><td>Dark</td><td><code>#1a1a1a</code></td><td>Project cards background</td></tr>
+  <tr><td>Font — display</td><td><code>Bebas Neue</code></td><td>All headings, nav, labels</td></tr>
+  <tr><td>Font — body</td><td><code>Inter</code></td><td>Body copy, descriptions</td></tr>
+  <tr><td>Mobile breakpoint</td><td><code>768px</code></td><td>Nav switches to hamburger</td></tr>
+  <tr><td>Button radius</td><td><code>5px</code></td><td>All buttons site-wide</td></tr>
+</table>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>Security Constraint</h2>
+<div class="security"><strong>Do NOT list Apple as a past client anywhere.</strong><br>Approved marquee client names: Toyota · Nissan · Disney · Google</div>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>Known Quirks</h2>
+<ul>
+  <li>Google Docs iframe renders fonts unreliably — Oswald may fall back to Times New Roman. Switching the doc font to Inter fixes this.</li>
+  <li><code>index.html</code> (desktop) and <code>index-mobile.html</code> are separate pages — the site does not auto-redirect between them.</li>
+  <li>Inline nav CSS remains in some page <code>&lt;style&gt;</code> blocks (harmless redundancy — nav.js overrides).</li>
+  <li>Smart quotes in JS string literals will break all project pages — run <code>fix-quotes.ps1</code> if projects stop rendering.</li>
+</ul>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>How to Make Common Changes</h2>
+
+<table>
+  <tr><th>Task</th><th>Edit this</th></tr>
+  <tr><td>Change nav links or logo</td><td><span class="file">nav.js</span></td></tr>
+  <tr><td>Add / edit a project</td><td><span class="file">projects-data.js</span></td></tr>
+  <tr><td>Update resume content</td><td>Edit the Google Doc — site updates after cache (~5–30 min)</td></tr>
+  <tr><td>Change resume download file</td><td>Update <code>href</code> on <code>.resume-dl-btn</code> in <span class="file">resume.html</span></td></tr>
+  <tr><td>Edit Toyota / Nissan / Storyfire case study</td><td>The respective <span class="file">*-case-study.html</span> file directly</td></tr>
+  <tr><td>Change homepage intro video</td><td>Replace <span class="file">frames/frames1/frames1.mp4</span></td></tr>
+  <tr><td>Change mobile project carousel images</td><td><code>data-images</code> attribute on <code>.project-carousel</code> in <span class="file">index-mobile.html</span></td></tr>
+</table>
+
+</body>
+</html>
