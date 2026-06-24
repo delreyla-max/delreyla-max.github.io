@@ -92,6 +92,7 @@
         <a href="all-projects.html">Work</a>
         <a href="resume.html">Resume</a>
         <a href="contact.html">Contact</a>
+        <a href="ai-lab.html">AI Lab</a>
       </div>
       <button id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
     </nav>
@@ -100,6 +101,7 @@
       <a href="all-projects.html" onclick="${closeSnippet}">Work</a>
       <a href="resume.html" onclick="${closeSnippet}">Resume</a>
       <a href="contact.html" onclick="${closeSnippet}">Contact</a>
+      <a href="ai-lab.html" onclick="${closeSnippet}">AI Lab</a>
     </div>
   `;
 
@@ -122,9 +124,11 @@
     document.getElementById('nav-brand').classList.add('active');
   }
   var isProject = path.indexOf('-case-study') !== -1 || path === 'project.html' || path === 'all-projects.html';
+  var isAiLab = path === 'ai-lab.html' || path.indexOf('ai-lab-') === 0;
   document.querySelectorAll('#nav-links a').forEach(function (a) {
     var href = a.getAttribute('href');
     if (href === path) { a.classList.add('active'); }
-    else if (isProject && href === 'all-projects.html') { a.classList.add('active'); }
+    else if (isProject && !isAiLab && href === 'all-projects.html') { a.classList.add('active'); }
+    else if (isAiLab && href === 'ai-lab.html') { a.classList.add('active'); }
   });
 })();

@@ -17,9 +17,9 @@ window.PROJECTS = [
     folder: "projects/toyota-ai-pipeline-project",
     images: ["hero-cropped.jpg"],
     media: [{"type":"image-grid","src":"","id":"","items":["final1.png","final4.png","final5.png","final6.png","final8.png"],"columns":3,"caption":""}],
-    brief: "How do you produce product-correct lifestyle imagery for thousands of Toyota parts and accessories that have never been photographed?",
-    work: "Built an AI production workflow at Rapp using propietary generative AI — rendering parts and environments separately from engineering sketches, then compositing them together while keeping every product accurate to spec.",
-    outcome: "The pipeline produced marketing imagery for potneitally thousands of previously unphotographed parts and made it possible to spin up seasonal variations for campaigns like Memorial Day and Parts and Accessories — without a single reshoot.",
+    brief: "How do you produce product-correct lifestyle imagery for thousands of Toyota parts that have never been photographed?",
+    work: "I built an AI production workflow at Rapp on proprietary generative tools. Parts and environments were rendered separately from engineering sketches, then composited, with every product held accurate to spec.",
+    outcome: "The pipeline produced marketing imagery for thousands of previously unphotographed parts, and let us spin up seasonal variations for campaigns like Memorial Day and Parts and Accessories without a reshoot.",
     url: "toyota-case-study.html"
   },
   {
@@ -33,9 +33,9 @@ window.PROJECTS = [
     folder: "projects/storyfire-project",
     images: ["storyfire.jpg"],
     media: [{"type":"image-grid","src":"","id":"","items":["storyfire2.png","storyfire4.png","storyfire5.png","storyfire6.png","storyfire7.png"],"columns":3,"caption":""}],
-    brief: "Build a creator-economy platform from scratch, where fans and creators write, film, and publish together using a token currency called Blaze.",
-    work: "Designed the experience — over 100 screens plus mobile app — building a dark-mode visual system with the Blaze flame mark woven into every point of contribution, and shipping it all through Sketch, Adobe XD, and Zeplin.",
-    outcome: "One designer covering an entire platform end-to-end, across web and mobile, from first sketch to shipped product.",
+    brief: "Build a creator platform from scratch where fans and creators write, film, and publish together, paid in a token called Blaze.",
+    work: "I designed the whole experience: 100-plus screens plus the mobile app. The dark-mode system carried the Blaze flame mark through every point where someone contributed. Built and handed off in Sketch, Adobe XD, and Zeplin.",
+    outcome: "One designer covering the entire platform, web and mobile, from first sketch to shipped product.",
     url: "storyfire-case-study.html"
   },
   {
@@ -48,9 +48,9 @@ window.PROJECTS = [
     folder: "projects/tacobell-redesign-project",
     images: ["tacobell.jpg"],
     media: [{"type":"image-grid","src":"","id":"","items":["tacobell4.jpg","tacobell7.jpg","tacobell2.jpg","tacobell6.jpg","tacobell5.jpg","tacobell1.jpg"],"columns":3,"caption":""}],
-    brief: "Redesign tacobell.com as freelance creative lead — without losing the brand's personality in translation.",
-    work: "Led the redesign of the visual system, balancing Taco Bell's distinct brand voice with the practical needs of ordering, store-locator discovery, and brand storytelling.",
-    outcome: "A refreshed site that lifted conversion while keeping Taco Bell feeling unmistakably like Taco Bell.",
+    brief: "Redesign tacobell.com as freelance creative lead without flattening the brand's personality.",
+    work: "I led the redesign of the visual system, keeping Taco Bell's voice intact while making ordering and store-locator flows easier to use.",
+    outcome: "A refreshed site that lifted conversion and still felt unmistakably like Taco Bell.",
     url: ""
   },
   {
@@ -63,9 +63,9 @@ window.PROJECTS = [
     folder: "projects/toyota-garage-project",
     images: ["garage.jpg"],
     media: [{"type":"image-grid","src":"","id":"","items":["toyotagarage2.jpg","toyotagarage4.jpg","toyotagarage6.jpg","toyotagarage8.jpg","toyotagarage9.jpg","toyotagarage10.jpg","toyotagarage11.jpg"],"columns":3,"caption":""}],
-    brief: "Concepted and designed first draft of a real-time shopping and inventory tool for toyota.com for live inventory, buyer-to-dealer handoff.",
-    work: "I led UI/UX at Saatchi on the initial concept, ran the team, and defined the full product across desktop and mobile before engineering came in making a local, real-time shopping tool feel like a continuation of the Toyota brand.",
-    outcome: "Shipped to Toyota as the initial design system that later deployed on toyota.com.",
+    brief: "Concept and first design of a real-time shopping and inventory tool for toyota.com, covering live inventory and buyer-to-dealer handoff.",
+    work: "I led UI/UX at Saatchi from the initial concept, ran the team, and defined the full product across desktop and mobile before engineering came in. The goal was to make a local, real-time shopping tool feel like part of the Toyota brand.",
+    outcome: "Shipped to Toyota as the initial design system, later deployed on toyota.com.",
     url: ""
   },
   {
@@ -78,9 +78,9 @@ window.PROJECTS = [
     folder: "projects/honda-motorsports-project",
     images: ["honda2-cropped.jpg"],
     media: [{"type":"image-grid","src":"","id":"","items":["honda1.jpg","honda2.jpg","honda3.jpg","honda4.jpg","honda5.jpg"],"columns":5,"caption":""}],
-    brief: "Honda owners needed a simpler way to keep track of their vehicles, service information, ownership details, and related resources across a single digital experience.",
-    work: "Designed a centralized owner platform that allowed users to save their Honda vehicles, view relevant information, and access tools and content tailored to their specific model.",
-    outcome: "Created a more useful owner experience by bringing vehicle information, resources, and ownership tools into one organized digital destination.",
+    brief: "Honda owners needed one place to track their vehicles, service records, and ownership details.",
+    work: "I designed an owner platform where users save their Honda vehicles and get tools and content matched to their specific model.",
+    outcome: "Vehicle information, resources, and ownership tools pulled into one place owners could actually use.",
     url: ""
   },
   {
@@ -95,8 +95,8 @@ window.PROJECTS = [
     images: ["nissan.jpg"],
     media: [{"type":"image-grid","src":"","id":"","items":["nissan1.jpg","nissan2.jpg","nissan3.jpg","nissan4.png","nissan5.jpg","nissan6.jpg","nissan9.jpg"],"columns":3,"caption":""}],
     brief: "How do you make every Nissan feel like the same brand without making them feel the same?",
-    work: "Created vehicle-specific backgrounds that formed the system's signature element, then developed a global style guide for all Nissan properties spanning vehicles (JUKE through Altima) and channels — television, print, outdoor advertising, dealer materials, and digital platforms.",
-    outcome: "This unified brand approach persisted for three years across Nissan markets globally — the longest unified brand identity of its era — with the color grid serving as the brand's distinctive visual identifier across every application.",
+    work: "I created the vehicle-specific backgrounds that became the system's signature, then wrote the global style guide for every Nissan property. It covered the lineup from JUKE to Altima across TV, print, outdoor, dealer materials, and digital.",
+    outcome: "The system ran for three years across Nissan's global markets, the longest unified identity of its era, with the color grid as the brand's signature across every application.",
     url: "nissan-case-study.html"
   },
   {
@@ -110,8 +110,8 @@ window.PROJECTS = [
     images: ["cooper.jpg"],
     media: [{"type":"image-grid","src":"","id":"","items":["mrcooper1.jpg","mrcooper2.jpg","mrcooper3.jpg","mrcooper4.jpg","mrcooper5.jpg","mrcooper6.jpg"],"columns":3,"caption":""}],
     brief: "Redesign the customer portal for one of the largest U.S. mortgage servicers.",
-    work: "I led UI/UX for the post-login experience payment, escrow, statements, service requests, translating complex mortgage operations into a low-stress interface.",
-    outcome: "Friendly consumer facing marketing and portal website.",
+    work: "I led UI/UX for the post-login experience: payments, escrow, statements, and service requests. The job was turning complex mortgage operations into a low-stress interface.",
+    outcome: "A consumer-facing marketing site and account portal that felt approachable.",
     url: ""
   },
   {
@@ -124,9 +124,9 @@ window.PROJECTS = [
     folder: "projects/disney-habit-heroes-project",
     images: ["disney2.jpg"],
     media: [{"type":"image-grid","src":"","id":"","items":["disney3.jpg","disney2.jpg","disney10.jpg","disney14.jpg","disney11.jpg","disney15.jpg","disney1.jpg"],"columns":3,"caption":""},{"type":"text","src":"Innoventions is an interactive HTML5 website where viewers can experience the experimental exhibits at Innoventions at Epcot Center in Orlando.","id":"","items":[],"columns":3,"caption":""},{"type":"image-grid","src":"","id":"","items":["disney4.jpg","disney7.jpg","disney13.jpg"],"columns":3,"caption":""}],
-    brief: "An Imagineering attraction where Epcot itself becomes the attraction guests get wristbands, make healthy choices everywhere they go, the park becomes the game.",
-    work: "I worked on the digital side the kiosk UI where you built your Hero identity, the wristband interactions, the challenge prompts triggered as you moved through the park, and the companion iPhone/iPad apps that picked up where Epcot left off.",
-    outcome: "One of the earliest large-scale connected, location-aware guest experiences Disney built a working answer to what a theme-park attraction looks like when the park itself is the ride.",
+    brief: "An Imagineering attraction where the park is the game. Guests get wristbands, make healthy choices as they move through Epcot, and the whole place plays along.",
+    work: "I worked the digital side: the kiosk UI where you built your Hero identity, the wristband interactions, the challenge prompts that fired as you moved through the park, and the companion iPhone and iPad apps that picked up where Epcot left off.",
+    outcome: "One of the earliest large-scale, location-aware guest experiences Disney built. A working answer to what an attraction looks like when the park itself is the ride.",
     url: ""
   },
   {
@@ -140,8 +140,8 @@ window.PROJECTS = [
     images: ["quest2-cropped.jpg"],
     media: [{"type":"vimeo","src":"","id":"23031451","items":[],"columns":1,"caption":"","embedWidth":"640","embedHeight":"360"},{"type":"vimeo","src":"","id":"23031997","items":[],"columns":2,"caption":""},{"type":"vimeo","src":"","id":"23032401","items":[],"columns":2,"caption":""},{"type":"image-grid","src":"","id":"","items":["quest1.jpg","quest4.jpg","quest2.jpg","quest3.jpg","quest6.jpg"],"columns":2,"caption":""}],
     brief: "Launch the redesigned Nissan Quest minivan into a category dominated by Honda and Toyota.",
-    work: "I led creative for the launch campaign, TV, dealer materials, and the asset system that slotted into the broader Nissan global brand framework.",
-    outcome: "Delivered an interactive launch campaign that brought the Nissan Quest’s family-focused positioning to life through playful digital storytelling.",
+    work: "I led creative for the launch: TV, dealer materials, and the asset system that slotted into the Nissan global brand framework.",
+    outcome: "An interactive launch campaign that played up the Quest’s family positioning through digital storytelling.",
     url: ""
   },
   {
@@ -154,8 +154,8 @@ window.PROJECTS = [
     folder: "projects/google-chromebook-project",
     images: ["google.jpg"],
     media: [{"type":"image","src":"google1.jpg","id":"","items":[],"columns":3,"caption":""},{"type":"image","src":"google2.jpg","id":"","items":[],"columns":3,"caption":""}],
-    brief: "Launch design for Google's first major hardware product Chromebook in a category Google was new to.",
-    work: "I art directed the retail signage campaign, establishing the visual language for a Google-branded hardware line.",
+    brief: "Launch design for the Chromebook, Google's first major hardware product, in a category it was new to.",
+    work: "I art directed the retail signage campaign and set the visual language for a Google-branded hardware line.",
     outcome: "Displayed in thousands of Best Buys across the US.",
     url: ""
   },
@@ -169,9 +169,9 @@ window.PROJECTS = [
     folder: "projects/toyota-lexus-owners-project",
     images: ["owners.jpg"],
     media: [{"type":"heading","src":"Toyota Owners","id":"","items":[],"columns":3,"caption":""},{"type":"image-grid","src":"","id":"","items":["EM Welcome.jpg","EM Spec GR Corolla.jpg","EM Accessories.jpg","EM Connected Technology.jpg","EM Connected Technology-1.jpg","EM Service Introduction.jpg","EM RAV4 PHEV.jpg","EM Spec GR Supra.jpg"],"columns":5,"caption":""},{"type":"heading","src":"Lexus Owners","id":"","items":[],"columns":3,"caption":""},{"type":"image-grid","src":"","id":"","items":["EM Welcome.jpg","EM Accessories.jpg","EM Connected Technology.jpg","EM Lexuscare.jpg","EM NX.jpg","EM RX.jpg","EM Safety Features.jpg","EM Service Introduction.jpg"],"columns":5,"caption":""},{"type":"heading","src":"Vehicle Support","id":"","items":[],"columns":3,"caption":""}],
-    brief: "Build the unified system that meets every new Toyota and Lexus owner across email, direct mail, and the Connected Technologies brand family.",
-    work: "I led design across the whole Owner Experience system the email templates shipping with every Toyota and Lexus purchase, plus the branding and iconography for Safety Connect, Service Connect, CarPlay, Alexa, and the rest of the Connected Technologies family.",
-    outcome: "A living, evolving brand system that introduces hundreds of thousands of new owners to their cars every year.",
+    brief: "Build the system that meets every new Toyota and Lexus owner across email, direct mail, and the Connected Technologies brand family.",
+    work: "I led design across the Owner Experience system: the email templates that ship with every Toyota and Lexus purchase, plus the branding and iconography for Safety Connect, Service Connect, CarPlay, Alexa, and the rest of the Connected Technologies family.",
+    outcome: "A brand system that introduces hundreds of thousands of new owners to their cars every year.",
     url: ""
   },
   {
@@ -184,9 +184,9 @@ window.PROJECTS = [
     folder: "projects/xome-real-estate-project",
     images: ["xome5-cropped.jpg"],
     media: [{"type":"image","src":"xome5.jpg","id":"","items":[],"columns":3,"caption":""},{"type":"image-grid","src":"","id":"","items":["xome1.jpg","xome4.jpg","xome3.jpg"],"columns":3,"caption":""},{"type":"heading","src":"Marketing Site","id":"","items":[],"columns":3,"caption":""},{"type":"image-grid","src":"","id":"","items":["xome2.jpg","xome6.jpg","xome7.jpg"],"columns":3,"caption":""}],
-    brief: "Design the end-to-end UI/UX for Xome buy, sell, finance, all in one real-estate experience.",
-    work: "I led UI/UX across buyer and seller flows listing search, offer management, document handoffs, agent connection building the platform Xome went to market with.",
-    outcome: "Helped transform a complex real estate platform into a clearer, more user-friendly product experience across search, property details, and mobile workflows.",
+    brief: "Design the full UI/UX for Xome, where buying, selling, and financing a home live in one place.",
+    work: "I led UI/UX across the buyer and seller flows: listing search, offer management, document handoffs, and agent connection. This was the platform Xome went to market with.",
+    outcome: "Turned a complex real-estate platform into a clearer product across search, property details, and mobile.",
     url: ""
   },
   {
@@ -199,9 +199,9 @@ window.PROJECTS = [
     folder: "projects/jeffrys-bbq-project",
     images: ["jeffrys6-cropped.jpg"],
     media: [{"type":"image-grid","src":"","id":"","items":["jeffrys8.jpeg","jeffrys5.jpg","jeffrys2.jpg","jeffrys3.jpg","jeffrys4.jpg","jeffrys6.jpg","jeffrys7.jpeg"],"columns":3,"caption":""}],
-    brief: "A from-scratch brand identity for a restaurant sitting at the intersection of two California traditions: pit-smoked barbecue and small-lot wine hospitality.",
-    work: "The mark resolves the brief in a single image: a wine glass cradling a flame, readable as either at a glance. The wordmark sits in a confident all-caps display face that holds from a beer-can etching to a wall mural.",
-    outcome: "Has been the restaurant's active brand since launch. Built without an agency or a team — every asset that shipped came from one designer. The flame-in-glass mark has become the visual shorthand customers and staff use for the place.",
+    brief: "A from-scratch brand identity for a restaurant built on two California traditions: pit-smoked barbecue and small-lot wine.",
+    work: "The mark answers the brief in one image: a wine glass cradling a flame, readable as either at a glance. The wordmark sits in an all-caps display face that holds from a beer-can etching to a wall mural.",
+    outcome: "It has been the restaurant's brand since launch. No agency, no team, every asset from one designer. The flame-in-glass mark is now the shorthand customers and staff use for the place.",
     url: ""
   },
   {
@@ -215,8 +215,8 @@ window.PROJECTS = [
     images: ["ps3.jpg"],
     media: [{"type":"image-grid","src":"","id":"","items":["playstation2.jpg","playstation3.jpg","playstation5.jpg"],"columns":3,"caption":""},{"type":"youtube","src":"","id":"RYy6yUd8H28","items":[],"columns":2,"caption":"Smarter"},{"type":"vimeo","src":"","id":"653887","items":[],"columns":2,"caption":"Multidimentional"},{"type":"vimeo","src":"","id":"653616","items":[],"columns":2,"caption":"Control"},{"type":"youtube","src":"","id":"_WRUNyQiNtQ","items":[],"columns":2,"caption":"Capacity"},{"type":"youtube","src":"","id":"s2f_Fl7aZO8","items":[],"columns":2,"caption":"Space"},{"type":"vimeo","src":"","id":"24056294","items":[],"columns":2,"caption":"Engaging the Hardcore","embedWidth":"400","embedHeight":"300"},{"type":"heading","src":"Additional Launch Titles","id":"","items":[],"columns":3,"caption":""},{"type":"vimeo","src":"","id":"23071940","items":[],"columns":2,"caption":"Singstar"},{"type":"vimeo","src":"","id":"27033436","items":[],"columns":2,"caption":"Socom"},{"type":"vimeo","src":"","id":"","items":[],"columns":3,"caption":""},{"type":"image-grid","src":"","id":"","items":["playstation1.jpg","playstation4.jpg","playstation6.jpg"],"columns":3,"caption":""}],
     brief: "Launch campaign for the PlayStation 3. Sony's entry into the next console generation.",
-    work: "We created videos and hidden messages for hard-core gamers, a language based on the icons for the PS3 to introduce high-end hardware for North America. In-store video displays, launch titles, website, banners, print, OOH.",
-    outcome: "We started a conversation with Playstations biggest audience, hard core gamers, and created a language and World only they could understand.",
+    work: "We made videos and hidden messages for hardcore gamers, a visual language built from the PS3 icons to introduce the hardware in North America. It ran across in-store displays, launch titles, the website, banners, print, and OOH.",
+    outcome: "We started a conversation with PlayStation's biggest audience, hardcore gamers, in a language and world only they could read.",
     url: ""
   },
   {
@@ -230,8 +230,8 @@ window.PROJECTS = [
     images: ["walle4.jpg"],
     media: [{"type":"image-grid","src":"","id":"","items":["walle4.jpg","walle5.jpg","walle11.jpg"],"columns":3,"caption":""},{"type":"heading","src":"Build-A-Bit","id":"","items":[],"columns":3,"caption":""},{"type":"image-grid","src":"","id":"","items":["walle6.jpg","walle9.jpg","walle1.jpg","walle2.jpg","walle3.jpg","walle8.jpg"],"columns":3,"caption":""}],
     brief: "Marketing and promotional design for the Pixar feature WALL-E.",
-    work: "I designed launch website for the WALL-E theatrical launch, working inside Pixar's tight IP and brand standards.",
-    outcome: "Fully immersive website with custom bot building game.",
+    work: "I designed the theatrical launch website for WALL-E, working inside Pixar's tight IP and brand standards.",
+    outcome: "An immersive launch site with a custom bot-building game.",
     url: ""
   },
   {
@@ -244,9 +244,9 @@ window.PROJECTS = [
     folder: "projects/nissan-leaf-project",
     images: ["leaf5.jpg"],
     media: [{"type":"vimeo","src":"","id":"23031631","items":[],"columns":3,"caption":"","embedWidth":"640","embedHeight":"360"},{"type":"vimeo","src":"","id":"23031806","items":[],"columns":2,"caption":""},{"type":"vimeo","src":"","id":"24330428","items":[],"columns":2,"caption":""},{"type":"image","src":"leaf2.jpg","id":"","items":[],"columns":3,"caption":""},{"type":"image-grid","src":"","id":"","items":["leaf5.jpg","leaf1.jpg","leaf3.jpg","leaf7.jpg","leaf6.jpg"],"columns":3,"caption":""},{"type":"image-grid","src":"","id":"","items":["leaf4.jpg","leaf9.jpg"],"columns":3,"caption":""}],
-    brief: "Launch the world's first mass-market all-electric car into a category consumers didn't yet have a frame of reference for.",
-    work: "I art directed the launch campaign visual system, hero imagery, dealer materials establishing design DNA that fed into the broader Nissan global brand system later.",
-    outcome: "Supported the launch of the Nissan LEAF with an integrated campaign that made electric driving feel more accessible, understandable, and relevant to everyday drivers.",
+    brief: "Launch the world's first mass-market electric car into a category buyers had no frame of reference for.",
+    work: "I art directed the launch: the visual system, hero imagery, and dealer materials. The design DNA fed into the Nissan global brand system later on.",
+    outcome: "An integrated launch campaign that made electric driving feel approachable to everyday drivers.",
     url: ""
   },
   {
@@ -259,9 +259,9 @@ window.PROJECTS = [
     folder: "projects/nissan-versa-project",
     images: ["versa5.jpg"],
     media: [{"type":"image-grid","src":"","id":"","items":["versa5.jpg","versa10.jpg","versa4.jpg","versa3.jpg","versa7.jpg","versa6.jpg","versa9.jpg","versa8.jpg"],"columns":3,"caption":""}],
-    brief: "Nissan needed to make the Versa stand out in the compact car category by showing that affordability did not have to mean sacrificing space, comfort, or everyday practicality.",
-    work: "Created a campaign experience including TV and major OOH that highlighted the Versa's unexpected interior room and strong value with a lean into fashion. ",
-    outcome: "The campaign came out fun and quirky and helped create one of Apple's first iAds.",
+    brief: "Make the Versa stand out among compacts by proving an affordable car could still be roomy and comfortable.",
+    work: "A campaign across TV and major OOH that played the Versa's surprising interior room and value against a fashion angle.",
+    outcome: "Fun, quirky work that became one of Apple's first iAds.",
     url: ""
   },
   {
@@ -274,9 +274,9 @@ window.PROJECTS = [
     folder: "projects/adidas-golf-project",
     images: ["adidas6.jpg"],
     media: [{"type":"image-grid","src":"","id":"","items":["adidas6.jpg","adidas5.jpg","adidas10.jpg","adidas3.jpg","adidas1.jpg","adidas2.jpg"],"columns":3,"caption":""},{"type":"heading","src":"Golf 360","id":"","items":[],"columns":3,"caption":""},{"type":"image-grid","src":"","id":"","items":["adidas9.jpg","adidas7.jpg","adidas8.jpgadidas4.jpg"],"columns":2,"caption":""}],
-    brief: "Art direction and digital design for the Adidas Golf brand apparel, equipment, lifestyle.",
-    work: "I led UI design and art direction across digital campaigns, translating Adidas's broader athletic DNA into the specific feel of golf.",
-    outcome: "2 products, one brand launched.",
+    brief: "Art direction and digital design for Adidas Golf across apparel, equipment, and lifestyle.",
+    work: "I led UI design and art direction across digital campaigns, tuning Adidas's athletic DNA to the feel of golf.",
+    outcome: "Two products, one brand, launched.",
     url: ""
   },
   {
@@ -289,8 +289,8 @@ window.PROJECTS = [
     folder: "projects/saints-row-iv-project",
     images: ["sr4.jpg"],
     media: [{"type":"image-grid","src":"","id":"","items":["saintsrow4.jpg","saintsrow1.jpg","saintsrow2.jpg","saintsrow3.jpg"],"columns":3,"caption":""}],
-    brief: "Design the online game UI system for Saints Row IV HUD, menus, mission flow, status wheel.",
-    work: "I led UI design for the title, bringing the franchise's absurdist visual humor into a HUD and menu system that read instantly under intense gameplay.",
+    brief: "Design the in-game UI system for Saints Row IV: HUD, menus, mission flow, and status wheel.",
+    work: "I led UI design for the title, carrying the franchise's absurdist humor into a HUD and menu system that read instantly in the middle of a firefight.",
     outcome: "Shipped as part of one of the franchise's highest-rated installments.",
     url: ""
   }

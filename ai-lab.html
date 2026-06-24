@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal AI Lab, Garman Yip</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@1,900&family=Poppins:wght@400;600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --gold: #CC8A1F;
+      --red:  #E0261E;
+      --red2: #dc2626;
+    }
+    html, body { width:100%; min-height:100%; background:#fff; font-family:'Inter',sans-serif; color:#000; scroll-behavior:smooth; }
+    body { display:flex; flex-direction:column; }
+    :focus-visible { outline:2px solid var(--red2); outline-offset:3px; border-radius:2px; }
+
+    @keyframes sReveal { to { transform:translateY(0); } }
+    @keyframes sFadeUp  { to { opacity:1; } }
+
+    /* ── HERO ANIMATIONS ── */
+    .hero-line { overflow:hidden; line-height:1; }
+    .hero-line > * {
+      display:block; transform:translateY(110%);
+      animation:sReveal 0.75s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    .d0 > * { animation-delay:0.05s; }
+    .d1 > * { animation-delay:0.2s; }
+    .d2 > * { animation-delay:0.35s; }
+
+    /* ── MAIN LAYOUT ── */
+    main {
+      flex:1; display:flex; justify-content:center;
+      padding:clamp(7rem,14vw,9rem) clamp(1.2rem,4vw,2.8rem) clamp(4rem,8vw,6rem);
+    }
+    #lab-wrap { width:100%; max-width:78rem; }
+
+    /* anchor offset so headings clear the fixed nav */
+    .anchor { scroll-margin-top:90px; }
+
+    /* ── EYEBROW / TITLE ── */
+    .lab-eyebrow {
+      font-family:'Bebas Neue',sans-serif; letter-spacing:0.18em;
+      text-transform:uppercase; color:#999;
+      font-size:clamp(0.75rem,1.4vw,0.9rem);
+      display:block; padding:0 0 8px;
+    }
+    .lab-title {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(2.6rem,7.5vw,5rem);
+      letter-spacing:-0.015em; line-height:0.95; color:#000;
+    }
+    .lab-title-accent { color:var(--gold); }
+
+    /* ── INTRO BAND ── */
+    .lab-intro {
+      opacity:0; animation:sFadeUp 0.8s ease forwards 0.55s;
+      display:flex; gap:48px; align-items:flex-start;
+      padding:40px 0 0;
+    }
+    .lab-intro-text {
+      flex:1; display:flex; flex-direction:column; gap:14px; padding-top:4px;
+    }
+    .lab-intro-text p {
+      font-size:clamp(0.82rem,1.3vw,0.95rem);
+      color:rgba(0,0,0,0.55); line-height:1.75; font-weight:300;
+    }
+    .lab-intro-text p strong { color:#000; font-weight:600; }
+
+    /* ── DIVIDER ── */
+    .divider { height:1px; background:#e1e1e1; margin:40px 0; }
+
+    /* ── SECTION LABEL (red tick) ── */
+    .section-label {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(1rem,2vw,1.4rem);
+      letter-spacing:0.04em; color:#000;
+      margin:0 0 clamp(0.9rem,1.8vw,1.4rem) 0;
+      font-weight:400;
+      display:flex; align-items:center; gap:12px;
+    }
+    .section-label::before {
+      content:''; display:block; width:28px; height:2px;
+      background:var(--red2); flex-shrink:0;
+    }
+
+    /* ── SYSTEMS GRID (jump-nav) ── */
+    #systems-grid {
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:clamp(0.9rem,1.8vw,1.4rem);
+      opacity:0; animation:sFadeUp 0.8s ease forwards 0.65s;
+    }
+
+    /* ── BASE CARD ── */
+    .sys-card {
+      display:flex; flex-direction:column; gap:16px;
+      text-decoration:none; color:inherit;
+      background:#f2f2f2; border-radius:8px;
+      padding:clamp(1.2rem,2.2vw,1.8rem);
+      box-shadow:0 6px 12px rgba(0,0,0,0.12), 0 14px 40px rgba(0,0,0,0.05);
+      border:1px solid rgba(0,0,0,0.05);
+      transition:transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .sys-card:hover {
+      transform:translateY(-4px);
+      box-shadow:0 20px 50px rgba(0,0,0,0.1);
+    }
+
+    /* ── FLAGSHIP CARD (full-width dark) ── */
+    .sys-card--flagship {
+      background:#1a1a1a;
+      border-color:rgba(255,255,255,0.08);
+      grid-column:1 / -1;
+      flex-direction:row; align-items:flex-start; gap:clamp(24px,4vw,52px);
+    }
+    .sys-card--flagship:hover {
+      box-shadow:0 20px 50px rgba(0,0,0,0.35);
+    }
+
+    /* ── CARD INNER PARTS ── */
+    .sys-card-badge {
+      font-family:'Poppins',sans-serif;
+      font-size:0.52rem; letter-spacing:0.12em; text-transform:uppercase;
+      color:var(--gold); font-weight:600;
+      display:inline-flex; align-items:center; gap:7px;
+    }
+    .sys-card-badge::before {
+      content:''; display:block; width:16px; height:1px; background:var(--gold);
+    }
+    .sys-card-badge--secondary { color:rgba(0,0,0,0.35); }
+    .sys-card-badge--secondary::before { background:rgba(0,0,0,0.25); }
+
+    .sys-card-name {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(1.4rem,3vw,2.2rem);
+      letter-spacing:0.02em; line-height:0.95; color:#000;
+    }
+    .sys-card--flagship .sys-card-name { color:#fff; }
+
+    .sys-card-tagline {
+      font-size:clamp(0.75rem,1.1vw,0.88rem);
+      color:rgba(0,0,0,0.55); line-height:1.7;
+      font-family:'Inter',sans-serif; font-weight:300;
+    }
+    .sys-card--flagship .sys-card-tagline { color:rgba(255,255,255,0.48); }
+
+    .sys-card-chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; }
+    .sys-chip {
+      font-family:'Poppins',sans-serif;
+      font-size:0.62rem; letter-spacing:0.04em;
+      padding:0.3rem 0.75rem; border-radius:5px;
+      background:rgba(0,0,0,0.05); color:rgba(0,0,0,0.55);
+    }
+    .sys-card--flagship .sys-chip {
+      background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.5);
+    }
+
+    .sys-card-cta {
+      display:inline-flex; align-items:center; gap:5px;
+      font-family:'Bebas Neue',sans-serif;
+      font-size:0.75rem; letter-spacing:0.12em;
+      color:#000; text-decoration:none;
+      padding-bottom:1px;
+      border-bottom:1px solid rgba(0,0,0,0.2);
+      transition:border-color 0.2s, color 0.2s;
+      width:fit-content; margin-top:4px;
+    }
+    .sys-card-cta:hover { border-color:var(--red2); color:var(--red2); }
+    .sys-card-cta svg { width:8px; height:8px; }
+    .sys-card--flagship .sys-card-cta {
+      color:var(--gold); border-color:rgba(204,138,31,0.35);
+    }
+    .sys-card--flagship .sys-card-cta:hover { border-color:var(--gold); }
+
+    /* ── FLAGSHIP LAYOUT COLS ── */
+    .flagship-left { flex:1; display:flex; flex-direction:column; gap:16px; }
+    .flagship-right {
+      flex-shrink:0; width:210px;
+      display:flex; flex-direction:column; gap:8px; padding-top:2px;
+    }
+
+    /* ── PIPELINE MINI-DIAGRAM ── */
+    .pipeline-mini-label {
+      font-family:'Poppins',sans-serif; font-size:0.5rem;
+      letter-spacing:0.12em; text-transform:uppercase;
+      color:rgba(255,255,255,0.28); margin-bottom:4px;
+    }
+    .pipeline-step { display:flex; align-items:center; gap:8px; }
+    .pipeline-node {
+      width:30px; height:30px; border-radius:5px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.1);
+      display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    }
+    .pipeline-node svg { width:13px; height:13px; }
+    .pipeline-step-info { display:flex; flex-direction:column; gap:1px; }
+    .pipeline-step-name {
+      font-family:'Poppins',sans-serif; font-size:0.6rem;
+      color:rgba(255,255,255,0.65); letter-spacing:0.02em; font-weight:600;
+    }
+    .pipeline-step-sub {
+      font-family:'Poppins',sans-serif; font-size:0.5rem;
+      color:rgba(255,255,255,0.3); letter-spacing:0.02em;
+    }
+    .pipeline-connector {
+      width:1px; height:10px; background:rgba(255,255,255,0.1); margin:0 0 0 14px;
+    }
+
+    /* ══════════════════════════════════════════════════
+       PROJECT SECTION SHELL (shared by both projects)
+       ══════════════════════════════════════════════════ */
+    .project-section { padding-top:clamp(2rem,4vw,3rem); }
+    .project-head { display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+    .project-kicker {
+      font-family:'Poppins',sans-serif; font-size:0.6rem; letter-spacing:0.14em;
+      text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:8px;
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .project-kicker::before { content:''; width:18px; height:1px; background:var(--gold); }
+    .project-title {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(2rem,5.5vw,3.6rem); letter-spacing:0.01em; line-height:0.92; color:#000;
+    }
+    .project-title span { color:var(--gold); }
+    .project-tags { display:flex; flex-wrap:wrap; gap:8px; padding:14px 0 0; }
+    .project-tag {
+      font-family:'Poppins',sans-serif; font-size:0.66rem; letter-spacing:0.04em;
+      padding:0.32rem 0.8rem; border-radius:5px; background:rgba(0,0,0,0.05); color:rgba(0,0,0,0.55);
+    }
+    .project-tag--gold { background:rgba(204,138,31,0.1); color:var(--gold); }
+    .top-jump {
+      font-family:'Bebas Neue',sans-serif; font-size:0.78rem; letter-spacing:0.1em;
+      color:#999; text-decoration:none; display:inline-flex; align-items:center; gap:6px;
+      transition:color 0.2s; white-space:nowrap;
+    }
+    .top-jump:hover { color:var(--red2); }
+    .top-jump svg { width:8px; height:8px; }
+
+    /* ── HERO 2-COL (project intro) ── */
+    .hero-2col { display:flex; gap:48px; align-items:flex-start; padding:36px 0 0; }
+    .hero-2col-text { flex:1; display:flex; flex-direction:column; gap:12px; padding-top:8px; }
+    .hero-2col-text p { font-size:13px; color:#6e6e6e; line-height:22px; font-family:'Inter',sans-serif; font-weight:300; }
+    .hero-2col-text p strong { color:#000; font-weight:600; }
+    .hero-2col-visual { flex:1; }
+
+    /* ── SCREENSHOT FRAME ── */
+    .screenshot-frame {
+      width:100%; aspect-ratio:16/10;
+      background:#f0f0f0; border-radius:8px;
+      border:1px solid rgba(0,0,0,0.08);
+      display:flex; flex-direction:column; overflow:hidden;
+    }
+    .screenshot-frame-bar {
+      height:28px; background:#e4e4e4; flex-shrink:0;
+      display:flex; align-items:center; padding:0 12px; gap:6px;
+      border-bottom:1px solid rgba(0,0,0,0.06);
+    }
+    .screenshot-frame-dot { width:8px; height:8px; border-radius:50%; }
+    .screenshot-frame-dot:nth-child(1) { background:#ff5f57; }
+    .screenshot-frame-dot:nth-child(2) { background:#ffbd2e; }
+    .screenshot-frame-dot:nth-child(3) { background:#28c840; }
+
+    /* ── PSI ── */
+    .psi-row { display:flex; padding:40px 0; }
+    .psi-col { flex:1; display:flex; flex-direction:column; gap:14px; padding:0 28px; }
+    .psi-col:first-child { padding-left:0; }
+    .psi-col:last-child { padding-right:0; }
+    .psi-bar { background:var(--red2); height:2px; width:28px; margin-bottom:4px; }
+    .psi-heading { font-size:10px; font-weight:800; letter-spacing:1px; }
+    .psi-body { font-size:11px; color:#6e6e6e; line-height:18px; }
+    .psi-div { width:1px; background:#e1e1e1; align-self:stretch; }
+
+    /* ── DARK LEADER CARD ── */
+    .leader-card { background:#161616; border-radius:4px; padding:24px 32px; display:flex; gap:28px; margin:16px 0 0; }
+    .leader-col { flex:1; display:flex; flex-direction:column; gap:6px; }
+    .leader-head { font-family:'Bebas Neue',sans-serif; font-size:0.7rem; letter-spacing:0.12em; color:rgba(255,255,255,0.25); margin-bottom:4px; text-transform:uppercase; }
+    .leader-item { display:flex; gap:6px; align-items:flex-start; }
+    .leader-dot { color:var(--red2); font-size:10px; font-weight:700; line-height:16px; flex-shrink:0; }
+    .leader-text { color:#b9b9b9; font-size:10px; line-height:16px; }
+
+    /* ── SECTION SIDE (label + content) ── */
+    .section-side { padding:40px 0; display:flex; gap:40px; align-items:flex-start; }
+    .section-side-label { flex-shrink:0; width:160px; display:flex; flex-direction:column; gap:0; }
+    .section-side-label-bar { background:var(--red2); height:2px; width:32px; margin-bottom:6px; }
+    .section-side-label-text { font-size:13px; font-weight:800; letter-spacing:1.3px; line-height:normal; }
+    .section-side-label-sub { font-size:11px; color:#6e6e6e; line-height:17px; margin-top:8px; }
+    .section-side-content { flex:1; min-width:0; }
+
+    /* ── DIAGRAM WRAPPER ── */
+    .diagram-wrapper { width:100%; border-radius:8px; overflow:hidden; border:1px solid rgba(0,0,0,0.06); box-shadow:0 4px 16px rgba(0,0,0,0.06); }
+    .diagram-caption { font-family:'Poppins',sans-serif; font-size:0.58rem; letter-spacing:0.08em; text-transform:uppercase; color:#bbb; margin-top:10px; }
+
+    /* ── PROSE BLOCK ── */
+    .prose-block { display:flex; flex-direction:column; gap:14px; }
+    .prose-block p { font-size:12px; color:#6e6e6e; line-height:20px; }
+    .prose-block p strong { color:#000; font-weight:600; }
+    .source-chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
+    .source-chip { font-family:'Poppins',sans-serif; font-size:0.65rem; letter-spacing:0.04em; padding:0.3rem 0.75rem; border-radius:4px; border:1px solid rgba(0,0,0,0.12); color:#555; }
+    .source-chip--gold { border-color:rgba(204,138,31,0.35); color:var(--gold); background:rgba(204,138,31,0.06); }
+
+    /* ── SCORING DIMENSIONS ── */
+    .scoring-dims { margin-top:20px; display:flex; flex-direction:column; gap:0; }
+    .scoring-dim { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid #f0f0f0; }
+    .scoring-dim:last-child { border-bottom:none; }
+    .scoring-dim-name { font-size:11px; font-weight:600; color:#000; flex:1; }
+    .scoring-dim-weight { font-family:'Bebas Neue',sans-serif; font-size:0.9rem; color:var(--gold); letter-spacing:0.04em; flex-shrink:0; width:32px; text-align:right; }
+    .scoring-dim-bar-wrap { flex:2; height:4px; background:#f0f0f0; border-radius:2px; }
+    .scoring-dim-bar { height:4px; border-radius:2px; background:var(--gold); }
+    .scoring-dim-note { font-size:9px; color:#aaa; letter-spacing:0.03em; flex:1; }
+
+    /* ── SCREENSHOTS GRID ── */
+    .screenshots-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .screenshots-grid .screenshot-frame { aspect-ratio:16/9; }
+    .screenshots-grid .screenshot-frame img,
+    .hero-2col-visual .screenshot-frame img { width:100%; height:100%; object-fit:cover; object-position:top; display:block; }
+
+    /* ── DECISION LIST ── */
+    .decision-list { display:flex; flex-direction:column; gap:0; }
+    .decision-item { padding:18px 0; border-bottom:1px solid #e1e1e1; display:flex; gap:20px; align-items:flex-start; }
+    .decision-item:last-child { border-bottom:none; }
+    .decision-num { font-family:'Bebas Neue',sans-serif; font-size:1.4rem; color:rgba(0,0,0,0.12); flex-shrink:0; width:32px; line-height:1; }
+    .decision-body { flex:1; }
+    .decision-title { font-size:12px; font-weight:700; color:#000; margin-bottom:4px; letter-spacing:0.02em; }
+    .decision-text { font-size:11px; color:#6e6e6e; line-height:18px; }
+    .decision-text strong { color:#000; font-weight:600; }
+
+    /* ── WHY I BUILT THIS ── */
+    .why-block { background:#fafafa; border-left:3px solid var(--gold); padding:24px 28px; border-radius:0 6px 6px 0; }
+    .why-block p { font-size:13px; color:#555; line-height:22px; }
+    .why-block p + p { margin-top:12px; }
+    .why-block p strong { color:#000; font-weight:600; }
+
+    /* ── SECOND BRAIN BAND ── */
+    .second-brain-band { background:#fafafa; border-radius:8px; border:1px solid #ebebeb; padding:32px 36px; margin:8px 0 0; }
+    .second-brain-head { display:flex; align-items:baseline; gap:16px; margin-bottom:16px; flex-wrap:wrap; }
+    .second-brain-label { font-family:'Bebas Neue',sans-serif; font-size:clamp(1.1rem,3vw,1.6rem); letter-spacing:0.04em; color:#000; line-height:1; }
+    .second-brain-tag { font-family:'Poppins',sans-serif; font-size:0.6rem; letter-spacing:0.08em; padding:0.22rem 0.65rem; border-radius:4px; background:rgba(204,138,31,0.12); color:var(--gold); white-space:nowrap; }
+    .second-brain-intro { font-size:13px; color:#6e6e6e; line-height:22px; margin-bottom:20px; max-width:44rem; }
+
+    /* ── FLOW ROW (capture/structure/retrieve) ── */
+    .flow-row { display:flex; align-items:stretch; gap:0; }
+    .flow-step { flex:1; background:#fff; border:1px solid #e4e4e4; border-radius:2px; padding:18px 14px; display:flex; flex-direction:column; gap:8px; }
+    .flow-step-num { font-size:10px; font-weight:600; color:var(--red2); }
+    .flow-step-name { font-size:11px; font-weight:800; letter-spacing:0.66px; }
+    .flow-step-body { font-size:10px; color:#6e6e6e; line-height:16px; }
+    .flow-arrow { display:flex; align-items:center; justify-content:center; width:22px; flex-shrink:0; }
+    .flow-arrow span { font-size:11px; color:#aaa; }
+    .second-brain-note { font-size:11px; color:#999; line-height:18px; margin-top:20px; }
+    .second-brain-graph { margin-top:24px; border-radius:6px; overflow:hidden; border:1px solid rgba(0,0,0,0.06); }
+    .second-brain-graph img { width:100%; display:block; height:auto; }
+
+    img.z { cursor:zoom-in; }
+
+    /* ── PHILOSOPHY BAND ── */
+    .philosophy-band {
+      background:#f2f2f2; border-radius:8px;
+      border:1px solid rgba(0,0,0,0.05);
+      padding:clamp(1.4rem,3vw,2.2rem) clamp(1.4rem,3.5vw,2.6rem);
+      display:flex; gap:clamp(20px,4vw,40px); align-items:flex-start;
+    }
+    .philosophy-band-label { flex-shrink:0; width:130px; }
+    .philosophy-band-label::before { content:''; display:block; width:24px; height:2px; background:var(--red2); margin-bottom:6px; }
+    .philosophy-band-label p { font-size:10px; font-weight:800; letter-spacing:1.3px; line-height:1.4; color:#000; text-transform:uppercase; }
+    .philosophy-items { flex:1; display:flex; gap:clamp(16px,3vw,28px); }
+    .philosophy-item { flex:1; display:flex; flex-direction:column; gap:6px; }
+    .philosophy-item-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(0.9rem,1.5vw,1.1rem); letter-spacing:0.06em; color:#000; }
+    .philosophy-item-body { font-family:'Poppins',sans-serif; font-size:0.65rem; color:#6e6e6e; line-height:1.7; }
+
+    /* ── CTA FOOTER BAND ── */
+    .cta-band { display:flex; align-items:center; justify-content:space-between; gap:24px; padding:0; }
+    .cta-band-text p { font-size:clamp(0.8rem,1.2vw,0.9rem); color:rgba(0,0,0,0.45); line-height:1.65; font-weight:300; }
+    .cta-band-text p strong { color:#000; font-weight:600; }
+    .cta-buttons { display:flex; gap:12px; flex-shrink:0; align-items:center; flex-wrap:wrap; }
+    .btn-primary {
+      display:inline-flex; align-items:center; gap:6px;
+      font-family:'Bebas Neue',sans-serif; font-size:0.85rem; letter-spacing:0.12em;
+      color:#fff; background:#000; text-decoration:none;
+      padding:0.65rem 1.4rem; border-radius:5px; transition:background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background:#1a1a1a; transform:translateY(-1px); }
+    .btn-primary svg { width:8px; height:8px; }
+    .btn-secondary {
+      display:inline-flex; align-items:center; gap:6px;
+      font-family:'Bebas Neue',sans-serif; font-size:0.85rem; letter-spacing:0.12em;
+      color:#000; text-decoration:none;
+      padding:0.65rem 1.4rem; border-radius:5px; border:1px solid rgba(0,0,0,0.15);
+      transition:border-color 0.2s, transform 0.2s;
+    }
+    .btn-secondary:hover { border-color:rgba(0,0,0,0.4); transform:translateY(-1px); }
+
+    /* ── LIGHTBOX ── */
+    #lightbox { position:fixed; inset:0; z-index:900; background:rgba(0,0,0,0.92); display:flex; align-items:center; justify-content:center; opacity:0; visibility:hidden; transition:opacity 0.25s ease,visibility 0s linear 0.25s; }
+    #lightbox.open { opacity:1; visibility:visible; transition:opacity 0.25s ease,visibility 0s; }
+    #lightbox-img { max-width:92vw; max-height:90vh; object-fit:contain; border-radius:4px; transform:scale(0.97); transition:transform 0.25s ease; user-select:none; }
+    #lightbox.open #lightbox-img { transform:scale(1); }
+    #lightbox-close { position:fixed; top:1.4rem; right:1.6rem; background:none; border:none; cursor:pointer; color:#fff; font-size:1.8rem; line-height:1; opacity:0.7; transition:opacity 0.2s; z-index:901; }
+    #lightbox-close:hover { opacity:1; }
+    .lightbox-arrow { position:fixed; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.1); border:none; cursor:pointer; color:#fff; width:3rem; height:3rem; border-radius:50%; display:flex; align-items:center; justify-content:center; opacity:0.6; transition:opacity 0.2s,background 0.2s; z-index:901; }
+    .lightbox-arrow:hover { opacity:1; background:rgba(255,255,255,0.2); }
+    .lightbox-arrow.hidden { opacity:0; pointer-events:none; }
+    #lightbox-prev { left:1.2rem; } #lightbox-next { right:1.2rem; }
+    #lightbox-counter { position:fixed; bottom:1.4rem; left:50%; transform:translateX(-50%); font-family:'Poppins',sans-serif; font-size:0.65rem; letter-spacing:0.1em; color:rgba(255,255,255,0.45); }
+
+    /* ── MOBILE ── */
+    @media (max-width:768px) {
+      .lab-intro { flex-direction:column; gap:24px; }
+    }
+    @media (max-width:640px) {
+      #systems-grid { grid-template-columns:1fr; }
+      .sys-card--flagship { grid-column:1; flex-direction:column; gap:24px; }
+      .flagship-right { width:100%; }
+      .philosophy-band { flex-direction:column; gap:20px; }
+      .philosophy-items { flex-direction:column; gap:16px; }
+      .philosophy-band-label { width:100%; }
+      .cta-band { flex-direction:column; align-items:flex-start; }
+      .hero-2col { flex-direction:column; gap:24px; }
+      .psi-row { flex-direction:column; }
+      .psi-col { padding:20px 0; border-bottom:1px solid #e1e1e1; }
+      .psi-col:last-child { border-bottom:none; }
+      .psi-div { display:none; }
+      .leader-card { flex-direction:column; gap:12px; padding:20px; }
+      .section-side { flex-direction:column; gap:20px; }
+      .section-side-label { width:100%; }
+      .screenshots-grid { grid-template-columns:1fr; }
+      .flow-row { flex-direction:column; }
+      .flow-arrow { transform:rotate(90deg); }
+      .second-brain-band { padding:24px 20px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html, body { scroll-behavior:auto; }
+      .hero-line > *, .lab-intro, #systems-grid { animation:none !important; transform:none !important; opacity:1 !important; }
+    }
+  </style>
+</head>
+<body>
+<script src="nav.js"></script>
+
+<main>
+  <div id="lab-wrap">
+
+    <!-- ══ HERO ══ -->
+    <div class="hero-line d1">
+      <h1 class="lab-title">Personal<br><span class="lab-title-accent">AI Lab</span></h1>
+    </div>
+
+    <div class="lab-intro">
+      <div class="lab-intro-text">
+        <p>I'm an art director who builds. The two systems below run my actual life: a job-matching pipeline that scores real listings against my profile, and a dashboard that holds the rest of my operations in one place. They aren't mockups. They run.</p>
+      </div>
+    </div>
+
+
+
+
+    <!-- ══════════════════════════════════════════════════ -->
+    <!-- ══  LIFEOS SECTION                               ══ -->
+    <!-- ══════════════════════════════════════════════════ -->
+    <div id="lifeos" class="anchor"></div>
+    <div class="divider" style="margin-top:clamp(2.5rem,5vw,4rem);"></div>
+
+    <div class="project-section" style="padding-top:0;">
+      <div class="project-head">
+        <div>
+          <span class="project-kicker">System</span>
+          <h1 class="project-title">LifeOS</h1>
+          <div class="project-tags">
+            <span class="project-tag project-tag--gold">Personal Dashboard</span>
+            <span class="project-tag">Supabase</span>
+            <span class="project-tag">Automation</span>
+            <span class="project-tag">Signal Design</span>
+            <span class="project-tag">Second Brain</span>
+          </div>
+        </div>
+        <a href="#top" class="top-jump" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+          <svg viewBox="0 0 10 10" fill="none"><path d="M5 9V1M5 1L1 5M5 1l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back to top
+        </a>
+      </div>
+
+      <!-- INTRO 2-COL -->
+      <div class="hero-2col">
+        <div class="hero-2col-text">
+          <p>LifeOS pulls work, health, finance, and creative projects onto one surface, so I can see what's slipping without hunting across six apps.</p>
+        </div>
+        <div class="hero-2col-visual">
+          <div class="screenshot-frame">
+            <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
+            <img class="z" src="projects/ai-lab/images/lifeos-hero.png" alt="LifeOS Real Estate tab with a Properties and assets card and a property to-do list.">
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- SECOND BRAIN -->
+      <div class="section-side">
+        <div class="section-side-label">
+          <div class="section-side-label-bar"></div>
+          <p class="section-side-label-text">THE<br>SECOND BRAIN</p>
+          <p class="section-side-label-sub">A knowledge layer beside LifeOS. Its job is to make anything I capture retrievable when it matters.</p>
+        </div>
+        <div class="section-side-content">
+          <div class="second-brain-band">
+            <div class="second-brain-graph">
+              <img class="z" src="projects/ai-lab/images/secondbrain-graph.png" alt="Obsidian knowledge graph: the Second Brain node map with hundreds of linked notes.">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- INTERFACE GALLERY -->
+      <div class="section-side">
+        <div class="section-side-label">
+          <div class="section-side-label-bar"></div>
+          <p class="section-side-label-text">INTERFACE</p>
+        </div>
+        <div class="section-side-content">
+          <div class="screenshots-grid">
+            <div class="screenshot-frame">
+              <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
+              <img class="z" src="projects/ai-lab/images/lifeos-mortgage.png" alt="Mortgage detail: payment donut, amortization area chart, and equity versus debt donut.">
+            </div>
+            <div class="screenshot-frame">
+              <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
+              <img class="z" src="projects/ai-lab/images/lifeos-finance.png" alt="Finance tab: net worth snapshot and net worth composition donut.">
+            </div>
+            <div class="screenshot-frame">
+              <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
+              <img class="z" src="projects/ai-lab/images/lifeos-adu.png" alt="ADU Rental tab: metric cards, open issues, owner draw bar chart, and rent allocation donut.">
+            </div>
+            <div class="screenshot-frame">
+              <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
+              <img class="z" src="projects/ai-lab/images/lifeos-hero.png" alt="Real Estate tab: tab bar, Properties and assets card, and property to-do list.">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /lifeos section -->
+
+
+    <!-- ══════════════════════════════════════════════════ -->
+    <!-- ══  JOBSMATCH SECTION                            ══ -->
+    <!-- ══════════════════════════════════════════════════ -->
+    <div id="jobsmatch" class="anchor"></div>
+    <div class="divider" style="margin-top:clamp(2.5rem,5vw,4rem);"></div>
+
+    <div class="project-section" style="padding-top:0;">
+      <div class="project-head">
+        <div>
+          <span class="project-kicker">Flagship System</span>
+          <h1 class="project-title">JobsMatch</h1>
+          <div class="project-tags">
+            <span class="project-tag project-tag--gold">Flagship</span>
+            <span class="project-tag">Apify Scraping</span>
+            <span class="project-tag">Supabase</span>
+            <span class="project-tag">Scoring Algorithm</span>
+            <span class="project-tag">Dashboard UI</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- INTRO 2-COL -->
+      <div class="hero-2col">
+        <div class="hero-2col-text">
+          <p>Hundreds of postings land every day and most are noise. I was checking four boards by hand.</p>
+          <p>So I automated it. Apify actors scrape the boards on a schedule and write every listing to Supabase. A scoring engine ranks each one against my profile, and the dashboard shows the top matches with a full score breakdown.</p>
+        </div>
+        <div class="hero-2col-visual">
+          <div class="screenshot-frame">
+            <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
+            <img class="z" src="projects/ai-lab/images/jobsmatch-hero.png" alt="JobsMatch dashboard with four signal cards: Resume, Preferences, Learnings, and an Outlook relevance dial.">
+          </div>
+        </div>
+      </div>
+
+
+      <div class="divider"></div>
+
+      <!-- SCORING DIMENSIONS -->
+      <div class="section-side">
+        <div class="section-side-label">
+          <div class="section-side-label-bar"></div>
+          <p class="section-side-label-text">SCORING<br>DIMENSIONS</p>
+        </div>
+        <div class="section-side-content">
+          <div class="prose-block">
+            <p><strong>The weights say what I care about.</strong></p>
+          </div>
+          <div class="scoring-dims">
+            <div class="scoring-dim">
+              <span class="scoring-dim-name">Role / Title Match</span>
+              <div class="scoring-dim-bar-wrap"><div class="scoring-dim-bar" style="width:90%;"></div></div>
+              <span class="scoring-dim-weight">×0.9</span>
+              <span class="scoring-dim-note">Keyword match against target titles</span>
+            </div>
+            <div class="scoring-dim">
+              <span class="scoring-dim-name">Required Skills Match</span>
+              <div class="scoring-dim-bar-wrap"><div class="scoring-dim-bar" style="width:85%;"></div></div>
+              <span class="scoring-dim-weight">×0.85</span>
+              <span class="scoring-dim-note">Overlap with my skill profile</span>
+            </div>
+            <div class="scoring-dim">
+              <span class="scoring-dim-name">Seniority Fit</span>
+              <div class="scoring-dim-bar-wrap"><div class="scoring-dim-bar" style="width:80%;"></div></div>
+              <span class="scoring-dim-weight">×0.8</span>
+              <span class="scoring-dim-note">Level alignment to profile</span>
+            </div>
+            <div class="scoring-dim">
+              <span class="scoring-dim-name">Location / Remote</span>
+              <div class="scoring-dim-bar-wrap"><div class="scoring-dim-bar" style="width:75%;"></div></div>
+              <span class="scoring-dim-weight">×0.75</span>
+              <span class="scoring-dim-note">Remote-ok or preferred city</span>
+            </div>
+            <div class="scoring-dim">
+              <span class="scoring-dim-name">Salary Range</span>
+              <div class="scoring-dim-bar-wrap"><div class="scoring-dim-bar" style="width:70%;"></div></div>
+              <span class="scoring-dim-weight">×0.7</span>
+              <span class="scoring-dim-note">Overlap with target range</span>
+            </div>
+            <div class="scoring-dim">
+              <span class="scoring-dim-name">Posting Recency</span>
+              <div class="scoring-dim-bar-wrap"><div class="scoring-dim-bar" style="width:60%;"></div></div>
+              <span class="scoring-dim-weight">×0.6</span>
+              <span class="scoring-dim-note">Newer listings score higher</span>
+            </div>
+            <div class="scoring-dim">
+              <span class="scoring-dim-name">Company Rating</span>
+              <div class="scoring-dim-bar-wrap"><div class="scoring-dim-bar" style="width:50%;"></div></div>
+              <span class="scoring-dim-weight">×0.5</span>
+              <span class="scoring-dim-note">Glassdoor rating where available</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- INTERFACE GALLERY -->
+      <div class="section-side">
+        <div class="section-side-label">
+          <div class="section-side-label-bar"></div>
+          <p class="section-side-label-text">INTERFACE</p>
+          <p class="section-side-label-sub">Screens from the working system. Click to enlarge.</p>
+        </div>
+        <div class="section-side-content">
+          <div class="screenshots-grid">
+            <div class="screenshot-frame">
+              <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
+              <img class="z" src="projects/ai-lab/images/jobsmatch-onboarding.png" alt="Four-step onboarding: Upload Resume, Adjust Profile, Scan Job Boards, Find Matches.">
+            </div>
+            <div class="screenshot-frame">
+              <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
+              <img class="z" src="projects/ai-lab/images/jobsmatch-keywords.png" alt="Resume keywords panel with extracted chips that drive the per-job qualification score.">
+            </div>
+            <div class="screenshot-frame">
+              <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
+              <img class="z" src="projects/ai-lab/images/jobsmatch-listings.png" alt="Job Board: one ranked feed across four sites with relevance scores and AI match summaries per listing.">
+            </div>
+            <div class="screenshot-frame">
+              <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
+              <img class="z" src="projects/ai-lab/images/jobsmatch-preferences.png" alt="Preferences panel with job title chips and a free-text intent field that scores a preference-fit badge on each listing.">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /jobsmatch section -->
+
+
+    <div class="divider"></div>
+
+    <!-- ══ CTA FOOTER ══ -->
+    <div class="cta-band">
+      <div class="cta-buttons">
+        <a href="contact.html" class="btn-primary">
+          Get in Touch
+          <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="all-projects.html" class="btn-secondary">View All Work</a>
+      </div>
+    </div>
+
+  </div><!-- /lab-wrap -->
+</main>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <button id="lightbox-close" aria-label="Close">&times;</button>
+  <button class="lightbox-arrow hidden" id="lightbox-prev" aria-label="Previous image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M7 1L3 5L7 9" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <img id="lightbox-img" src="" alt="">
+  <button class="lightbox-arrow hidden" id="lightbox-next" aria-label="Next image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M3 1L7 5L3 9" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <div id="lightbox-counter"></div>
+</div>
+
+<script>
+(function () {
+  var imgs = Array.from(document.querySelectorAll('img.z'));
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lightbox-img');
+  var lbClose = document.getElementById('lightbox-close');
+  var lbPrev = document.getElementById('lightbox-prev');
+  var lbNext = document.getElementById('lightbox-next');
+  var lbCounter = document.getElementById('lightbox-counter');
+  var currentIdx = 0;
+
+  function openLightbox(idx) {
+    currentIdx = idx;
+    lbImg.src = imgs[idx].src;
+    lbImg.alt = imgs[idx].alt;
+    lb.classList.add('open');
+    lbPrev.classList.toggle('hidden', idx === 0);
+    lbNext.classList.toggle('hidden', idx === imgs.length - 1);
+    lbCounter.textContent = (idx + 1) + ' / ' + imgs.length;
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  imgs.forEach(function (img, i) {
+    img.addEventListener('click', function () { openLightbox(i); });
+  });
+  lbClose.addEventListener('click', closeLightbox);
+  lb.addEventListener('click', function (e) { if (e.target === lb) closeLightbox(); });
+  lbPrev.addEventListener('click', function () { if (currentIdx > 0) openLightbox(currentIdx - 1); });
+  lbNext.addEventListener('click', function () { if (currentIdx < imgs.length - 1) openLightbox(currentIdx + 1); });
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft' && currentIdx > 0) openLightbox(currentIdx - 1);
+    if (e.key === 'ArrowRight' && currentIdx < imgs.length - 1) openLightbox(currentIdx + 1);
+  });
+})();
+</script>
+
+</body>
+</html>

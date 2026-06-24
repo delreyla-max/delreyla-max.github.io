@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin — Projects CMS</title>
+  <title>Admin, Projects CMS</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -261,12 +261,12 @@
     <button class="admin-btn" id="btn-reload">Reload from file</button>
     <button class="admin-btn primary" id="btn-export">Export projects-data.js</button>
   </div>
-  <div id="admin-status">Loaded from projects-data.js — edit below, then export to save.</div>
+  <div id="admin-status">Loaded from projects-data.js, edit below, then export to save.</div>
 </div>
 
 <div id="admin-help">
-  <p><strong>How this works:</strong> this page loads <code>projects-data.js</code> (the same file your site reads from). Edit any project below, use the up/down arrows to reorder, add or remove projects, then click <strong>Export projects-data.js</strong> to download the updated file. Replace the old <code>projects-data.js</code> in your project folder with the downloaded one, then redeploy your site — the All Projects page and individual project pages will pick up the changes automatically.</p>
-  <p style="margin-top:0.6rem;"><strong>Tip:</strong> this page runs entirely in your browser — nothing is uploaded anywhere, and nothing saves automatically. Always export when you are done editing.</p>
+  <p><strong>How this works:</strong> this page loads <code>projects-data.js</code> (the same file your site reads from). Edit any project below, use the up/down arrows to reorder, add or remove projects, then click <strong>Export projects-data.js</strong> to download the updated file. Replace the old <code>projects-data.js</code> in your project folder with the downloaded one, then redeploy your site, the All Projects page and individual project pages will pick up the changes automatically.</p>
+  <p style="margin-top:0.6rem;"><strong>Tip:</strong> this page runs entirely in your browser, nothing is uploaded anywhere, and nothing saves automatically. Always export when you are done editing.</p>
 </div>
 
 <div id="admin-list"></div>
@@ -299,7 +299,7 @@
   // now lives inside a "projects/" parent directory (e.g. "adidas-golf-project"
   // -> "projects/adidas-golf-project"), and the Nissan global branding folder
   // was renamed+moved to "projects/nissal-global-branding-project". Old drafts
-  // saved before this move still carry the pre-move paths — migrate them here
+  // saved before this move still carry the pre-move paths, migrate them here
   // so reloading/exporting from a stale draft can't keep clobbering the fix.
   function migrateFolderPath(folder) {
     folder = folder || "";
@@ -504,7 +504,7 @@
         p.images = v ? [v] : [];
         saveDraft();
         thumbInput.value = v;
-      }, "Shown on the All Projects grid card — e.g. cover.jpg. Leave blank to use the first gallery image automatically.");
+      }, "Shown on the All Projects grid card, e.g. cover.jpg. Leave blank to use the first gallery image automatically.");
       thumbField.style.flex = "1 1 14rem";
       thumbField.style.marginBottom = "0";
       var thumbInput = thumbField.querySelector("input");
@@ -584,7 +584,7 @@
 
     var note = document.createElement("div");
     note.className = "crop-note";
-    note.textContent = "Drag to reposition, use the slider to zoom, then download — the cropped file " +
+    note.textContent = "Drag to reposition, use the slider to zoom, then download, the cropped file " +
       "comes out sized to fit its box perfectly. Drop the downloaded file into this project's folder " +
       "(replacing or alongside the original) so the live page can find it.";
     modal.appendChild(note);
@@ -747,7 +747,7 @@
 
   // Lets the user browse to image/video files on disk and pick them visually
   // instead of typing filenames. Browsers cannot copy the chosen files into
-  // the project folder for you (a security restriction) — but this shows a
+  // the project folder for you (a security restriction), but this shows a
   // thumbnail preview of exactly what was picked and auto-fills the
   // filename field(s), so it is easy to confirm you grabbed the right ones.
   // accept: e.g. "image/*" or "video/*"
@@ -904,7 +904,7 @@
 
     var note = document.createElement("div");
     note.className = "picker-note";
-    note.textContent = "Previews your pick and fills in filenames — copy the actual files into this project's folder so the live page can find them." +
+    note.textContent = "Previews your pick and fills in filenames, copy the actual files into this project's folder so the live page can find them." +
       (multiple ? " Drag thumbnails to reorder." : "") +
       (cropAspect ? " Click \"Crop to fit…\" to trim and resize before downloading." : "");
     wrap.appendChild(note);
@@ -988,7 +988,7 @@
     title.textContent = "Media gallery";
     var hint = document.createElement("div");
     hint.className = "media-section-hint";
-    hint.textContent = "Build this project's gallery block by block — mix and match images, image grids, " +
+    hint.textContent = "Build this project's gallery block by block, mix and match images, image grids, " +
       "local video files, and Vimeo or YouTube embeds in any order. Local images and videos are read from " +
       "the folder named above (\"" + (p.folder || "this-project") + "\"). For Vimeo/YouTube, paste just the " +
       "ID from the URL (e.g. vimeo.com/76979871 -> 76979871).";
@@ -1153,7 +1153,7 @@
         var empty = document.createElement("div");
         empty.className = "media-section-hint";
         empty.style.marginBottom = "0.8rem";
-        empty.textContent = "No media blocks yet — this project page will show a placeholder. Use the menu below to add the first block.";
+        empty.textContent = "No media blocks yet, this project page will show a placeholder. Use the menu below to add the first block.";
         listEl.appendChild(empty);
       }
     }
