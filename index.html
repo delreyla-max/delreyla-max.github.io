@@ -3,7 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Every brand has a story. AI helps tell it.</title>
+  <title>Garman Yip — Creative Director &amp; Brand Designer, Los Angeles</title>
+  <meta name="description" content="Every brand has a story. AI helps tell it. Portfolio of Garman Yip, Los Angeles creative director: Toyota AI pipeline, Nissan brand system, Storyfire product design, and a personal AI Lab.">
+  <link rel="canonical" href="https://gyip.com/">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Garman Yip — Creative Director &amp; Brand Designer, Los Angeles">
+  <meta property="og:description" content="Every brand has a story. AI helps tell it. Toyota AI pipeline, Nissan brand system, Storyfire product design, and a personal AI Lab.">
+  <meta property="og:url" content="https://gyip.com/">
+  <meta property="og:image" content="https://gyip.com/frames/frames2/frames200.jpg">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@1,900&family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
@@ -424,6 +433,20 @@
       #play-next-btn { grid-column:1 / -1; margin-top:0.75rem; }
     }
 
+    /* END CTA (shown at the last animation stop) */
+    #end-cta {
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      display:inline-flex; align-items:center; gap:0.7rem;
+      font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:0.08em;
+      background:#000; color:#fff; text-decoration:none;
+      padding:1.1rem 2.4rem; border-radius:8px;
+      opacity:0; pointer-events:none;
+      transition:opacity 0.5s ease 0.5s, transform 0.25s ease;
+    }
+    #end-cta.visible { opacity:1; pointer-events:auto; }
+    #end-cta:hover { transform:translate(-50%,-50%) translateY(-2px); }
+    #end-cta svg { width:12px; height:12px; }
+
     /* A4: prefers-reduced-motion */
     html.reduced-motion,
     html.reduced-motion body { overflow:auto !important; height:auto !important; }
@@ -540,7 +563,9 @@
 <video id="video1" src="frames/frames1/frames1.mp4" muted playsinline preload="auto" style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;"></video>
 <canvas id="canvas"></canvas>
 <div id="vig"></div>
-<div id="fade-white" style="position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:150;transition:opacity 0.9s ease;"></div>
+<div id="fade-white" style="position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:150;transition:opacity 0.9s ease;">
+  <a id="end-cta" href="all-projects.html">View All Work <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</div>
 
 <!-- PANELS -->
 <div class="panel" id="panel-0">
@@ -769,9 +794,19 @@ if (!prefersReducedMotion) {
     scrubCtx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
   }
 
+  function hideEndOverlay() {
+    finalStopReached = false;
+    var fw = document.getElementById('fade-white');
+    fw.style.opacity = '0';
+    fw.style.pointerEvents = 'none';
+    var cta = document.getElementById('end-cta');
+    if (cta) cta.classList.remove('visible');
+  }
+
   function addDelta(delta) {
     if (animPhase !== 'scrub') return;
     if (locked) return;
+    if (finalStopReached && delta < 0) hideEndOverlay();
     virtualScroll += delta;
     virtualScroll = Math.max(0, Math.min(maxScroll, virtualScroll));
     // scroll back past start -> return to Toyota panel
@@ -807,7 +842,10 @@ if (!prefersReducedMotion) {
               var fw = document.getElementById('fade-white');
               fw.style.pointerEvents = 'all';
               fw.style.opacity = '1';
-              setTimeout(function() { window.location.href = 'all-projects.html'; }, 950);
+              if (panel1el) panel1el.classList.remove('visible');
+              if (panel2el) panel2el.classList.remove('visible');
+              var cta = document.getElementById('end-cta');
+              if (cta) cta.classList.add('visible');
             }
           }, PAUSE_MS);
         })(i);
@@ -832,12 +870,30 @@ if (!prefersReducedMotion) {
     drawFrame(0);
   }
 
+  function skipIntroVideo() {
+    if (animPhase !== 'video1') return;
+    try { video1el.pause(); if (video1el.duration) video1el.currentTime = video1el.duration; } catch (err) {}
+    startToyotaHold();
+  }
+
   window.addEventListener('wheel', function(e) {
     e.preventDefault();
-    if (animPhase === 'video1') return;
+    if (animPhase === 'video1') { if (e.deltaY > 0) skipIntroVideo(); return; }
     if (animPhase === 'toyota-hold' && e.deltaY > 0) { startScrub(); addDelta(e.deltaY); return; }
     addDelta(e.deltaY);
   }, { passive: false });
+
+  window.addEventListener('keydown', function(e) {
+    var down = (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ');
+    var up   = (e.key === 'ArrowUp'   || e.key === 'PageUp');
+    if (!down && !up) return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    e.preventDefault();
+    var delta = down ? 120 : -120;
+    if (animPhase === 'video1') { if (down) skipIntroVideo(); return; }
+    if (animPhase === 'toyota-hold' && down) { startScrub(); addDelta(delta); return; }
+    addDelta(delta);
+  });
 
   var touchLastY = 0;
   window.addEventListener('touchstart', function(e) { touchLastY = e.touches[0].clientY; }, { passive: true });
@@ -845,7 +901,7 @@ if (!prefersReducedMotion) {
     e.preventDefault();
     var dy = touchLastY - e.touches[0].clientY;
     touchLastY = e.touches[0].clientY;
-    if (animPhase === 'video1') return;
+    if (animPhase === 'video1') { if (dy > 0) skipIntroVideo(); return; }
     if (animPhase === 'toyota-hold' && dy > 0) { startScrub(); addDelta(dy * 2.5); return; }
     addDelta(dy * 2.5);
   }, { passive: false });
@@ -859,7 +915,7 @@ if (!prefersReducedMotion) {
     if (rf !== currentFrame) { currentFrame = rf; drawFrame(currentFrame); }
 
     stopFrames.forEach(function(sf, i) {
-      var show = Math.abs(currentFrame - sf) <= PANEL_FRAMES;
+      var show = Math.abs(currentFrame - sf) <= PANEL_FRAMES && !finalStopReached;
       // panel-0 = Toyota, already handled by video phase; panels here are offset by 1
       var panelId = 'panel-' + (i + 1);
       var p = document.getElementById(panelId);
@@ -883,7 +939,8 @@ if (!prefersReducedMotion) {
     if (panel2el) panel2el.classList.remove('visible');
     scrubCanvas.style.display = 'none';
     virtualScroll = 0; smoothScroll = 0; currentFrame = 0;
-    locked = false; recentlyUnlockedStop = -1; finalStopReached = false;
+    locked = false; recentlyUnlockedStop = -1;
+    hideEndOverlay();
     setTimeout(function() {
       splashTextEl.style.transition = '';
       triggerTextAnims();
