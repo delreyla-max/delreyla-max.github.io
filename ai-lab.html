@@ -19,7 +19,7 @@
   <style>
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
     :root {
-      --gold: #CC8A1F;
+      --gold: #641fcc;
       --red:  #E0261E;
       --red2: #dc2626;
     }
@@ -196,6 +196,12 @@
     #lightbox-prev { left:1.2rem; } #lightbox-next { right:1.2rem; }
     #lightbox-counter { position:fixed; bottom:1.4rem; left:50%; transform:translateX(-50%); font-family:'Poppins',sans-serif; font-size:0.65rem; letter-spacing:0.1em; color:rgba(255,255,255,0.45); }
 
+    /* ── COMPACT PROJECT LEAD ── */
+    .proj-lead { margin:22px 0 18px; max-width:70ch; }
+    .proj-lead p { font-size:13px; color:#6e6e6e; line-height:23px; }
+    .proj-lead p strong { color:#000; font-weight:600; }
+    .proj-grid { margin-top:0; }
+
     /* ── MOBILE ── */
     @media (max-width:768px) {
       .lab-intro { flex-direction:column; gap:24px; }
@@ -223,128 +229,66 @@
 
     <!-- ══ HERO ══ -->
     <div class="hero-line d1">
-      <h1 class="lab-title">Personal<br><span class="lab-title-accent">AI Lab</span></h1>
+      <h1 class="lab-title">My Personal <span class="lab-title-accent">AI Lab</span></h1>
     </div>
 
     <div class="lab-intro">
       <div class="lab-intro-text">
-        <p>I'm an art director who builds. The two systems below run my actual life: a job-matching pipeline that scores real listings against my profile, and a dashboard that holds the rest of my operations in one place. They aren't mockups. They run.</p>
+        <p>Welcome to my personal workspace. Below are some projects I've been working on and systems I built in AI using various tools like Claude, Gemini, ChatGPT, Higgsfield, VS Code, and many others, these are live and not mockups: a product imagery app, a job matching pipeline, a life dashboard with a second brain, an image library that scrapes the web, and social videos. They run. Most of them use Supabase, Google Cloud, various LLMs, and all sorts of goodies.</p>
       </div>
     </div>
 
 
-    <!-- ══════════════════════════════════════════════════ -->
-    <!-- ══  JOBSMATCH SECTION                            ══ -->
-    <!-- ══════════════════════════════════════════════════ -->
-    <div class="divider" style="margin-top:clamp(2.5rem,5vw,4rem);"></div>
+    <!-- ══ TOLERANCE STUDIO ══ -->
+    <div class="divider" style="margin-top:clamp(2.2rem,4.5vw,3.4rem);"></div>
+
+    <div class="project-section" style="padding-top:0;">
+               
+
+      <div class="proj-lead">
+        <h1 class="project-title">Tolerance Studio</h1>
+        <p>I created this project as a tool for creating product graphics. The way it works, it uses a Python script to cut out a product image, figures out the lighting and angles, generates a background and then pastes it back together. It also has a neat text and layout editor.</p>
+      </div>
+
+      <div class="screenshots-grid proj-grid">
+            <div class="screenshot-frame">
+              <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
+              <img class="z" src="projects/ai-lab/images/ts-app-canvas.jpg" width="1800" height="1013" loading="lazy" alt="The app's layout canvas: a composed KindTail ad with headline, subhead, and Shop button dragged onto the product photo, and green 'new space' zones where AI paints more scene to hit any size.">
+            </div>
+            <div class="screenshot-frame">
+              <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
+              <img class="z" src="projects/ai-lab/images/ts-app-brandkit.jpg" width="1800" height="1013" loading="lazy" alt="The app's tags editor: weighted Product Spec and Creative Constants tags, with Apply brand kit and Ask AI to draft tags.">
+            </div>
+            <div class="screenshot-frame">
+              <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
+              <img class="z" src="projects/ai-lab/images/ts-inspection.jpg" width="1800" height="812" loading="lazy" alt="The 7-point brand inspection: shape, color, materials, details, clarity, lighting, and scene, with a sample render scored 7/7 verified.">
+            </div>
+            <div class="screenshot-frame">
+              <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
+              <img class="z" src="projects/ai-lab/images/ts-hero.jpg" width="1800" height="925" loading="lazy" alt="Tolerance Studio landing: 'Build a campaign from a single photo' over a row of product renders.">
+            </div>
+      </div>
+    </div><!-- /tolerance studio -->
+
+
+    <!-- ══ JOBSMATCH ══ -->
+    <div class="divider" style="margin-top:clamp(2.2rem,4.5vw,3.4rem);"></div>
 
     <div class="project-section" style="padding-top:0;">
       <div class="project-head">
         <div>
           <h1 class="project-title">JobsMatch</h1>
-          <div class="project-tags">
-            <span class="project-tag project-tag--gold">Flagship</span>
-            <span class="project-tag">Apify Scraping</span>
-            <span class="project-tag">Supabase</span>
-            <span class="project-tag">Scoring Algorithm</span>
-            <span class="project-tag">Dashboard UI</span>
-          </div>
         </div>
       </div>
 
-      <!-- INTRO 2-COL -->
-      <div class="hero-2col">
-        <div class="hero-2col-text">
-          <p>Hundreds of postings land every day and most are noise. I was checking four boards by hand.</p>
-          <p>So I automated it. Apify actors scrape the boards on a schedule and write every listing to Supabase. A scoring engine ranks each one against my profile, and the dashboard shows the top matches with a full score breakdown.</p>
-          <p><strong>The payoff:</strong> a morning that used to eat ~30 minutes of tab-surfing is now a 2-minute scan of one ranked list I trust.</p>
-        </div>
-        <div class="hero-2col-visual">
-          <div class="screenshot-frame">
-            <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
-            <img class="z" src="projects/ai-lab/images/jobsmatch-hero.png" width="1600" height="491" alt="JobsMatch dashboard with four signal cards: Resume, Preferences, Learnings, and an Outlook relevance dial.">
-          </div>
-        </div>
+      <div class="proj-lead">
+        <p>I created this site for a friend who was searching for a job. It scrapes LinkedIn, Glassdoor, ZipRecruiter, and other sites to find listings based on their resume and experience. First it pulls out key words from experience, then uses AI to create an algorithm to find matches and ranks them against each other.</p>
       </div>
 
-
-      <div class="divider"></div>
-
-      <!-- SCORING DIMENSIONS -->
-      <div class="section-side">
-        <div class="section-side-label">
-          <div class="section-side-label-bar"></div>
-          <p class="section-side-label-text">SCORING<br>DIMENSIONS</p>
-        </div>
-        <div class="section-side-content">
-          <div class="prose-block">
-            <p><strong>The weights say what I care about.</strong></p>
-          </div>
-          <div class="scoring-dims">
-            <div class="scoring-dim">
-              <span class="scoring-dim-name">Role / Title Match</span>
-              <div class="scoring-dim-bar-wrap"><div class="scoring-dim-bar" style="width:90%;"></div></div>
-              <span class="scoring-dim-weight">×0.9</span>
-              <span class="scoring-dim-note">Keyword match against target titles</span>
-            </div>
-            <div class="scoring-dim">
-              <span class="scoring-dim-name">Required Skills Match</span>
-              <div class="scoring-dim-bar-wrap"><div class="scoring-dim-bar" style="width:85%;"></div></div>
-              <span class="scoring-dim-weight">×0.85</span>
-              <span class="scoring-dim-note">Overlap with my skill profile</span>
-            </div>
-            <div class="scoring-dim">
-              <span class="scoring-dim-name">Seniority Fit</span>
-              <div class="scoring-dim-bar-wrap"><div class="scoring-dim-bar" style="width:80%;"></div></div>
-              <span class="scoring-dim-weight">×0.8</span>
-              <span class="scoring-dim-note">Level alignment to profile</span>
-            </div>
-            <div class="scoring-dim">
-              <span class="scoring-dim-name">Location / Remote</span>
-              <div class="scoring-dim-bar-wrap"><div class="scoring-dim-bar" style="width:75%;"></div></div>
-              <span class="scoring-dim-weight">×0.75</span>
-              <span class="scoring-dim-note">Remote-ok or preferred city</span>
-            </div>
-            <div class="scoring-dim">
-              <span class="scoring-dim-name">Salary Range</span>
-              <div class="scoring-dim-bar-wrap"><div class="scoring-dim-bar" style="width:70%;"></div></div>
-              <span class="scoring-dim-weight">×0.7</span>
-              <span class="scoring-dim-note">Overlap with target range</span>
-            </div>
-            <div class="scoring-dim">
-              <span class="scoring-dim-name">Posting Recency</span>
-              <div class="scoring-dim-bar-wrap"><div class="scoring-dim-bar" style="width:60%;"></div></div>
-              <span class="scoring-dim-weight">×0.6</span>
-              <span class="scoring-dim-note">Newer listings score higher</span>
-            </div>
-            <div class="scoring-dim">
-              <span class="scoring-dim-name">Company Rating</span>
-              <div class="scoring-dim-bar-wrap"><div class="scoring-dim-bar" style="width:50%;"></div></div>
-              <span class="scoring-dim-weight">×0.5</span>
-              <span class="scoring-dim-note">Glassdoor rating where available</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="divider"></div>
-
-      <!-- INTERFACE GALLERY -->
-      <div class="section-side">
-        <div class="section-side-label">
-          <div class="section-side-label-bar"></div>
-          <p class="section-side-label-text">INTERFACE</p>
-          <p class="section-side-label-sub">Screens from the working system. Click to enlarge.</p>
-        </div>
-        <div class="section-side-content">
-          <div class="screenshots-grid">
+      <div class="screenshots-grid proj-grid">
             <div class="screenshot-frame">
               <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
-              <img class="z" src="projects/ai-lab/images/jobsmatch-onboarding.png" width="1100" height="1657" loading="lazy" alt="Four-step onboarding: Upload Resume, Adjust Profile, Scan Job Boards, Find Matches.">
-            </div>
-            <div class="screenshot-frame">
-              <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
-              <img class="z" src="projects/ai-lab/images/jobsmatch-keywords.png" width="1600" height="836" loading="lazy" alt="Resume keywords panel with extracted chips that drive the per-job qualification score.">
+              <img class="z" src="projects/ai-lab/images/jobsmatch-hero.png" width="1600" height="491" loading="lazy" alt="JobsMatch dashboard with four signal cards: Resume, Preferences, Learnings, and an Outlook relevance dial.">
             </div>
             <div class="screenshot-frame">
               <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
@@ -352,106 +296,89 @@
             </div>
             <div class="screenshot-frame">
               <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
-              <img class="z" src="projects/ai-lab/images/jobsmatch-preferences.png" width="1600" height="740" loading="lazy" alt="Preferences panel with job title chips and a free-text intent field that scores a preference-fit badge on each listing.">
+              <img class="z" src="projects/ai-lab/images/jobsmatch-keywords.png" width="1600" height="836" loading="lazy" alt="Resume keywords panel with extracted chips that drive the per-job qualification score.">
             </div>
-          </div>
-        </div>
+            <div class="screenshot-frame">
+              <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
+              <img class="z" src="projects/ai-lab/images/jobsmatch-preferences.png" width="1600" height="740" loading="lazy" alt="Preferences panel with job-title chips and a free-text intent field that scores a preference-fit badge on each listing.">
+            </div>
       </div>
+    </div><!-- /jobsmatch -->
 
-    </div><!-- /jobsmatch section -->
 
-
-    <!-- ══════════════════════════════════════════════════ -->
-    <!-- ══  LIFEOS SECTION                               ══ -->
-    <!-- ══════════════════════════════════════════════════ -->
-    <div class="divider" style="margin-top:clamp(2.5rem,5vw,4rem);"></div>
+    <!-- ══ LIFEOS ══ -->
+    <div class="divider" style="margin-top:clamp(2.2rem,4.5vw,3.4rem);"></div>
 
     <div class="project-section" style="padding-top:0;">
       <div class="project-head">
         <div>
-          <span class="project-kicker">System</span>
           <h1 class="project-title">LifeOS</h1>
           <div class="project-tags">
-            <span class="project-tag project-tag--gold">Personal Dashboard</span>
-            <span class="project-tag">Supabase</span>
-            <span class="project-tag">Automation</span>
-            <span class="project-tag">Signal Design</span>
-            <span class="project-tag">Second Brain</span>
           </div>
         </div>
       </div>
 
-      <!-- INTRO 2-COL -->
-      <div class="hero-2col">
-        <div class="hero-2col-text">
-          <p>LifeOS pulls work, health, finance, and creative projects onto one surface, so I can see what's slipping without hunting across six apps.</p>
-        </div>
-        <div class="hero-2col-visual">
-          <div class="screenshot-frame">
-            <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
-            <img class="z" src="projects/ai-lab/images/lifeos-hero.png" width="1600" height="1000" loading="lazy" alt="LifeOS Real Estate tab with a Properties and assets card and a property to-do list.">
-          </div>
-        </div>
+      <div class="proj-lead">
+        <p>LifeOS is my personal daily workhorse and I use Obsidian to ingest data about my month. What I end up with is a glorified to-do list for all aspects of my life, a QuickBooks-type budgeter, and a big-picture life coach. Also nice is my AI reads the md files when I start new projects so it has all the context it needs to see things that I cannot.</p>
       </div>
 
-      <div class="divider"></div>
-
-      <!-- SECOND BRAIN -->
-      <div class="section-side">
-        <div class="section-side-label">
-          <div class="section-side-label-bar"></div>
-          <p class="section-side-label-text">THE<br>SECOND BRAIN</p>
-          <p class="section-side-label-sub">A knowledge layer beside LifeOS. Its job is to make anything I capture retrievable when it matters.</p>
-        </div>
-        <div class="section-side-content">
-          <div class="second-brain-band">
-            <div class="second-brain-graph" style="max-width:50%;">
+      <div class="screenshots-grid proj-grid">
+            <div class="screenshot-frame">
+              <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
+              <img class="z" src="projects/ai-lab/images/lifeos-hero.png" width="1600" height="1000" loading="lazy" alt="LifeOS Real Estate tab: tab bar, a Properties and assets card, and a property to-do list.">
+            </div>
+            <div class="screenshot-frame">
+              <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
+              <img class="z" src="projects/ai-lab/images/lifeos-adu.png" width="1600" height="750" loading="lazy" alt="ADU Rental tab: metric cards, open issues, an owner-draw bar chart, and a rent-allocation donut.">
+            </div>
+            <div class="screenshot-frame">
+              <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
+              <img class="z" src="projects/ai-lab/images/lifeos-finance.png" width="1600" height="875" loading="lazy" alt="LifeOS finance view: account balances and cash-flow tracking.">
+            </div>
+            <div class="screenshot-frame">
+              <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
               <img class="z" src="projects/ai-lab/images/secondbrain-graph.jpg" width="1600" height="1844" loading="lazy" alt="Obsidian knowledge graph: the Second Brain node map with hundreds of linked notes.">
             </div>
-          </div>
+      </div>
+    </div><!-- /lifeos -->
+
+
+    <!-- ══ RAPP ══ -->
+    <div class="divider" style="margin-top:clamp(2.2rem,4.5vw,3.4rem);"></div>
+
+    <div class="project-section" style="padding-top:0;">
+      <div class="project-head">
+        <div>
+          <h1 class="project-title">Scraper <span>Image Library</span></h1>
         </div>
       </div>
 
-      <div class="divider"></div>
+      <div class="proj-lead">
+        <p>Searching for new and updated images was so time consuming, I created an app that scrapes the image sites I need most, tags them with AI vision capabilities and Apple Vision face detection, then organizes over 1000 images so they can easily be found. Took a few days to make but has saved me weeks.</p>
+      </div>
 
-      <!-- INTERFACE GALLERY -->
-      <div class="section-side">
-        <div class="section-side-label">
-          <div class="section-side-label-bar"></div>
-          <p class="section-side-label-text">INTERFACE</p>
-        </div>
-        <div class="section-side-content">
-          <div class="screenshots-grid">
+      <div class="screenshots-grid proj-grid">
             <div class="screenshot-frame">
               <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
-              <img class="z" src="projects/ai-lab/images/lifeos-adu.png" width="1600" height="750" loading="lazy" alt="ADU Rental tab: metric cards, open issues, owner draw bar chart, and rent allocation donut.">
+              <img class="z" src="projects/ai-lab/images/rapp-gallery.jpg" width="1800" height="1125" loading="lazy" alt="Rapp viewer: a filterable grid of Toyota gallery images with a Model / Year / Type / Lifestyle / AI Search sidebar and keyword chips with counts.">
             </div>
             <div class="screenshot-frame">
               <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
-              <img class="z" src="projects/ai-lab/images/lifeos-hero.png" width="1600" height="1000" loading="lazy" alt="Real Estate tab: tab bar, Properties and assets card, and property to-do list.">
+              <img class="z" src="projects/ai-lab/images/rapp-lightbox.jpg" width="1800" height="1125" loading="lazy" alt="Rapp lightbox: a full-size bZ interior shot with an AI keyword panel — night, panoramic sunroof, starry sky, forest, luxury — each clickable to filter.">
             </div>
-          </div>
-        </div>
+            <div class="screenshot-frame">
+              <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
+              <img class="z" src="projects/ai-lab/images/rapp-keywords.png" width="1800" height="1125" loading="lazy" alt="Rapp keyword cloud: 1,411 unique AI keywords sized by frequency across the full Toyota and Lexus library.">
+            </div>
+            <div class="screenshot-frame">
+              <div class="screenshot-frame-bar"><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span><span class="screenshot-frame-dot"></span></div>
+              <img class="z" src="projects/ai-lab/images/rapp-search.jpg" width="1800" height="1125" loading="lazy" alt="Rapp viewer with the 'forest' keyword filter active, narrowing the grid to 137 matching images.">
+            </div>
       </div>
+    </div><!-- /rapp -->
 
-    </div><!-- /lifeos section -->
 
-
-    <div class="divider"></div>
-
-    <!-- ══ CTA FOOTER ══ -->
-    <div class="cta-band">
-      <div class="cta-band-text">
-        <p><strong>Hiring?</strong> This is how I work, end to end, from data and logic to the interface. If that's useful on your team, let's talk.</p>
-      </div>
-      <div class="cta-buttons">
-        <a href="contact.html" class="btn-primary">
-          Get in Touch
-          <svg viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <a href="all-projects.html" class="btn-secondary">View All Work</a>
-      </div>
-    </div>
+    
 
   </div><!-- /lab-wrap -->
 </main>
