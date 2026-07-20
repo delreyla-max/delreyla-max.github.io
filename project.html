@@ -514,7 +514,9 @@
   document.getElementById("project-wrap").style.display = "block";
 
   // â"€â"€â"€ Prev / Next navigation â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
-  var sorted = (window.PROJECTS || []).slice().sort(function (a, b) {
+  var sorted = (window.PROJECTS || []).filter(function (p) {
+    return !p.hidden || p.id === id;
+  }).sort(function (a, b) {
     return (a.order || 0) - (b.order || 0);
   });
   var idx = sorted.findIndex(function (p) { return p.id === id; });

@@ -168,7 +168,9 @@
   var earlierLabel = document.getElementById('ap-earlier-label');
   var featured = document.getElementById('ap-featured');
   var gridCount = 0;
-  var list = (window.PROJECTS || []).slice().sort(function (a, b) {
+  var list = (window.PROJECTS || []).filter(function (p) {
+    return !p.hidden;
+  }).sort(function (a, b) {
     return (a.order || 0) - (b.order || 0);
   });
   list.forEach(function (p) {

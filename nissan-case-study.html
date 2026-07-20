@@ -148,7 +148,7 @@
 <script>
 (function(){
   var THIS_ID = "nissan-global-branding";
-  var sorted = (window.PROJECTS||[]).slice().sort(function(a,b){return(a.order||0)-(b.order||0);});
+  var sorted = (window.PROJECTS||[]).filter(function(p){return !p.hidden||p.id===THIS_ID;}).sort(function(a,b){return(a.order||0)-(b.order||0);});
   var idx = sorted.findIndex(function(p){return p.id===THIS_ID;});
   var prev = idx > 0 ? sorted[idx-1] : null;
   var next = idx < sorted.length-1 ? sorted[idx+1] : null;
